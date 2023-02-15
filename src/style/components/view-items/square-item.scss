@@ -1,0 +1,38 @@
+
+.block-item-container{
+    position: relative;
+    width: 190px;
+    height: 470px;
+    flex-wrap: wrap;
+    padding: 8px 8px 0 8px;
+    & .block-item-main-photo{
+        width: 174px;
+        height: 242px;
+    }
+}
+
+.button-reserve-block{
+    position: absolute;
+    bottom: 16px;
+    left: 12px;
+}
+
+
+
+.book-block{
+    height: 89px;
+}
+
+.title-book-block {
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    color: #363636;
+    align-self: flex-start;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}

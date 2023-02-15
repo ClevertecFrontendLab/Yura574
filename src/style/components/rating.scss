@@ -1,0 +1,28 @@
+
+.rating-container-block {
+    margin: 16px 0 16px 0;
+}
+.rating-container-line{
+
+}
+
+.star-container{
+    display: flex;
+    img{
+        margin-right: 6px;
+    }
+}
+
+.rating-number{
+    margin-left: 24px;
+}
+
+
+@media (max-width: 320px) {
+    .star-container{
+        img{
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
