@@ -7,7 +7,6 @@ import {LineItem} from './main-section/view-items/line-item';
 import {SquareItem} from './main-section/view-items/square-item';
 import { useAppSelector} from '../store/store';
 import {AllBooksType} from '../store/reducers/book-reducer';
-import {Error} from "./common-components/error";
 
 
 export const MainSection = React.memo(() => {
@@ -29,8 +28,8 @@ export const MainSection = React.memo(() => {
         return showBooks.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     };
     return (
-        <div>
-           <Error/>
+        <div>{error ? false: <div>
+
             <SortingItems changeView={changeView} view={viewItems}/>
             <div
                 className={viewItems === 'block' ? 'items-container-block' : 'items-container-line'}>
@@ -39,7 +38,7 @@ export const MainSection = React.memo(() => {
                     <div key={book.id}>
                         {viewItems === 'block'
 
-                            ? <NavLink to={`/book/${book.id}`}><SquareItem
+                            ? <NavLink to={`/books/all/${book.id}`}><SquareItem
                                 id={book.id}
                                 categories={book.categories}
                                 delivery={book.delivery}
@@ -52,7 +51,7 @@ export const MainSection = React.memo(() => {
                                 rating={book.rating}
                                 booking={book.booking}
                             /></NavLink>
-                            : <LineItem
+                            :<NavLink to={`/books/all/${book.id}`}> <LineItem
                                 id={book.id}
                                 categories={book.categories}
                                 delivery={book.delivery}
@@ -65,6 +64,7 @@ export const MainSection = React.memo(() => {
                                 rating={book.rating}
                                 booking={book.booking}
                             />
+                            </NavLink>
                         }
                     </div>
                 )}
@@ -75,6 +75,7 @@ export const MainSection = React.memo(() => {
             {/*            currentPage={currentPage}*/}
             {/*/>*/}
         </div>
+                }</div>
     )
 })
 

@@ -10,9 +10,9 @@ import {useWindowSize} from "../utils/utils";
 import arrowBtnBottom from '../assets/svg/arrow-bottom-black.svg'
 import arrowBtnTop from '../assets/svg/arrow-top-black.svg'
 import {initialState} from "./initial-state";
-import {getSuccessBookId} from "../store/reducers/book-reducer";
 import {useAppDispatch, useAppSelector} from "../store/store";
-import {Error} from "./common-components/error";
+import {Data} from "./common-components/data";
+import {getBook} from "../store/reducers/book-reducer";
 
 export type SlideType = {
     id: number
@@ -31,7 +31,7 @@ export const BookPage = () => {
     }
 
     useEffect(() => {
-        id && dispatch(getSuccessBookId(id))
+        id && dispatch(getBook(id))
     }, [id])
 
 
@@ -40,12 +40,11 @@ export const BookPage = () => {
 
             <div className="book-page-path-wrapper">
                 <div className="path">
-                    Бизнес книги / {book && book.title}
+                    {book && book.categories && book.categories[0]} / {book && book.title}
                 </div>
             </div>
 
-            {error ? <Error/>
-                : <div className="book-page-wrapper">
+            {!error && <div className="book-page-wrapper">
                     <div className="main-inform-1100px">
                         {size.width > 768
                             ? <Slider images={book && book.images}/>
@@ -57,7 +56,7 @@ export const BookPage = () => {
                                     {book && book.title}
                                 </h3>
                                 <div className="book-page-author ">
-                                    {book && book.authors.map(el => <div>{el}</div>)}
+                                    {book && book.authors.map((el, index) => <div key={index}>{el}</div>)}
                                 </div>
                                 {!initialState.reservation
                                     ?
@@ -165,7 +164,7 @@ export const BookPage = () => {
                             <div
                                 className={toggleReviews ? "h5 detailed-information" : 'h5 detailed-information'}>
                                 Отзывы <span className="number-of-reviews">
-                                {initialState.reviewState.length ? initialState.reviewState.length : 0}
+                                {book && book.comments? book.comments.length : 0}
                             </span>
                                 <button data-test-id='button-hide-reviews' type='button'
                                         onClick={clickToggleReviews}>
@@ -173,35 +172,38 @@ export const BookPage = () => {
                                          alt="arrow"/>
                                 </button>
                             </div>
-                            {!toggleReviews && initialState.reviewState.length > 0 &&
+                            {!toggleReviews && book && book.comments.length > 0 &&
                                 <div className="dividing-line">
                                     <div style={{display: "none"}}>a</div>
                                 </div>}
                         </div>
 
 
-                        {!toggleReviews && initialState.reviewState
-                            ? initialState.reviewState.map(review =>
-                                <div key={review.id} className="review-container">
+                        {!toggleReviews && book && book.comments
+                            ? book.comments.map(comment =>
+                                <div key={comment.id} className="review-container">
                                     <div className="review-header-1100">
-                                        <div><img src={avatar} alt="ava"/></div>
-                                        <div>{review.name}</div>
-                                        <div>{review.data}</div>
+                                        <div><img
+                                            src={comment.user.avatarUrl ? 'https://strapi.cleverland.by/' +comment.user.avatarUrl : avatar}
+                                            alt="ava"/></div>
+                                        <div>{comment.user.firstName} {comment.user.lastName}</div>
+                                        <div><Data data={comment.createdAt}/></div>
                                     </div>
                                     <div className="review-header-320">
                                         <div><img src={avatar} alt="ava"/></div>
                                         <div className="review-header-container">
-                                            <div>{review.name}</div>
-                                            <div>{review.data}</div>
+                                            <div>{comment.user.firstName} {comment.user.lastName}</div>
+                                            <div><Data data={comment.createdAt}/></div>
                                         </div>
                                     </div>
-                                    <Rating rating={review.rating} classname="describe-rating"/>
-                                    <div className="review">{review.review}</div>
+                                    <Rating rating={comment.rating} classname="describe-rating"/>
+                                    <div className="review">{comment.text}</div>
                                 </div>)
                             : ""}
 
                         <div
-                            className={initialState.reviewState.length > 0 ? "book-page-button-review-no-reviews" : "book-page-button-review-no-reviews"}>
+                            className={book && book.comments  ? "book-page-button-review-no-reviews" : "book-page-button-review-no-reviews"}
+                        >
                             <button
                                 data-test-id='button-rating'
                                 type="button"

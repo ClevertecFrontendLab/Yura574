@@ -1,6 +1,6 @@
 /* eslint-disable */
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getAllBooks} from "./book-reducer";
+import {getAllBooks, getBook} from "./book-reducer";
 
 export type ErrorType = {
     "data": string | null;
@@ -42,13 +42,18 @@ const appSlice = createSlice({
         },
         setIsLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload
+            document.body.style.overflow = 'hidden'
         },
         setError: (state, action: PayloadAction<ErrorType | null>) => {
             state.error = action.payload
         }
     },
     extraReducers(builder){
-        builder.addCase(getAllBooks.fulfilled, (state)=>{
+        builder
+            .addCase(getAllBooks.fulfilled, (state)=>{
+            state.isLoading = false
+        })
+            .addCase(getBook.fulfilled, (state)=>{
             state.isLoading = false
         })
     }

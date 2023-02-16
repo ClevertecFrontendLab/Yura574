@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import arrowBottom from "../assets/svg/arrow-bottom.svg";
 import arrowTop from "../assets/svg/arrow-top.svg";
 import {useAppDispatch, useAppSelector} from "../store/store";
-import {setActiveLink, setIsToggleList} from "../store/reducers/app-reducers";
+import {setActiveLink, setError, setIsToggleList} from "../store/reducers/app-reducers";
 
 
 type NavbarType = {
@@ -73,13 +73,13 @@ export const Navbar = (props: NavbarType) => {
                 ))}
             </ul>
             <div data-test-id={props.terms} className="navbar-rules-container" onClick={diActivate}>
-                <NavLink to="/rules"
+                <NavLink to="/rules" onClick={()=>dispatch(setError(null))}
                          className={({isActive}) => isActive ? "navbar__active-title" : "navbar-rules"}>
                     Правила пользования</NavLink>
             </div>
             <div data-test-id={props.contract} className="navbar-rules-container"
                  onClick={diActivate}>
-                <NavLink to="/contract-offer"
+                <NavLink to="/contract-offer" onClick={()=>dispatch(setError(null))}
                          className={({isActive}) => isActive ? "navbar__active-title" : "navbar-rules"}>
                     Договор оферты</NavLink>
             </div>

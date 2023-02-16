@@ -6,12 +6,16 @@ import avatar from '../assets/png/avatar.png'
 import cleverland from '../assets/svg/Cleverland.svg'
 import logo from '../assets/svg/logo.svg'
 import { useAppSelector } from '../store/store';
+import {useWindowSize} from '../utils/utils';
 
+import {Error} from './common-components/error';
 import {BurgerMenu} from './main-section/view-items/burger-menu';
 import { Navbar } from './navbar';
 /* eslint-disable */
 export const Header = () => {
     const isMenuToggle = useAppSelector(state => state.app.isToggleMenu);
+    const error = useAppSelector(state => state.app.error)
+    const size = useWindowSize()
 
     const click = (e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
@@ -37,7 +41,7 @@ export const Header = () => {
                     </div>
                 </div>
             </div>
-            <div onClick={(e) => click(e)} className={isMenuToggle
+            {size.width < 769 ?<div onClick={(e) => click(e)} className={isMenuToggle
                 ? "burger-menu__sidebar burger-menu__sidebar_active"
                 : "burger-menu__sidebar"}>
                 <Navbar sidebar={true}
@@ -46,9 +50,13 @@ export const Header = () => {
                         terms='burger-terms'
                         contract='burger-contract'
                 />
-                <div>dfdffd</div>
-                <div>dfdffd</div>
+                <div className='extra_button'>
+                <div className='profile'>Профиль</div>
+                <div className='exit'>Выход</div>
+                </div>
             </div>
+                : false}
+            {error ? <Error/>: false}
 
         </header>
     )
