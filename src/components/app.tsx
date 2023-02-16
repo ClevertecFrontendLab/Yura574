@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useEffect} from "react";
+import React from "react";
 
 import {Route, Routes} from 'react-router-dom';
 import {Footer} from './footer';
@@ -8,10 +8,6 @@ import {Main} from './main';
 import {BookPage} from './book-page';
 import {useAppDispatch, useAppSelector} from "../store/store";
 import {setIsToggleMenu} from "../store/reducers/app-reducers";
-import {
-    getAllBooks,
-    getAllCategories,
-} from "../store/reducers/book-reducer";
 import {Loader} from "./common-components/loader";
 
 
@@ -20,15 +16,7 @@ export const App = () => {
 
     const isToggleMenu = useAppSelector(state => state.app.isToggleMenu)
     const isLoading = useAppSelector(state => state.app.isLoading)
-    useEffect(() => {
-        dispatch(getAllCategories())
 
-    }, [])
-    //
-    useEffect(() => {
-        dispatch(getAllBooks())
-
-    }, [])
 
 
     const closeToggleMenu = () => {

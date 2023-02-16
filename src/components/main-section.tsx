@@ -1,27 +1,40 @@
 /* eslint-disable */
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import {SortingItems} from './main-section/sorting-items';
 import {LineItem} from './main-section/view-items/line-item';
 import {SquareItem} from './main-section/view-items/square-item';
-import { useAppSelector} from '../store/store';
-import {AllBooksType} from '../store/reducers/book-reducer';
+import {useAppDispatch, useAppSelector} from '../store/store';
+import {AllBooksType, getAllBooks, getAllCategories} from '../store/reducers/book-reducer';
 
 
 export const MainSection = React.memo(() => {
 
+    const dispatch = useAppDispatch()
     const books = useAppSelector(state => state.books.allBooks)
     const error = useAppSelector(state => state.app.error)
+    const categories = useAppSelector(state => state.books.categories)
 
     const [viewItems, setViewItems] = useState('block')
 
+    useEffect(() => {
+       if(books.length ===0){
+           dispatch(getAllBooks())
+       }
+
+    }, [dispatch])
+    useEffect(() => {
+        if(!categories ){
+            dispatch(getAllCategories())
+        }
+
+    }, [dispatch])
     const changeView = useCallback((view: string) => {
         setViewItems(view)
     }, [])
 
-    let showBooks = books;
-
+    let showBooks = books
 
     const showPageBook = (showBooks: AllBooksType[], currentPage: number, pageSize: number) => {
 

@@ -33,7 +33,6 @@ export const Slider = (props: SliderType) => {
             slides = 5;
         }
     }
-    console.log(images &&'https://strapi.cleverland.by' + images[0].url)
     return (
         <div className="slider-container">
             <div className="slider-wrapper">

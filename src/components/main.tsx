@@ -5,10 +5,10 @@ import {Navbar} from "./navbar";
 import {MainSection} from "./main-section";
 import {Rules} from "./main-section/rules";
 import {ContractOffer} from "./main-section/contract-offer";
-import {useAppSelector} from "../store/store";
 
 export const Main = () => {
 
+    //
 
     return (
         <main className="layout-main-page main_wrapper">

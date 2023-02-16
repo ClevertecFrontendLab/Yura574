@@ -10,7 +10,6 @@ import { SliderType } from "./slider";
 export const Slider2 = (props: SliderType) => {
     const {images} = props
     const length = images && images.length;
-    console.log(images && 'https://strapi.cleverland.by' + images[0])
     return (
         <div className="slider-container">
             <div className="slider-wrapper">
