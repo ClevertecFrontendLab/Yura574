@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {createAsyncThunk, createSlice, Dispatch} from "@reduxjs/toolkit";
 import {booksApi} from "../../api/api";
-import { setError, setIsLoading} from "./app-reducers";
+import {setError, setIsLoading} from "./app-reducers";
 
 export type AllBooksType = {
     issueYear: string
@@ -76,13 +76,51 @@ export type CategoryType = {
 }
 type InitialStateType = {
     allBooks: AllBooksType[]
-    book: BookType | null
-    categories: CategoryType[] | null
+    book: BookType
+    categories: CategoryType[]
 }
 const initialState: InitialStateType = {
     allBooks: [],
-    book: null,
-    categories: null,
+    book: {
+        id: 0,
+        title: '',
+        categories: [],
+        pages: '',
+        format: '',
+        ISBN: '',
+        weight: '',
+        cover: '',
+        issueYear: '',
+        publish: '',
+        rating: '',
+        booking: {
+            id: 0,
+            customerFirstName: '',
+            customerLastName: '',
+            customerId: 0,
+            order: false,
+            dateOrder: ''
+        },
+        description: '',
+        authors: [],
+        delivery: {
+            id: 0,
+            dateHandedFrom: '',
+            handed: false,
+            dateHandedTo: '',
+            recipientFirstName: '',
+            recipientId: 0,
+            recipientLastName: ''
+        },
+        histories: [],
+        comments: [],
+        images: [],
+        producer: ''
+
+
+
+    },
+    categories: [],
 
 };
 
@@ -149,7 +187,7 @@ const booksSlice = createSlice({
     name: "books",
     initialState,
     reducers: {
-        setBook: (state, action)=> {
+        setBook: (state, action) => {
             state.book = action.payload
         }
     },
@@ -161,7 +199,7 @@ const booksSlice = createSlice({
             .addCase(getAllBooks.fulfilled, (state, action) => {
                 state.allBooks = action.payload
             })
-            .addCase(getBook.fulfilled, (state, action)=>{
+            .addCase(getBook.fulfilled, (state, action) => {
                 state.book = action.payload
             })
     }

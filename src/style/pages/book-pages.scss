@@ -130,37 +130,40 @@
 }
 
 .information-table {
-    display: flex;
+    //display: flex;
+    //width: 100%;
+    //flex-direction: column;
+    //flex-wrap: wrap;
+    //height: 200px;
+    font-size: 16px;
+    line-height: 24px;
 
-    .table-first-div {
-        margin-right: 146px;
+    .information-table-body{
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        flex-wrap: wrap;
+        width: 100%;
     }
 
-    .table-row-container {
-        margin-bottom: 16px;
+    tr {
+        min-height: 40px;
+        min-width: 475px;
+        line-height: 24px;
+        vertical-align: top;
     }
 
     th {
-        width: 190px;
-        text-align: left;
         font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: #A7A7A7;
-        padding: 0;
+        width: 160px;
+        text-align: left;
     }
 
     td {
-        font-size: 16px;
-        line-height: 24px;
-        padding: 0;
-        max-width: 445px;
-        letter-spacing: 0;
+        font-weight: 400;
     }
 
-    br {
-        display: none;
-    }
+
 }
 
 .number-of-reviews {

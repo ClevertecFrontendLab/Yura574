@@ -11,6 +11,7 @@ import {AllBooksType, getAllBooks, getAllCategories} from '../store/reducers/boo
 
 export const MainSection = React.memo(() => {
 
+
     const dispatch = useAppDispatch()
     const books = useAppSelector(state => state.books.allBooks)
     const error = useAppSelector(state => state.app.error)
@@ -19,13 +20,13 @@ export const MainSection = React.memo(() => {
     const [viewItems, setViewItems] = useState('block')
 
     useEffect(() => {
-       if(books.length ===0){
-           dispatch(getAllBooks())
-       }
+        if (books.length === 0) {
+            dispatch(getAllBooks())
+        }
 
     }, [dispatch])
     useEffect(() => {
-        if(!categories ){
+        if (categories.length === 0) {
             dispatch(getAllCategories())
         }
 
@@ -34,14 +35,8 @@ export const MainSection = React.memo(() => {
         setViewItems(view)
     }, [])
 
-    let showBooks = books
-
-    const showPageBook = (showBooks: AllBooksType[], currentPage: number, pageSize: number) => {
-
-        return showBooks.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-    };
     return (
-        <div>{error ? false: <div>
+        <div>{error ? false : <div>
 
             <SortingItems changeView={changeView} view={viewItems}/>
             <div
@@ -60,11 +55,11 @@ export const MainSection = React.memo(() => {
                                 data-test-id='card'
                                 title={book.title}
                                 authors={book.authors}
-                                image={ book.image}
+                                image={book.image}
                                 rating={book.rating}
                                 booking={book.booking}
                             /></NavLink>
-                            :<NavLink to={`/books/all/${book.id}`}> <LineItem
+                            : <NavLink to={`/books/all/${book.id}`}> <LineItem
                                 id={book.id}
                                 categories={book.categories}
                                 delivery={book.delivery}
@@ -73,7 +68,7 @@ export const MainSection = React.memo(() => {
                                 data-test-id='card'
                                 title={book.title}
                                 authors={book.authors}
-                                image={ book.image}
+                                image={book.image}
                                 rating={book.rating}
                                 booking={book.booking}
                             />
@@ -82,13 +77,9 @@ export const MainSection = React.memo(() => {
                     </div>
                 )}
             </div>
-            {/*<Pagination pageSize={pageSize}*/}
-            {/*            siblingCount={1}*/}
-            {/*            totalCount={books.length}*/}
-            {/*            currentPage={currentPage}*/}
-            {/*/>*/}
+
         </div>
-                }</div>
+        }</div>
     )
 })
 

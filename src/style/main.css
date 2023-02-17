@@ -803,32 +803,29 @@ select {
 }
 
 .information-table {
+  font-size: 16px;
+  line-height: 24px;
+}
+.information-table .information-table-body {
   display: flex;
+  flex-direction: column;
+  height: 200px;
+  flex-wrap: wrap;
+  width: 100%;
 }
-.information-table .table-first-div {
-  margin-right: 146px;
-}
-.information-table .table-row-container {
-  margin-bottom: 16px;
+.information-table tr {
+  min-height: 40px;
+  min-width: 475px;
+  line-height: 24px;
+  vertical-align: top;
 }
 .information-table th {
-  width: 190px;
-  text-align: left;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  color: #A7A7A7;
-  padding: 0;
+  width: 160px;
+  text-align: left;
 }
 .information-table td {
-  font-size: 16px;
-  line-height: 24px;
-  padding: 0;
-  max-width: 445px;
-  letter-spacing: 0;
-}
-.information-table br {
-  display: none;
+  font-weight: 400;
 }
 
 .number-of-reviews {

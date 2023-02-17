@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/* eslint-disable */
 import React, { MouseEvent } from 'react';
 import {NavLink} from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import {useWindowSize} from '../utils/utils';
 import {Error} from './common-components/error';
 import {BurgerMenu} from './main-section/view-items/burger-menu';
 import { Navbar } from './navbar';
-/* eslint-disable */
+
 export const Header = () => {
     const isMenuToggle = useAppSelector(state => state.app.isToggleMenu);
     const error = useAppSelector(state => state.app.error)
@@ -20,8 +20,9 @@ export const Header = () => {
     const click = (e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     };
+
     return (
-        <header className=" layout-main-page header-wrapper">
+        <header className="layout-main-page header-wrapper">
             <div className='container'>
                 <NavLink to='/'>
                     <div className="logo-container">
@@ -41,9 +42,9 @@ export const Header = () => {
                     </div>
                 </div>
             </div>
-            {size.width < 769 ?<div onClick={(e) => click(e)} className={isMenuToggle
-                ? "burger-menu__sidebar burger-menu__sidebar_active"
-                : "burger-menu__sidebar"}>
+            {size.width < 769 ?<div  onClick={(e) => click(e)} className={isMenuToggle
+                ? 'burger-menu__sidebar burger-menu__sidebar_active'
+                : 'burger-menu__sidebar'}>
                 <Navbar sidebar={true}
                         showcase='burger-showcase'
                         books='burger-books'

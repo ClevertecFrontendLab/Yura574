@@ -1,16 +1,17 @@
 /* eslint-disable */
-import React from "react";
-import {Navigate, Route, Routes} from "react-router-dom";
-import {Navbar} from "./navbar";
-import {MainSection} from "./main-section";
-import {Rules} from "./main-section/rules";
-import {ContractOffer} from "./main-section/contract-offer";
+import React from 'react';
+import {Navigate, Route, Routes} from 'react-router-dom';
 
-export const Main = () => {
+import {ContractOffer} from './main-section/contract-offer';
+import {Rules} from './main-section/rules';
+import {MainSection} from './main-section';
+import {Navbar} from './navbar';
+
+export const Main = () =>
 
     //
 
-    return (
+     (
         <main className="layout-main-page main_wrapper">
 
 
@@ -23,7 +24,7 @@ export const Main = () => {
                 />
 
                 < Routes>
-                    < Route path="/" element={<Navigate to={'books/all'}/>}/>
+                    < Route path="/" element={<Navigate to="books/all"/>}/>
                     <Route path="/books/all" element={<MainSection/>}/>
                     <Route path="/rules" element={<Rules/>}/>
                     <Route path="/contract-offer" element={<ContractOffer/>}/>
@@ -31,5 +32,5 @@ export const Main = () => {
 
             </section>
         </main>
-    );
-};
+    )
+;

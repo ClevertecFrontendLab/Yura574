@@ -1,17 +1,20 @@
 /* eslint-disable */
-import React from "react";
-
+import React from 'react';
 import {Route, Routes} from 'react-router-dom';
+
+import {setIsToggleMenu} from '../store/reducers/app-reducers';
+import {useAppDispatch, useAppSelector} from '../store/store';
+
+import {Loader} from './common-components/loader';
+import {BookPage} from './book-page';
 import {Footer} from './footer';
 import {Header} from './header';
 import {Main} from './main';
-import {BookPage} from './book-page';
-import {useAppDispatch, useAppSelector} from "../store/store";
-import {setIsToggleMenu} from "../store/reducers/app-reducers";
-import {Loader} from "./common-components/loader";
 
 
 export const App = () => {
+
+
     const dispatch = useAppDispatch()
 
     const isToggleMenu = useAppSelector(state => state.app.isToggleMenu)
@@ -24,7 +27,7 @@ export const App = () => {
     }
 
     return (
-        <div className={isToggleMenu ? "wrapper wrapper-active" : 'wrapper'}
+        <div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'}
              onClick={closeToggleMenu}>
             {isLoading && <Loader/>}
             <Header/>
