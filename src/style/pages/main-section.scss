@@ -1,0 +1,33 @@
+
+
+.items-container-block{
+    margin: 32px 0 62px 0;
+    display: grid;
+    gap: 21px;
+    grid-template-columns: repeat(4, 1fr);
+}
+.items-container-line{
+    margin: 32px 0 62px 0;
+
+
+}
+
+
+@media (max-width: 768px) {
+    .items-container-block{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .items-container-line{
+        width: 640px;
+    }
+}
+
+@media (max-width: 320px) {
+    .items-container-block{
+        grid-template-columns: repeat(1, 1fr);
+        justify-items: center;
+    }
+    .items-container-line{
+        width: 288px;
+    }
+}

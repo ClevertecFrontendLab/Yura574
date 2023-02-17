@@ -1,0 +1,98 @@
+
+.navbar__wrapper {
+    width: 255px;
+    margin-right: 30px;
+}
+
+.navbar_title {
+    display: flex;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    width: 255px;
+    height: 36px;
+    //border-bottom: 1px solid black;
+}
+
+.navbar__active-title {
+    display: flex;
+    justify-content: space-between;
+    background: -webkit-linear-gradient(#F83600, #F9D423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+
+    border-image: linear-gradient(#F83600, #F9D423) 1;
+    border-bottom: 1px solid transparent;
+    a{
+        width: 137px;
+    }
+
+}
+
+.navbar-list_books {
+    width: 100%;
+    li {
+        font-size: 16px;
+        line-height: 24px;
+        margin: 16px 0 16px 20px;
+        padding-left: 4px;
+        a{
+            border-bottom: none;
+        }
+
+    }
+
+    li:first-child {
+        padding-left: 0
+    }
+
+    span {
+        color: #A7A7A7;
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+.navbar__list-book__invisible{
+    display: none;
+}
+
+.navbar-rules {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+
+}
+.navbar-rules-container{
+    margin-top: 42px;
+}
+
+.navbar__toggle-menu{
+    background-color: rgba(0,0,0,0);
+    border: none;
+
+
+}
+.navbar__toggle-menu__invisible{
+
+}
+
+@media (max-width: 768px ) {
+    .navbar__wrapper_invisible{
+        display: none;
+    }
+    .navbar__wrapper_visible{
+        display: block;
+        padding: 32px 0 0 32px;
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar__wrapper{
+        width: 225px;
+    }
+
+
+}

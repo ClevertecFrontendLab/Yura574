@@ -1,0 +1,115 @@
+.burger-menu__wrapper {
+    display: none;
+}
+
+.burger-menu__sidebar {
+    display: none;
+}
+
+.burger-menu__sidebar_active {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    .burger-menu__wrapper {
+        position: relative;
+        display: block;
+        margin-right: 24px;
+        width: 32px;
+        height: 32px;
+    }
+    .burger-menu__container {
+        position: relative;
+        height: 32px;
+        border: 0;
+        width: 32px;
+        background-color: rgba(1, 1, 1, 0);
+
+        .burger-menu__icon {
+            position: absolute;
+            font-size: 0;
+            width: 26px;
+            height: 3px;
+            background-color: #000000;
+            left: 3px;
+            transition: 0.5s all;
+        }
+
+        .first {
+            top: 6px;
+        }
+
+        .second, .third {
+            top: 15px
+        }
+
+        .fourth {
+            top: 23px
+        }
+    }
+    .burger-menu__container_active {
+        .first {
+            display: none;
+        }
+
+        .fourth {
+            display: none;
+        }
+
+        .second {
+            transform: rotate(45deg);
+        }
+
+        .third {
+            transform: rotate(-45deg);
+        }
+    }
+    .burger-menu__sidebar {
+        display: block;
+        position: absolute;
+        width: 350px;
+        background-color: #F9F9FA;
+        margin-top: 70px;
+        z-index: 2;
+        transform: translateX(-120%);
+        transition: 0.5s all;
+        border-radius: 10px;
+
+        & .extra_button {
+            margin: 52px 0;
+            padding: 32px 0 0 32px;
+            border-top: 1px solid #BFC4C9;
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 700;
+            & .profile{
+                margin-top: 32px;
+            }
+            & .exit{
+                margin-top: 42px;
+            }
+        }
+    }
+    .burger-menu__sidebar_active {
+        transform: translateX(0);
+        overflow: scroll !important;
+        max-height: 700px !important;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .burger-menu__wrapper {
+        width: 24px;
+        height: 24px;
+    }
+    .burger-menu__sidebar {
+        width: 288px;
+        overflow-x: hidden;
+
+
+    }
+
+}

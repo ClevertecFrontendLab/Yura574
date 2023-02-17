@@ -1,0 +1,45 @@
+
+.rules-page-container{
+    width: 825px;
+    margin-left: 6px;
+}
+
+.rules-title{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.all-rules{
+    div {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+.main-rules{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    margin-top: 32px;
+    letter-spacing: 0;
+
+}
+.first-level-rules{
+    margin-left: 30px;
+}
+//
+//.rules-container{
+//    div {
+//        margin-top: 16px;
+//        font-size: 16px;
+//        line-height: 24px;
+//    }
+//}
+.two-level-rules{
+    margin-left: 60px;
+}
+.three-level-rules{
+    margin-left: 90px;
+}

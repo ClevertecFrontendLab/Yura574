@@ -1,0 +1,60 @@
+.square-item-container {
+  position:relative;
+  width:190px;
+  height:470px;
+  background:#FFFFFF;
+  flex-wrap:wrap;
+  box-shadow:0 2px 4px rgba(191, 196, 201, 0.2), 0 3px 4px rgba(191, 196, 201, 0.18), 0 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius:10px;
+  padding:8px 8px 0 8px;
+}
+.line-item-container {
+  width:825px;
+  display:flex;
+  margin:32px 0 16px 6px;
+}
+.title-book {
+  font-weight:600;
+  font-size:14px;
+  line-height:18px;
+  letter-spacing:0.1px;
+  font-family:sans-serif;
+  max-height:54px;
+}
+.button-reserve {
+  bottom:16px;
+  left:12px;
+  width:166px;
+  height:40px;
+  border-radius:20px;
+  background:linear-gradient(231.58deg, #F83600 -53.35%, #F9D423 297.76%);
+  color:#FFFFFF;
+  font-weight:600;
+  font-size:12px;
+  line-height:18px;
+  border:none;
+}
+.button-block {
+  position:absolute;
+}
+.reserve {
+  background:#FFFFFF;
+  color:#000000;
+  border:1px solid #BFC4C9;
+}
+.reverse-date {
+  text-transform:uppercase;
+  color:#BFC4C9;
+}
+.book {
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+.author-book {
+  font-weight:400;
+  font-size:14px;
+  line-height:18px;
+  letter-spacing:0.1px;
+  color:#727272;
+}
