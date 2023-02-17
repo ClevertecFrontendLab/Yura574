@@ -41,7 +41,7 @@ export const BookPage = () => {
 
             <div className="book-page-path-wrapper">
                 <div className="path">
-                    {book.categories.length > 0 ? book.categories[0] : <React.Fragment> Бизнес книги</React.Fragment>} / {book.title}
+                    {book.categories && book.categories.length > 0 ? book.categories[0] : <React.Fragment> Бизнес книги</React.Fragment>} / {book.title}
                 </div>
             </div>
 
