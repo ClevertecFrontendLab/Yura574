@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {createAsyncThunk, createSlice, Dispatch} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {booksApi} from "../../api/api";
 import {setError, setIsLoading} from "./app-reducers";
 
@@ -187,9 +187,7 @@ const booksSlice = createSlice({
     name: "books",
     initialState,
     reducers: {
-        setBook: (state, action) => {
-            state.book = action.payload
-        }
+
     },
     extraReducers(builder) {
         builder
@@ -205,31 +203,8 @@ const booksSlice = createSlice({
     }
 });
 
-export const {setBook} = booksSlice.actions;
+export const {} = booksSlice.actions;
 
 export const booksReducer = booksSlice.reducer;
 
 
-export const getSuccessBookId = (id: string) => (dispatch: Dispatch) => {
-    dispatch(setIsLoading(true))
-    booksApi.getBook(id)
-        .then(res => {
-            console.log(res.data)
-            dispatch(setBook(res.data))
-        })
-        .catch(() => {
-            dispatch(setError({
-                    "data": null,
-                    "error": {
-                        "status": 401,
-                        "name": 'string',
-                        "message": 'string',
-                        "details": {}
-                    }
-                }
-            ))
-        })
-        .finally(() => {
-            dispatch(setIsLoading(false))
-        })
-}

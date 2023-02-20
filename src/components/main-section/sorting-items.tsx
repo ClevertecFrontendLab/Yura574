@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 
 import lineGray from '../../assets/svg/icon_line-gray.svg';
@@ -14,9 +15,10 @@ type SortingItemsType = {
     view: string
 }
 
-export const SortingItems = (props: SortingItemsType) => {
+export const SortingItems = React.memo((props: SortingItemsType) => {
     const size = useWindowSize();
     const [activeInput, setActiveInput] = useState<string>('');
+    const [searchValue, setSearchValue] = useState<string>('')
     const inputClick = () => {
         setActiveInput('active-input');
     };
@@ -27,7 +29,12 @@ export const SortingItems = (props: SortingItemsType) => {
         <div className="sorting-container">
             {activeInput === 'active-input' && size.width <= 320 ?
                 <div className="active-input-container">
-                    <input  data-test-id='input-search' className="active-input" placeholder="Поиск книги или автора…" />
+                    <input  data-test-id='input-search'
+                            className="active-input"
+                            placeholder="Поиск книги или автора…"
+                            value={searchValue}
+                            onChange={e=>setSearchValue(e.currentTarget.value)}
+                    />
                     <button
                         data-test-id="button-search-close"
                         className="active-input-button"
@@ -44,8 +51,11 @@ export const SortingItems = (props: SortingItemsType) => {
                                       className="button button-search"
                                       onClick={inputClick}><img src={iconSearch} alt='search'/> </button>
 
-                            <input data-test-id="input-search" placeholder="Поиск книги или автора…"
+                            <input data-test-id="input-search"
+                                   placeholder="Поиск книги или автора…"
                                    className="input-search"
+                                   value={searchValue}
+                                   onChange={e=>setSearchValue(e.currentTarget.value)}
                                    />
                         <button type="button" className="sort-by-rating">
                             <span>По рейтенгу</span>
@@ -75,4 +85,4 @@ export const SortingItems = (props: SortingItemsType) => {
         </div>
     );
 
-};
+});

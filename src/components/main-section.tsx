@@ -1,16 +1,14 @@
 /* eslint-disable */
 import React, {useCallback, useEffect, useState} from 'react';
-import {NavLink} from 'react-router-dom';
 
 import {SortingItems} from './main-section/sorting-items';
-import {LineItem} from './main-section/view-items/line-item';
-import {SquareItem} from './main-section/view-items/square-item';
 import {useAppDispatch, useAppSelector} from '../store/store';
-import {AllBooksType, getAllBooks, getAllCategories} from '../store/reducers/book-reducer';
+import { getAllBooks, getAllCategories} from '../store/reducers/book-reducer';
+import {ItemsMainSection} from "./main-section/items-main-section";
+import {setError} from "../store/reducers/app-reducers";
 
 
 export const MainSection = React.memo(() => {
-
 
     const dispatch = useAppDispatch()
     const books = useAppSelector(state => state.books.allBooks)
@@ -21,65 +19,37 @@ export const MainSection = React.memo(() => {
 
     useEffect(() => {
         if (books.length === 0) {
+            if (error) {
+                dispatch(setError(null))
+            }
             dispatch(getAllBooks())
         }
-
-    }, [dispatch])
-    useEffect(() => {
         if (categories.length === 0) {
+            if (error) {
+                dispatch(setError(null))
+            }
             dispatch(getAllCategories())
+        }
+        if (error && books.length > 0) {
+
+            dispatch(setError(null))
         }
 
     }, [dispatch])
+
+
     const changeView = useCallback((view: string) => {
         setViewItems(view)
     }, [])
 
     return (
-        <div>{error ? false : <div>
-
-            <SortingItems changeView={changeView} view={viewItems}/>
-            <div
-                className={viewItems === 'block' ? 'items-container-block' : 'items-container-line'}>
-                {!error && books.map((book: AllBooksType) =>
-
-                    <div key={book.id}>
-                        {viewItems === 'block'
-
-                            ? <NavLink to={`/books/all/${book.id}`}><SquareItem
-                                id={book.id}
-                                categories={book.categories}
-                                delivery={book.delivery}
-                                histories={book.histories}
-                                issueYear={book.issueYear}
-                                data-test-id='card'
-                                title={book.title}
-                                authors={book.authors}
-                                image={book.image}
-                                rating={book.rating}
-                                booking={book.booking}
-                            /></NavLink>
-                            : <NavLink to={`/books/all/${book.id}`}> <LineItem
-                                id={book.id}
-                                categories={book.categories}
-                                delivery={book.delivery}
-                                histories={book.histories}
-                                issueYear={book.issueYear}
-                                data-test-id='card'
-                                title={book.title}
-                                authors={book.authors}
-                                image={book.image}
-                                rating={book.rating}
-                                booking={book.booking}
-                            />
-                            </NavLink>
-                        }
-                    </div>
-                )}
+        <div>
+            {!error && <div>
+                <SortingItems changeView={changeView} view={viewItems}/>
+                <ItemsMainSection error={error} books={books} viewItems={viewItems}/>
             </div>
-
+            }
         </div>
-        }</div>
     )
 })
 
