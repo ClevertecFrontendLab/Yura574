@@ -35,6 +35,7 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
                     <div key={book.id}>
                         {viewItems === 'block'
 
+
                             ? <NavLink to={`/books/all/${book.id}`}><SquareItem
                                 id={book.id}
                                 categories={book.categories}
