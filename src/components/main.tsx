@@ -1,17 +1,11 @@
 /* eslint-disable */
-import React from 'react';
-import {Navigate, Route, Routes} from 'react-router-dom';
-
-import {ContractOffer} from './main-section/contract-offer';
-import {Rules} from './main-section/rules';
 import {MainSection} from './main-section';
 import {Navbar} from './navbar';
 
-export const Main = () =>
+export const Main = () =>{
 
-    //
 
-     (
+    return(
         <main className="layout-main-page main_wrapper">
 
 
@@ -22,15 +16,9 @@ export const Main = () =>
                          terms='navigation-terms'
                          contract='navigation-contract'
                 />
-
-                < Routes>
-                    < Route path="/" element={<Navigate to="books/all"/>}/>
-                    <Route path="/books/all" element={<MainSection/>}/>
-                    <Route path="/rules" element={<Rules/>}/>
-                    <Route path="/contract-offer" element={<ContractOffer/>}/>
-                </Routes>
-
+                   <MainSection/>
             </section>
         </main>
     )
+    }
 ;

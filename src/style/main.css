@@ -1379,6 +1379,7 @@ select {
   width: 100%;
   border: 1px solid #F42C4F;
   left: 0;
+  top: 40px;
   background-color: #FEEBEA;
   z-index: 2;
   padding: 24px 32px;
@@ -1408,6 +1409,7 @@ select {
 @media (max-width: 768px) {
   .error-container {
     padding: 24px 16px;
+    top: 60px;
   }
   .error-message {
     font-size: 14px;
@@ -1429,6 +1431,7 @@ select {
   .error-container {
     padding: 12px 16px;
     align-items: flex-start;
+    top: 50px;
   }
   .error-message-container {
     align-items: flex-start;
