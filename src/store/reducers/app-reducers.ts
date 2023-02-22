@@ -18,13 +18,15 @@ type InitialStateType = {
     activeLink: boolean,
     isLoading: boolean,
     error: ErrorType | null
+    sortByRating: boolean
 }
 const initialState: InitialStateType = {
     isToggleMenu: false,
     isToggleList: true,
     activeLink: true,
     isLoading: false,
-    error: null
+    error: null,
+    sortByRating: true
 };
 
 const appSlice = createSlice({
@@ -46,16 +48,19 @@ const appSlice = createSlice({
         },
         setError: (state, action: PayloadAction<ErrorType | null>) => {
             state.error = action.payload
+        },
+        isSortByRating: (state, action: PayloadAction<boolean>) => {
+            state.sortByRating = action.payload
         }
     },
-    extraReducers(builder){
+    extraReducers(builder) {
         builder
-            .addCase(getAllBooks.fulfilled, (state)=>{
-            state.isLoading = false
-        })
-            .addCase(getBook.fulfilled, (state)=>{
-            state.isLoading = false
-        })
+            .addCase(getAllBooks.fulfilled, (state) => {
+                state.isLoading = false
+            })
+            .addCase(getBook.fulfilled, (state) => {
+                state.isLoading = false
+            })
     }
 
 
@@ -67,6 +72,7 @@ export const {
     setIsToggleList,
     setIsLoading,
     setError,
+    isSortByRating,
 } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;

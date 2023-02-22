@@ -11,6 +11,17 @@
 
 
 }
+.noBooksInCategory{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    color: #A7A7A7;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    width: 100%;
+}
+
 
 
 @media (max-width: 768px) {

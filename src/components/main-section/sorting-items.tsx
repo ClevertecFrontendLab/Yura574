@@ -8,11 +8,15 @@ import squareWhite from '../../assets/svg/icon_square-four-white.svg';
 import inputClose from '../../assets/svg/inputClose.svg';
 import iconSearch from '../../assets/svg/search.svg'
 import { useWindowSize } from '../../utils/utils';
+import {AllBooksType} from "../../store/reducers/book-reducer";
 
 
 type SortingItemsType = {
     changeView: (view: string) => void
     view: string
+    setBooksHandler: (sort: boolean)=>void
+    ratingBooks: AllBooksType[]
+    sortByRating: boolean
 }
 
 export const SortingItems = React.memo((props: SortingItemsType) => {
@@ -57,7 +61,7 @@ export const SortingItems = React.memo((props: SortingItemsType) => {
                                    value={searchValue}
                                    onChange={e=>setSearchValue(e.currentTarget.value)}
                                    />
-                        <button type="button" className="sort-by-rating">
+                        <button type="button" className="sort-by-rating" onClick={()=>props.setBooksHandler(props.sortByRating)}>
                             <span>По рейтенгу</span>
                         </button>
 

@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 
-import {setIsToggleMenu} from '../store/reducers/app-reducers';
+import {setError, setIsToggleMenu} from '../store/reducers/app-reducers';
 import {useAppDispatch, useAppSelector} from '../store/store';
 
 import {Loader} from './common-components/loader';
@@ -12,16 +12,46 @@ import {Header} from './header';
 import {Main} from './main';
 import {Rules} from "./main-section/rules";
 import {ContractOffer} from "./main-section/contract-offer";
+import {getAllBooks, getAllCategories, setCountsBook} from "../store/reducers/book-reducer";
 
 
-export const App = () => {
+export const App = React.memo(() => {
 
 
     const dispatch = useAppDispatch()
 
     const isToggleMenu = useAppSelector(state => state.app.isToggleMenu)
     const isLoading = useAppSelector(state => state.app.isLoading)
+    const categories = useAppSelector(state => state.books.categories)
+    const books = useAppSelector(state => state.books.allBooks)
+    const error = useAppSelector(state => state.app.error)
+    useEffect(() => {
+        if (books.length === 0) {
+            if (error) {
+                dispatch(setError(null))
+            }
+            dispatch(getAllBooks())
+        }
+        if (categories.length === 0) {
+            if (error) {
+                dispatch(setError(null))
+            }
+            dispatch(getAllCategories())
+        }
+        if (error && books.length > 0) {
 
+            dispatch(setError(null))
+        }
+
+    }, [dispatch])
+    useEffect(()=>{
+        if(books.length !== 0 && categories.length !== 0 ){
+            categories.map(cat => {
+                const booksCount = books.filter(el => el.categories[0] === cat.name)
+                dispatch(setCountsBook({category: cat.name, count: booksCount.length}))
+            })
+        }
+    },[dispatch, books, categories])
 
 
     const closeToggleMenu = () => {
@@ -47,4 +77,4 @@ export const App = () => {
 
     )
 
-}
+})

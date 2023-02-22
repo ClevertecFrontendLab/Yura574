@@ -198,16 +198,13 @@ select {
 
 .navbar_title {
   display: flex;
+  justify-content: space-between;
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
-  width: 255px;
-  height: 36px;
 }
 
 .navbar__active-title {
-  display: flex;
-  justify-content: space-between;
   background: -webkit-linear-gradient(#F83600, #F9D423);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -217,10 +214,9 @@ select {
   border-image: linear-gradient(#F83600, #F9D423) 1;
   border-bottom: 1px solid transparent;
 }
-.navbar__active-title a {
-  width: 137px;
+.navbar__active-title span {
+  color: black;
 }
-
 .navbar-list_books {
   width: 100%;
 }
@@ -284,6 +280,17 @@ select {
 
 .items-container-line {
   margin: 32px 0 62px 0;
+}
+
+.noBooksInCategory {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+  color: #A7A7A7;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

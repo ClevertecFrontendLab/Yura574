@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {booksApi} from "../../api/api";
 import {setError, setIsLoading} from "./app-reducers";
 
@@ -73,6 +73,7 @@ export type CategoryType = {
     id: number
     name: string
     path: string
+    booksCount?: number
 }
 type InitialStateType = {
     allBooks: AllBooksType[]
@@ -118,7 +119,6 @@ const initialState: InitialStateType = {
         producer: ''
 
 
-
     },
     categories: [],
 
@@ -131,6 +131,7 @@ export const getAllCategories = createAsyncThunk('books/getCategories', async (a
         const res = await booksApi.getAllCategories()
         return res.data
     } catch (e) {
+        debugger
         thunkAPI.dispatch(setIsLoading(false))
         const error = {
             "data": null,
@@ -150,6 +151,7 @@ export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thu
         const res = await booksApi.getAllBooks()
         return res.data
     } catch (e) {
+        debugger
         thunkAPI.dispatch(setIsLoading(false))
         const error = {
             "data": null,
@@ -187,7 +189,10 @@ const booksSlice = createSlice({
     name: "books",
     initialState,
     reducers: {
-
+        setCountsBook: (state, action:PayloadAction<{category: string,count:number}>) => {
+            const index = state.categories.findIndex(cat => cat.name === action.payload.category)
+            state.categories[index].booksCount = action.payload.count
+        }
     },
     extraReducers(builder) {
         builder
@@ -203,7 +208,7 @@ const booksSlice = createSlice({
     }
 });
 
-export const {} = booksSlice.actions;
+export const {setCountsBook} = booksSlice.actions;
 
 export const booksReducer = booksSlice.reducer;
 

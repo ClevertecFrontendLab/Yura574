@@ -23,6 +23,7 @@ export const Navbar = (props: NavbarType) => {
     const error = useAppSelector(state => state.app.error)
 
 
+
     const activate = () => {
         dispatch(setActiveLink(true));
     };
@@ -41,7 +42,7 @@ export const Navbar = (props: NavbarType) => {
                 onClick={() => dispatch(setIsToggleList(!isToggle))}>
                 <NavLink to="/"
                          onClick={activate}
-                         className={({isActive}) => isActive || active ? 'navbar__active-title' : 'navbar_title'}>
+                         className={({isActive}) => isActive || active ? 'navbar__active-title navbar_title' : 'navbar_title'}>
                     Витрина книг
                     {active ?
                         <div className={active ? 'navbar__toggle-menu' : 'navbar__toggle-menu'}
@@ -69,7 +70,7 @@ export const Navbar = (props: NavbarType) => {
                                  onClick={activate}
                                  className={({isActive}) => isActive ? 'navbar__active-title' : ''}>
                             {el.name}
-                        </NavLink></li>
+                        </NavLink> <span>{el.booksCount}</span></li>
                 ))}
             </ul>
             <div data-test-id={props.terms} className="navbar-rules-container" onClick={diActivate}>
