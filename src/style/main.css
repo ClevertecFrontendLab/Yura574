@@ -236,6 +236,7 @@ select {
   color: #A7A7A7;
   font-size: 14px;
   line-height: 24px;
+  margin-left: 5px;
 }
 
 .navbar__list-book__invisible {
@@ -488,6 +489,10 @@ select {
   background-position-y: center;
 }
 
+.sort-by-rating-container {
+  display: flex;
+}
+
 .button {
   border: none;
   box-shadow: 0 2px 4px rgba(191, 196, 201, 0.2), 0 3px 4px rgba(191, 196, 201, 0.18), 0 1px 5px rgba(191, 196, 201, 0.24);
@@ -504,9 +509,13 @@ select {
   text-indent: 40px;
   margin-right: 16px;
   background-color: rgba(1, 1, 1, 0);
+  caret-color: #F42C4F;
 }
 .input-search::placeholder {
   color: #A7A7A7;
+}
+.input-search:focus {
+  outline: none;
 }
 
 .button-search {
@@ -517,13 +526,27 @@ select {
   width: 150px;
   height: 38px;
   border-radius: 598px;
-  background-image: url("../../assets/svg/sort.svg");
-  background-position-x: 16px;
   background-color: #ffffff;
   color: #A7A7A7;
 }
-.sort-by-rating span {
-  margin-left: 20px;
+.sort-by-rating .image-container {
+  display: flex;
+  align-items: center;
+}
+.sort-by-rating .image-sort {
+  display: inline-block;
+  margin-left: 15px;
+  width: 16px;
+  height: 16px;
+  background-position-x: 16px;
+  background: url("../../assets/svg/sort.svg") no-repeat;
+  transition: 0.5s;
+}
+.sort-by-rating .rotate {
+  transform: rotate(-180deg);
+}
+.sort-by-rating span:last-child {
+  margin-left: 8px;
 }
 .sort-by-rating:hover {
   content: "saasas";
@@ -582,9 +605,6 @@ select {
     background-color: rgba(1, 1, 1, 0);
     border: none;
     transform: translateY(-25%);
-  }
-  .sort-by-rating-container {
-    display: flex;
   }
   .input-search {
     display: none;

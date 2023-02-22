@@ -12,23 +12,25 @@ type ItemsMainSectionType = {
     error: ErrorType | null
     ratingBooks: AllBooksType[]
     viewItems: string
-
-
 }
 
 export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
 
-    const {error, ratingBooks, viewItems} = props
+    const {error, ratingBooks, viewItems, } = props
     const isLoading = useAppSelector(state => state.app.isLoading)
     const sortByRating = useAppSelector(state => state.app.sortByRating)
 
-    const newArr = [...ratingBooks]
+
+    let newArr = [...ratingBooks]
     let sortArr = newArr.sort((a, b) => a.rating - b.rating)
 
     if(sortByRating) sortArr = sortArr.reverse()
+
+
+
     return (
             <div>
-                {ratingBooks.length === 0 && !isLoading?
+                {ratingBooks.length === 0 && !isLoading ?
                     <div className='noBooksInCategory'>В этой категории книг ещё нет</div> : false}
 
                 <div
@@ -40,17 +42,18 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
                             {viewItems === 'block'
 
                                 ? <NavLink to={`/books/all/${book.id}`}><SquareItem
-                                    id={book.id}
-                                    categories={book.categories}
-                                    delivery={book.delivery}
-                                    histories={book.histories}
-                                    issueYear={book.issueYear}
-                                    data-test-id='card'
-                                    title={book.title}
-                                    authors={book.authors}
-                                    image={book.image}
-                                    rating={book.rating}
-                                    booking={book.booking}
+                                    // id={book.id}
+                                    // categories={book.categories}
+                                    // delivery={book.delivery}
+                                    // histories={book.histories}
+                                    // issueYear={book.issueYear}
+                                    // data-test-id='card'
+                                    // title={book.title}
+                                    // authors={book.authors}
+                                    // image={book.image}
+                                    // rating={book.rating}
+                                    // booking={book.booking}
+                                    book={book}
                                 /></NavLink>
                                 : <NavLink to={`/books/all/${book.id}`}> <LineItem
                                     id={book.id}

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getAllBooks, getBook} from "./book-reducer";
+import {AllBooksType, getAllBooks, getBook} from "./book-reducer";
 
 export type ErrorType = {
     "data": string | null;
@@ -19,6 +19,8 @@ type InitialStateType = {
     isLoading: boolean,
     error: ErrorType | null
     sortByRating: boolean
+    inputSortValue: string
+    searchData: AllBooksType[]
 }
 const initialState: InitialStateType = {
     isToggleMenu: false,
@@ -26,7 +28,9 @@ const initialState: InitialStateType = {
     activeLink: true,
     isLoading: false,
     error: null,
-    sortByRating: true
+    sortByRating: true,
+    inputSortValue: '',
+    searchData: [],
 };
 
 const appSlice = createSlice({
@@ -51,7 +55,14 @@ const appSlice = createSlice({
         },
         isSortByRating: (state, action: PayloadAction<boolean>) => {
             state.sortByRating = action.payload
+        },
+        setInputSortValue: (state, action:PayloadAction<string>)=>{
+            state.inputSortValue = action.payload
+        },
+        setSearchData: (state, action:PayloadAction<AllBooksType[]>)=>{
+            state.searchData = action.payload
         }
+
     },
     extraReducers(builder) {
         builder
@@ -73,6 +84,8 @@ export const {
     setIsLoading,
     setError,
     isSortByRating,
+    setInputSortValue,
+    setSearchData,
 } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;
