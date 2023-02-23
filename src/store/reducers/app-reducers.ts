@@ -21,6 +21,7 @@ type InitialStateType = {
     sortByRating: boolean
     inputSortValue: string
     searchData: AllBooksType[]
+    currentCategory: string
 }
 const initialState: InitialStateType = {
     isToggleMenu: false,
@@ -31,6 +32,7 @@ const initialState: InitialStateType = {
     sortByRating: true,
     inputSortValue: '',
     searchData: [],
+    currentCategory: '',
 };
 
 const appSlice = createSlice({
@@ -61,6 +63,9 @@ const appSlice = createSlice({
         },
         setSearchData: (state, action:PayloadAction<AllBooksType[]>)=>{
             state.searchData = action.payload
+        },
+        setCurrentCategory: (state, action:PayloadAction<string>)=>{
+            state.currentCategory =action.payload
         }
 
     },
@@ -86,6 +91,7 @@ export const {
     isSortByRating,
     setInputSortValue,
     setSearchData,
+    setCurrentCategory
 } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;

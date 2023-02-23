@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import {Rating} from "./main-section/rating";
 import avatar from "../assets/png/avatar-review.png";
 import {Slider} from "./main-section/view-items/slider";
@@ -11,7 +11,7 @@ import arrowBtnBottom from '../assets/svg/arrow-bottom-black.svg'
 import arrowBtnTop from '../assets/svg/arrow-top-black.svg'
 import {useAppDispatch, useAppSelector} from "../store/store";
 import {Data} from "./common-components/data";
-import {getBook} from "../store/reducers/book-reducer";
+import {AllBooksType, getAllBooks, getBook} from "../store/reducers/book-reducer";
 
 export type SlideType = {
     id: number
@@ -23,7 +23,7 @@ export const BookPage = React.memo(() => {
         const size = useWindowSize();
         const dispatch = useAppDispatch()
 
-        const allBooks = useAppSelector(state => state.books.allBooks)
+        const allBooks = useAppSelector<AllBooksType[]>(state => state.books.allBooks)
         const book = useAppSelector(state => state.books.book)
         const error = useAppSelector(state => state.app.error)
         const {category, id} = useParams()
@@ -31,16 +31,13 @@ export const BookPage = React.memo(() => {
         const clickToggleReviews = () => {
             setToggleReviews(!toggleReviews)
         }
-    console.log(category, id)
         useEffect(() => {
             id && dispatch(getBook(id))
         }, [id])
 
         const bookNotFound = (id: string) => {
 
-            const book = allBooks.filter(el => el.id === +id)
-            console.log(book && book[0] && {category: book[0].categories[0], title: book[0].title})
-            console.log(allBooks)
+            const book = allBooks && allBooks.filter(el => el.id === +id)
             return allBooks.length === 0 ? {
                 category: 'Все книги',
                 title: ''
@@ -48,14 +45,16 @@ export const BookPage = React.memo(() => {
 
 
         }
-        console.log(book)
         return (
             <div className="book-page-layout">
-
                 {book.id !== 0 ? <div className="book-page-path-wrapper">
                     <div className="path">
-                        {book.categories && book.categories.length > 0 ? <span>{book.categories[0]} / {book.title} </span>:
-                            <span>{id && bookNotFound(id).category}  / {id && bookNotFound(id).title}</span>}
+                        {book.categories && book.categories.length > 0
+                            ? <span><NavLink
+                                to={`/books/${category}`}
+                                onClick={() => dispatch(getAllBooks())}>  {category === 'all' ? 'Все книги ' : book.categories}</NavLink> / {book.title} </span>
+                            : <span><NavLink
+                                to='/'><span>{id && bookNotFound(id).category}</span></NavLink> / {id && bookNotFound(id).title}</span>}
                     </div>
                 </div> : false}
 
@@ -71,7 +70,7 @@ export const BookPage = React.memo(() => {
                                     {book.title}
                                 </h3>
                                 <div className="book-page-author ">
-                                    {book.authors.map((el, index) => <div
+                                    {book.authors && book.authors.map((el, index) => <div
                                         key={index}>{el}</div>)}
                                 </div>
                                 {!book.booking
@@ -175,25 +174,25 @@ export const BookPage = React.memo(() => {
 
 
                         {!toggleReviews && book.comments !== null
-                            ? book.comments.map(comment =>
-                                <div key={comment.id} className="review-container">
-                                    <div className="review-header-1100">
-                                        <div><img
-                                            src={comment.user.avatarUrl ? 'https://strapi.cleverland.by/' + comment.user.avatarUrl : avatar}
-                                            alt="ava"/></div>
+                            ? book.comments && book.comments.map(comment =>
+                            <div key={comment.id} className="review-container">
+                                <div className="review-header-1100">
+                                    <div><img
+                                        src={comment.user.avatarUrl ? 'https://strapi.cleverland.by/' + comment.user.avatarUrl : avatar}
+                                        alt="ava"/></div>
+                                    <div>{comment.user.firstName} {comment.user.lastName}</div>
+                                    <div><Data data={comment.createdAt}/></div>
+                                </div>
+                                <div className="review-header-320">
+                                    <div><img src={avatar} alt="ava"/></div>
+                                    <div className="review-header-container">
                                         <div>{comment.user.firstName} {comment.user.lastName}</div>
                                         <div><Data data={comment.createdAt}/></div>
                                     </div>
-                                    <div className="review-header-320">
-                                        <div><img src={avatar} alt="ava"/></div>
-                                        <div className="review-header-container">
-                                            <div>{comment.user.firstName} {comment.user.lastName}</div>
-                                            <div><Data data={comment.createdAt}/></div>
-                                        </div>
-                                    </div>
-                                    <Rating rating={comment.rating} classname="describe-rating"/>
-                                    <div className="review">{comment.text}</div>
-                                </div>)
+                                </div>
+                                <Rating rating={comment.rating} classname="describe-rating"/>
+                                <div className="review">{comment.text}</div>
+                            </div>)
                             : ""}
 
                         <div

@@ -623,7 +623,13 @@ select {
   .sort-by-rating {
     width: 32px;
     height: 32px;
-    background-position-x: center;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sort-by-rating .image-sort {
+    margin-left: 0;
   }
   .sort-by-rating span {
     display: none;
@@ -636,6 +642,8 @@ select {
     height: 38px;
     border-radius: 600px;
     text-indent: 16px;
+    caret-color: #f83600;
+    outline: none;
   }
   .active-input::placeholder {
     font-size: 12px;
@@ -1531,6 +1539,11 @@ select {
 .pagination-container .pagination-item.disabled:hover {
   background-color: transparent;
   cursor: default;
+}
+
+.highlights {
+  background: white;
+  color: #FF5253;
 }
 
 /*# sourceMappingURL=main.css.map */

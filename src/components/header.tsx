@@ -5,18 +5,22 @@ import {NavLink} from 'react-router-dom';
 import avatar from '../assets/png/avatar.png'
 import cleverland from '../assets/svg/Cleverland.svg'
 import logo from '../assets/svg/logo.svg'
-import {useAppSelector} from '../store/store';
+import {useAppDispatch, useAppSelector} from '../store/store';
 import {useWindowSize} from '../utils/utils';
 
 import {Error} from './common-components/error';
 import {BurgerMenu} from './main-section/view-items/burger-menu';
 import {Navbar} from './navbar';
+import {getAllBooks} from "../store/reducers/book-reducer";
 
 export const Header = () => {
+    const dispatch = useAppDispatch()
+
     const isMenuToggle = useAppSelector(state => state.app.isToggleMenu);
     const error = useAppSelector(state => state.app.error)
-    const size = useWindowSize()
+    const currentCategory = useAppSelector(state => state.app.currentCategory)
 
+    const size = useWindowSize()
     const click = (e: MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
     };
@@ -24,7 +28,7 @@ export const Header = () => {
     return (
         <header className="layout-main-page header-wrapper">
             <div className='container'>
-                <NavLink to='/'>
+                <NavLink to={currentCategory ? `/books/${currentCategory}` : '/'} onClick={()=> dispatch(getAllBooks())}>
                     <div className="logo-container">
                         <img src={logo} alt="logo"/>
                         <img src={cleverland} alt="avatar"/>

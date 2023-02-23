@@ -173,7 +173,14 @@
     .sort-by-rating {
         width: 32px;
         height: 32px;
-        background-position-x: center;
+       margin-left: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .image-sort {
+            margin-left: 0;
+        }
 
         span {
             display: none;
@@ -188,6 +195,8 @@
         height: 38px;
         border-radius: 600px;
         text-indent: 16px;
+        caret-color: #f83600;
+        outline: none;
 
         &::placeholder {
             font-size: 12px;

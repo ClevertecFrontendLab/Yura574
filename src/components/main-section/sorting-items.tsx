@@ -43,6 +43,7 @@ export const SortingItems = React.memo((props: SortingItemsType) => {
                            className="active-input"
                            placeholder="Поиск книги или автора…"
                            value={inputSortValue}
+                           autoFocus
                            onChange={e => handleInputSort(e.currentTarget.value)}
                     />
                     <button

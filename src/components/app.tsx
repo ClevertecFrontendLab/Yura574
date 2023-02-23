@@ -12,7 +12,12 @@ import {Header} from './header';
 import {Main} from './main';
 import {Rules} from "./main-section/rules";
 import {ContractOffer} from "./main-section/contract-offer";
-import {getAllBooks, getAllCategories, setCountsBook} from "../store/reducers/book-reducer";
+import {
+    CategoryType,
+    getAllBooks,
+    getAllCategories,
+    setCountsBook
+} from "../store/reducers/book-reducer";
 
 
 export const App = React.memo(() => {
@@ -22,7 +27,7 @@ export const App = React.memo(() => {
 
     const isToggleMenu = useAppSelector(state => state.app.isToggleMenu)
     const isLoading = useAppSelector(state => state.app.isLoading)
-    const categories = useAppSelector(state => state.books.categories)
+    const categories = useAppSelector<CategoryType[]>(state => state.books.categories)
     const books = useAppSelector(state => state.books.allBooks)
     const error = useAppSelector(state => state.app.error)
     useEffect(() => {
@@ -45,9 +50,9 @@ export const App = React.memo(() => {
 
     }, [dispatch])
     useEffect(()=>{
-        if(books.length !== 0 && categories.length !== 0 ){
-            categories.map(cat => {
-                const booksCount = books.filter(el => el.categories[0] === cat.name)
+        if(books.length >0 && categories.length > 0 ){
+          categories &&  categories.map(cat => {
+                const booksCount = books && books.filter(el => el.categories[0] === cat.name)
                 dispatch(setCountsBook({category: cat.name, count: booksCount.length}))
             })
         }
@@ -57,7 +62,6 @@ export const App = React.memo(() => {
     const closeToggleMenu = () => {
         isToggleMenu && dispatch(setIsToggleMenu(false))
     }
-
     return (
         <div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'}
              onClick={closeToggleMenu}>

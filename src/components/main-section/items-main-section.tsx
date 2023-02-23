@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 
 import {AllBooksType} from "../../store/reducers/book-reducer";
 import {SquareItem} from "./view-items/square-item";
@@ -19,8 +19,7 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
     const {error, ratingBooks, viewItems, } = props
     const isLoading = useAppSelector(state => state.app.isLoading)
     const sortByRating = useAppSelector(state => state.app.sortByRating)
-
-
+    const {category} = useParams()
     let newArr = [...ratingBooks]
     let sortArr = newArr.sort((a, b) => a.rating - b.rating)
 
@@ -41,32 +40,11 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
                         <div key={book.id}>
                             {viewItems === 'block'
 
-                                ? <NavLink to={`/books/all/${book.id}`}><SquareItem
-                                    // id={book.id}
-                                    // categories={book.categories}
-                                    // delivery={book.delivery}
-                                    // histories={book.histories}
-                                    // issueYear={book.issueYear}
-                                    // data-test-id='card'
-                                    // title={book.title}
-                                    // authors={book.authors}
-                                    // image={book.image}
-                                    // rating={book.rating}
-                                    // booking={book.booking}
+                                ? <NavLink to={`/books/${category}/${book.id}`}><SquareItem
                                     book={book}
                                 /></NavLink>
-                                : <NavLink to={`/books/all/${book.id}`}> <LineItem
-                                    id={book.id}
-                                    categories={book.categories}
-                                    delivery={book.delivery}
-                                    histories={book.histories}
-                                    issueYear={book.issueYear}
-                                    data-test-id='card'
-                                    title={book.title}
-                                    authors={book.authors}
-                                    image={book.image}
-                                    rating={book.rating}
-                                    booking={book.booking}
+                                : <NavLink to={`/books/${category}/${book.id}`}> <LineItem
+                                    book={book}
                                 />
                                 </NavLink>
                             }
