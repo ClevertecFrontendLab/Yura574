@@ -12,6 +12,7 @@ export const Rules = () =>
                          books='navigation-books'
                          terms='navigation-terms'
                          contract='navigation-contract'
+                         dataTestId='navigation-'
                 />
                 <div className="rules-page-container">
                     <div className="rules-title">Правила пользования</div>

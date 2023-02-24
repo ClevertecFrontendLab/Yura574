@@ -10,7 +10,6 @@ import {isSortByRating, setInputSortValue, setSearchData} from "../store/reducer
 
 
 export const MainSection = React.memo(() => {
-    debugger
     const dispatch = useAppDispatch()
     const books = useAppSelector(state => state.books.allBooks)
     const error = useAppSelector(state => state.app.error)
@@ -30,7 +29,6 @@ export const MainSection = React.memo(() => {
     let showBooks = books
 
     function arraysEqual(arr1: AllBooksType[], arr2: AllBooksType[]) {
-        debugger
         return arr1.length === arr2.length && arr1.every((value: AllBooksType, index: number) => JSON.stringify(value) === JSON.stringify(arr2[index]));
     }
 
@@ -39,7 +37,6 @@ export const MainSection = React.memo(() => {
     }
 
     useEffect(() => {
-        debugger
         if (inputSortValue) {
                 const newArr = showBooks
                     .filter(book => book.title.toLowerCase().includes(inputSortValue.toLowerCase()))
@@ -50,18 +47,13 @@ export const MainSection = React.memo(() => {
                         )
                         return {...book, title: newTitle}
                     })
-            console.log('new', newArr)
-            console.log('search', searchData)
 
               const equal = arraysEqual(newArr, ratingBooks)
-            console.log(equal)
             if(!equal){
                 setRatingBooks(newArr)
             }
-
         } else {
             const equal = arraysEqual(showBooks, ratingBooks)
-            console.log(equal)
             if (!equal && !inputSortValue) {
                 setRatingBooks(showBooks)
             }
@@ -85,7 +77,7 @@ export const MainSection = React.memo(() => {
             .map(book => {
                 let newTitle = book.title.replace(
                     new RegExp(value, 'gi'),
-                    match => `<mark class="highlights">${match}</mark>`
+                    match => `<mark class="highlights"><span   >${match}</span></mark>`
                 )
                 return {...book, title: newTitle}
             })

@@ -19,6 +19,8 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
     const {error, ratingBooks, viewItems, } = props
     const isLoading = useAppSelector(state => state.app.isLoading)
     const sortByRating = useAppSelector(state => state.app.sortByRating)
+    const inputSearch = useAppSelector(state => state.app.inputSortValue)
+
     const {category} = useParams()
     let newArr = [...ratingBooks]
     let sortArr = newArr.sort((a, b) => a.rating - b.rating)
@@ -29,8 +31,9 @@ export const ItemsMainSection = React.memo((props: ItemsMainSectionType) => {
 
     return (
             <div>
-                {ratingBooks.length === 0 && !isLoading ?
-                    <div className='noBooksInCategory'>В этой категории книг ещё нет</div> : false}
+                {inputSearch && ratingBooks.length === 0? <div className='noBooksInCategory' data-test-id='search-result-not-found'>По запросу ничего не найдено</div>
+                    : ratingBooks.length === 0 && !isLoading ?
+                    <div className='noBooksInCategory' data-test-id='empty-category'>В этой категории книг ещё нет</div> : false}
 
                 <div
                     className={viewItems === 'block' ? 'items-container-block' : 'items-container-line'}>

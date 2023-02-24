@@ -54,6 +54,7 @@ export const Header = () => {
                         books='burger-books'
                         terms='burger-terms'
                         contract='burger-contract'
+                        dataTestId='burger'
                 />
                 <div className='extra_button'>
                     <div className='profile'>Профиль</div>

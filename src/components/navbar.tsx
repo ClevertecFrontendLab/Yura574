@@ -3,7 +3,12 @@ import {NavLink} from 'react-router-dom';
 
 import arrowBottom from '../assets/svg/arrow-bottom.svg';
 import arrowTop from '../assets/svg/arrow-top.svg';
-import {setActiveLink, setError, setIsToggleList} from '../store/reducers/app-reducers';
+import {
+    setActiveLink,
+    setError,
+    setIsToggleList,
+    setIsToggleMenu
+} from '../store/reducers/app-reducers';
 import {useAppDispatch, useAppSelector} from '../store/store';
 import {useState} from "react";
 
@@ -13,6 +18,7 @@ type NavbarType = {
     books: string
     terms: string
     contract: string
+    dataTestId: string
 }
 export const Navbar = (props: NavbarType) => {
 
@@ -23,16 +29,19 @@ export const Navbar = (props: NavbarType) => {
     const error = useAppSelector(state => state.app.error)
 
 
-
     const activate = () => {
         dispatch(setActiveLink(true));
     };
+    const clickCategory = () =>{
+        dispatch(setActiveLink(true));
+        dispatch(setIsToggleMenu(false))
+    }
     const diActivate = () => {
         dispatch(setActiveLink(false));
         dispatch(setIsToggleList(false));
+        dispatch(setIsToggleMenu(false))
     };
-    // console.log('navbar')
-    const [test, setTest] =useState(true)
+    const [test, setTest] = useState(true)
     return (
         <nav data-test-id="burger-navigation" className={props.sidebar
             ? 'navbar__wrapper navbar__wrapper_visible'
@@ -55,9 +64,10 @@ export const Navbar = (props: NavbarType) => {
             </div>
             <ul className={isToggle ? 'navbar-list_books' : 'navbar__list-book__invisible'}>
                 {!error &&
-                    <li data-test-id={props.books}>
+                    <li >
                         <NavLink to="/books/all"
-                                 onClick={activate}
+                                 onClick={clickCategory}
+                                 data-test-id={props.books}
                                  className={({isActive}) => isActive ? 'navbar__active-title' : ''}>
                             Все книги
                         </NavLink>
@@ -67,10 +77,16 @@ export const Navbar = (props: NavbarType) => {
                 {!error && categories && categories.map(el => (
                     <li key={el.id}>
                         <NavLink to={`/books/${el.path}`}
-                                 onClick={activate}
+                                 onClick={clickCategory}
+                                 data-test-id={`${props.dataTestId}-${el.path}`}
                                  className={({isActive}) => isActive ? 'navbar__active-title' : ''}>
                             {el.name}
-                        </NavLink> <span>{el.booksCount}</span></li>
+                        </NavLink>
+                        <span
+                            data-test-id={`${props.dataTestId}-book-count-for-${el.path}`}>
+                            {el.booksCount}
+                        </span>
+                    </li>
                 ))}
             </ul>
             <div data-test-id={props.terms} className="navbar-rules-container" onClick={diActivate}>

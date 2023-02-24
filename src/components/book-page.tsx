@@ -51,8 +51,9 @@ export const BookPage = React.memo(() => {
                     <div className="path">
                         {book.categories && book.categories.length > 0
                             ? <span><NavLink
+                                data-test-id='breadcrumbs-link'
                                 to={`/books/${category}`}
-                                onClick={() => dispatch(getAllBooks())}>  {category === 'all' ? 'Все книги ' : book.categories}</NavLink> / {book.title} </span>
+                                onClick={() => dispatch(getAllBooks())}>{category === 'all' ? 'Все книги' : book.categories}</NavLink> / <span data-test-id='book-name'>{book.title}</span> </span>
                             : <span><NavLink
                                 to='/'><span>{id && bookNotFound(id).category}</span></NavLink> / {id && bookNotFound(id).title}</span>}
                     </div>
@@ -66,7 +67,7 @@ export const BookPage = React.memo(() => {
                         }
                         <div className="describe-wrapper">
                             <div>
-                                <h3>
+                                <h3 data-test-id='book-title'>
                                     {book.title}
                                 </h3>
                                 <div className="book-page-author ">

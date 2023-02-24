@@ -69,11 +69,12 @@ export const SortingItems = React.memo((props: SortingItemsType) => {
                                onChange={e => handleInputSort(e.currentTarget.value)}
                         />
                         <button type="button" className='sort-by-rating'
-                                onClick={() => setBooksHandler(sortByRating)}>
+                                onClick={() => setBooksHandler(sortByRating)}
+                                data-test-id='sort-rating-button'>
                             <div className='image-container'>
                                 <span
                                     className={sortByRating ? 'image-sort' : 'image-sort rotate'}> </span>
-                                <span>По рейтенгу</span>
+                                <span>По рейтингу</span>
                             </div>
                         </button>
 

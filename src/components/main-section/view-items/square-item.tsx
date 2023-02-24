@@ -35,14 +35,13 @@ export const SquareItem = React.memo((props: SquareItemProps) => {
                         <div className="title-book-block">
                             <div >
                                 {searchData?
-                                    <div dangerouslySetInnerHTML={createMarkup(book.title)}></div>
+                                    <div  data-test-id='highlight-matches' dangerouslySetInnerHTML={createMarkup(book.title)} ></div>
                                     : book.title}
 
                             </div>
 
                         </div>
                         <div className="author-book">
-                            {/* eslint-disable-next-line react/no-array-index-key */}
                             {book.authors.map((author,index) => <div key={index}>{author}</div>)}
                         </div>
                     </div>

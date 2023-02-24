@@ -44,6 +44,7 @@
     }
     &:focus{
         outline: none;
+        caret-color: rgb(248, 54, 0);
     }
 
 }
@@ -148,14 +149,11 @@
     }
 
     .input-search {
-        //width: 32px;
-        //height: 32px;
-        //background-position-x: center;
-        //
-        //&::placeholder {
-        //    color: transparent;
-        //}
+        caret-color: rgb(248, 54, 0);
         display: none;
+        & :focus{
+            caret-color: rgb(248, 54, 0);
+        }
 
     }
     .button-search {
@@ -195,9 +193,12 @@
         height: 38px;
         border-radius: 600px;
         text-indent: 16px;
-        caret-color: #f83600;
+        caret-color: rgb(248, 54, 0);
         outline: none;
 
+        & :focus{
+            caret-color: rgb(248, 54, 0);
+        }
         &::placeholder {
             font-size: 12px;
         }

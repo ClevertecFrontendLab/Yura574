@@ -9,6 +9,7 @@ export const ContractOffer = () => (
                      books='navigation-books'
                      terms='navigation-terms'
                      contract='navigation-contract'
+                     dataTestId='navigation-'
             />
     <div className="rules-page-container">
         <div className="rules-title">Договор оферты</div>
