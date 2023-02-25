@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {createAsyncThunk, createSlice, Dispatch} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {booksApi} from "../../api/api";
 import {setError, setIsLoading} from "./app-reducers";
 
@@ -73,6 +73,7 @@ export type CategoryType = {
     id: number
     name: string
     path: string
+    booksCount?: number
 }
 type InitialStateType = {
     allBooks: AllBooksType[]
@@ -118,7 +119,6 @@ const initialState: InitialStateType = {
         producer: ''
 
 
-
     },
     categories: [],
 
@@ -131,6 +131,7 @@ export const getAllCategories = createAsyncThunk('books/getCategories', async (a
         const res = await booksApi.getAllCategories()
         return res.data
     } catch (e) {
+        debugger
         thunkAPI.dispatch(setIsLoading(false))
         const error = {
             "data": null,
@@ -150,6 +151,7 @@ export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thu
         const res = await booksApi.getAllBooks()
         return res.data
     } catch (e) {
+        debugger
         thunkAPI.dispatch(setIsLoading(false))
         const error = {
             "data": null,
@@ -187,8 +189,9 @@ const booksSlice = createSlice({
     name: "books",
     initialState,
     reducers: {
-        setBook: (state, action) => {
-            state.book = action.payload
+        setCountsBook: (state, action:PayloadAction<{category: string,count:number}>) => {
+            const index = state.categories.findIndex(cat => cat.name === action.payload.category)
+            state.categories[index].booksCount = action.payload.count
         }
     },
     extraReducers(builder) {
@@ -205,31 +208,8 @@ const booksSlice = createSlice({
     }
 });
 
-export const {setBook} = booksSlice.actions;
+export const {setCountsBook} = booksSlice.actions;
 
 export const booksReducer = booksSlice.reducer;
 
 
-export const getSuccessBookId = (id: string) => (dispatch: Dispatch) => {
-    dispatch(setIsLoading(true))
-    booksApi.getBook(id)
-        .then(res => {
-            console.log(res.data)
-            dispatch(setBook(res.data))
-        })
-        .catch(() => {
-            dispatch(setError({
-                    "data": null,
-                    "error": {
-                        "status": 401,
-                        "name": 'string',
-                        "message": 'string',
-                        "details": {}
-                    }
-                }
-            ))
-        })
-        .finally(() => {
-            dispatch(setIsLoading(false))
-        })
-}

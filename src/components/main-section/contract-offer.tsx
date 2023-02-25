@@ -1,6 +1,16 @@
+import {Navbar} from '../navbar';
 
 
 export const ContractOffer = () => (
+    <main className="layout-main-page main_wrapper">
+        <section className=" main_wrapper">
+            < Navbar sidebar={false}
+                     showcase='navigation-showcase'
+                     books='navigation-books'
+                     terms='navigation-terms'
+                     contract='navigation-contract'
+                     dataTestId='navigation-'
+            />
     <div className="rules-page-container">
         <div className="rules-title">Договор оферты</div>
         <div className="all-rules">
@@ -45,5 +55,7 @@ export const ContractOffer = () => (
                 <div className='first-level-rules'>3.4. Повседневная практика показывает, что убеждённость некоторых оппонентов требует от нас анализа распределения внутренних резервов и ресурсов.</div>
             </div>
         </div>
-    </div>
+    </div>       </section>
+    </main>
+
 )

@@ -13,6 +13,12 @@
         background-position-y: center;
     }
 }
+
+.sort-by-rating-container {
+    display: flex;
+
+}
+
 .button {
     border: none;
     box-shadow: 0 2px 4px rgba(191, 196, 201, 0.2),
@@ -31,26 +37,53 @@
     text-indent: 40px;
     margin-right: 16px;
     background-color: rgba(1, 1, 1, 0);
+    caret-color: #F42C4F;
 
     &::placeholder {
         color: #A7A7A7;
     }
+    &:focus{
+        outline: none;
+        caret-color: rgb(248, 54, 0);
+        background-image: url("../../assets/svg/search-icon-color.svg");
+    }
+
 }
-.button-search{
-display: none;
+
+.button-search {
+    display: none;
 }
 
 .sort-by-rating {
     width: 150px;
     height: 38px;
     border-radius: 598px;
-    background-image: url("../../assets/svg/sort.svg");
-    background-position-x: 16px;
+
+
     background-color: #ffffff;
     color: #A7A7A7;
 
-    span {
-        margin-left: 20px;
+    & .image-container {
+        display: flex;
+        align-items: center;
+    }
+
+    & .image-sort {
+        display: inline-block;
+        margin-left: 15px;
+        width: 16px;
+        height: 16px;
+        background-position-x: 16px;
+        background: url("../../assets/svg/sort.svg") no-repeat;
+        transition: 0.5s;
+    }
+
+    & .rotate {
+        transform: rotate(-180deg);
+    }
+
+    span:last-child {
+        margin-left: 8px;
     }
 
     &:hover {
@@ -58,7 +91,6 @@ display: none;
         cursor: pointer;
     }
 }
-
 
 .sort-button-container {
     display: flex;
@@ -116,22 +148,16 @@ display: none;
             transform: translateY(-25%);
         }
     }
-    .sort-by-rating-container {
-        display: flex;
 
-    }
     .input-search {
-        //width: 32px;
-        //height: 32px;
-        //background-position-x: center;
-        //
-        //&::placeholder {
-        //    color: transparent;
-        //}
+        caret-color: rgb(248, 54, 0);
         display: none;
+        & :focus{
+            caret-color: rgb(248, 54, 0);
+        }
 
     }
-    .button-search{
+    .button-search {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -146,7 +172,14 @@ display: none;
     .sort-by-rating {
         width: 32px;
         height: 32px;
-        background-position-x: center;
+       margin-left: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .image-sort {
+            margin-left: 0;
+        }
 
         span {
             display: none;
@@ -161,7 +194,12 @@ display: none;
         height: 38px;
         border-radius: 600px;
         text-indent: 16px;
+        caret-color: rgb(248, 54, 0);
+        outline: none;
 
+        & :focus{
+            caret-color: rgb(248, 54, 0);
+        }
         &::placeholder {
             font-size: 12px;
         }

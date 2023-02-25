@@ -198,16 +198,13 @@ select {
 
 .navbar_title {
   display: flex;
+  justify-content: space-between;
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
-  width: 255px;
-  height: 36px;
 }
 
 .navbar__active-title {
-  display: flex;
-  justify-content: space-between;
   background: -webkit-linear-gradient(#F83600, #F9D423);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -217,10 +214,9 @@ select {
   border-image: linear-gradient(#F83600, #F9D423) 1;
   border-bottom: 1px solid transparent;
 }
-.navbar__active-title a {
-  width: 137px;
+.navbar__active-title span {
+  color: black;
 }
-
 .navbar-list_books {
   width: 100%;
 }
@@ -240,6 +236,7 @@ select {
   color: #A7A7A7;
   font-size: 14px;
   line-height: 24px;
+  margin-left: 5px;
 }
 
 .navbar__list-book__invisible {
@@ -284,6 +281,17 @@ select {
 
 .items-container-line {
   margin: 32px 0 62px 0;
+}
+
+.noBooksInCategory {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+  color: #A7A7A7;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -481,6 +489,10 @@ select {
   background-position-y: center;
 }
 
+.sort-by-rating-container {
+  display: flex;
+}
+
 .button {
   border: none;
   box-shadow: 0 2px 4px rgba(191, 196, 201, 0.2), 0 3px 4px rgba(191, 196, 201, 0.18), 0 1px 5px rgba(191, 196, 201, 0.24);
@@ -497,9 +509,15 @@ select {
   text-indent: 40px;
   margin-right: 16px;
   background-color: rgba(1, 1, 1, 0);
+  caret-color: #F42C4F;
 }
 .input-search::placeholder {
   color: #A7A7A7;
+}
+.input-search:focus {
+  outline: none;
+  caret-color: rgb(248, 54, 0);
+  background-image: url("../../assets/svg/search-icon-color.svg");
 }
 
 .button-search {
@@ -510,13 +528,27 @@ select {
   width: 150px;
   height: 38px;
   border-radius: 598px;
-  background-image: url("../../assets/svg/sort.svg");
-  background-position-x: 16px;
   background-color: #ffffff;
   color: #A7A7A7;
 }
-.sort-by-rating span {
-  margin-left: 20px;
+.sort-by-rating .image-container {
+  display: flex;
+  align-items: center;
+}
+.sort-by-rating .image-sort {
+  display: inline-block;
+  margin-left: 15px;
+  width: 16px;
+  height: 16px;
+  background-position-x: 16px;
+  background: url("../../assets/svg/sort.svg") no-repeat;
+  transition: 0.5s;
+}
+.sort-by-rating .rotate {
+  transform: rotate(-180deg);
+}
+.sort-by-rating span:last-child {
+  margin-left: 8px;
 }
 .sort-by-rating:hover {
   content: "saasas";
@@ -576,11 +608,12 @@ select {
     border: none;
     transform: translateY(-25%);
   }
-  .sort-by-rating-container {
-    display: flex;
-  }
   .input-search {
+    caret-color: rgb(248, 54, 0);
     display: none;
+  }
+  .input-search :focus {
+    caret-color: rgb(248, 54, 0);
   }
   .button-search {
     display: flex;
@@ -596,7 +629,13 @@ select {
   .sort-by-rating {
     width: 32px;
     height: 32px;
-    background-position-x: center;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sort-by-rating .image-sort {
+    margin-left: 0;
   }
   .sort-by-rating span {
     display: none;
@@ -609,6 +648,11 @@ select {
     height: 38px;
     border-radius: 600px;
     text-indent: 16px;
+    caret-color: rgb(248, 54, 0);
+    outline: none;
+  }
+  .active-input :focus {
+    caret-color: rgb(248, 54, 0);
   }
   .active-input::placeholder {
     font-size: 12px;
@@ -1379,6 +1423,7 @@ select {
   width: 100%;
   border: 1px solid #F42C4F;
   left: 0;
+  top: 40px;
   background-color: #FEEBEA;
   z-index: 2;
   padding: 24px 32px;
@@ -1408,6 +1453,7 @@ select {
 @media (max-width: 768px) {
   .error-container {
     padding: 24px 16px;
+    top: 60px;
   }
   .error-message {
     font-size: 14px;
@@ -1429,6 +1475,7 @@ select {
   .error-container {
     padding: 12px 16px;
     align-items: flex-start;
+    top: 50px;
   }
   .error-message-container {
     align-items: flex-start;
@@ -1501,6 +1548,11 @@ select {
 .pagination-container .pagination-item.disabled:hover {
   background-color: transparent;
   cursor: default;
+}
+
+.highlights {
+  background: white;
+  color: rgb(255, 82, 83);
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -6,17 +6,14 @@
 
 .navbar_title {
     display: flex;
+    justify-content: space-between;
     font-weight: 700;
     font-size: 18px;
     line-height: 28px;
-    width: 255px;
-    height: 36px;
-    //border-bottom: 1px solid black;
 }
 
 .navbar__active-title {
-    display: flex;
-    justify-content: space-between;
+
     background: -webkit-linear-gradient(#F83600, #F9D423);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -26,8 +23,11 @@
 
     border-image: linear-gradient(#F83600, #F9D423) 1;
     border-bottom: 1px solid transparent;
+    span{
+        color: black;
+    }
     a{
-        width: 137px;
+
     }
 
 }
@@ -53,6 +53,7 @@
         color: #A7A7A7;
         font-size: 14px;
         line-height: 24px;
+        margin-left: 5px;
     }
 }
 .navbar__list-book__invisible{

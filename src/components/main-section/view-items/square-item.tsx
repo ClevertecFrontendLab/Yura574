@@ -3,63 +3,52 @@ import React from 'react';
 
 import emptyCat from '../../../assets/svg/emptyCat.svg'
 import {
-    BookingType,
-    DeliveryType,
-    HistoriesType
+    AllBooksType,
 } from '../../../store/reducers/book-reducer';
 import {Rating} from '../rating';
+import {useAppSelector} from "../../../store/store";
 
 
 type SquareItemProps = {
-    issueYear: string
-    rating: number
-    title: string
-    authors: string[]
-    image:  {url:string}
-    categories: string[]
-    id: number
-    booking: BookingType | null
-    delivery: DeliveryType| null
-    histories: HistoriesType | null
+    book: AllBooksType
 }
 
 export const SquareItem = React.memo((props: SquareItemProps) => {
-        const cutText = (text: string) => {
-            if (text.length > 54) {
-                const str = text.slice(0, 54);
-                const threeDots = '...'
+    const {book}=props
+    const searchData = useAppSelector(state => state.app.searchData)
 
-                return str + threeDots;
-            }
-
-            return text
-
-        }
-
+    const createMarkup = (html: string) =>{
+        return {__html: html}
+    }
 
         return (
             <div data-test-id="card">
                 <div className="common-item-container block-item-container">
-                    {props.image
-                        ? <img src={'https://strapi.cleverland.by' +props.image.url}  className='block-item-main-photo' alt="book"/>
+                    {book.image
+                        ? <img src={'https://strapi.cleverland.by' +book.image.url}  className='block-item-main-photo' alt="book"/>
                         : <img src={emptyCat} alt="book"/>
                     }
-                    {props.rating > 0
-                        ? <Rating rating={props.rating} classname="rating-container-block"/>
+                    {book.rating > 0
+                        ? <Rating rating={book.rating} classname="rating-container-block"/>
                         : <div className="rating-container-block">еще нет оценок</div>}
                     <div className="book-common book-block">
                         <div className="title-book-block">
-                            {cutText(props.title)}
+                            <div >
+                                {searchData?
+                                    <div  data-test-id='highlight-matches' dangerouslySetInnerHTML={createMarkup(book.title)} ></div>
+                                    : book.title}
+
+                            </div>
+
                         </div>
                         <div className="author-book">
-                            {/* eslint-disable-next-line react/no-array-index-key */}
-                            {props.authors.map((author,index) => <div key={index}>{author}</div>)}
+                            {book.authors.map((author,index) => <div key={index}>{author}</div>)}
                         </div>
                     </div>
-                    {!props.booking
+                    {!book.booking
                         ? <button type="button"
                                   className="button-reserve-common button-reserve-block button-block">ЗАБРОНИРОВАТЬ</button>
-                        : props.booking ?
+                        : book.booking ?
                             <button type="button"
                                     className="
                                     button-reserve-common
