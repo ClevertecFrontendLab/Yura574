@@ -128,6 +128,7 @@ const initialState: InitialStateType = {
 export const getAllCategories = createAsyncThunk('books/getCategories', async (arg, thunkAPI) => {
     thunkAPI.dispatch(setIsLoading(true))
     try {
+        thunkAPI.dispatch(setError(null))
         const res = await booksApi.getAllCategories()
         return res.data
     } catch (e) {
@@ -148,6 +149,7 @@ export const getAllCategories = createAsyncThunk('books/getCategories', async (a
 export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thunkAPI) => {
     thunkAPI.dispatch(setIsLoading(true))
     try {
+        thunkAPI.dispatch(setError(null))
         const res = await booksApi.getAllBooks()
         return res.data
     } catch (e) {
@@ -167,6 +169,7 @@ export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thu
 })
 export const getBook = createAsyncThunk('books/getBook', async (id: string, thunkAPI) => {
     thunkAPI.dispatch(setIsLoading(true))
+    thunkAPI.dispatch(setError(null))
     try {
         const res = await booksApi.getBook(id)
         return res.data
