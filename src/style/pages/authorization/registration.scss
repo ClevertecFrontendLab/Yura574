@@ -1,0 +1,73 @@
+
+.registrationField {
+    padding: 48px 56px;
+    width: 528px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    margin-top: 46px;
+}
+
+.registrationField-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+
+}
+
+.registrationField-step {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+
+}
+
+.registrationField-input-container {
+    margin: 32px 0;
+}
+
+.registrationField-input {
+    position: relative;
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-bottom: 1px solid #BFC4C9;
+    transition: 0.4s;
+    background-color: #F9F9FA;
+    padding-left: 12px;
+    &:focus{
+        transition: 1s;
+        outline: none;
+    }
+    &::placeholder{
+        color: black;
+    }
+}
+.registrationField-form_input{
+    position: relative;
+
+}
+.registrationField-form_input-password{
+    margin-top: 16px;
+}
+.registrationField-input-label{
+    position: absolute;
+    left: 12px;
+    top: calc(50% - 18px);
+    transition: top 0.5s;
+}
+
+.registrationField-input-prompt {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #A7A7A7;
+    padding-left: 12px;
+}
+.registrationField-input:focus + .registrationField-input-label{
+    top: 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #A7A7A7;
+}
