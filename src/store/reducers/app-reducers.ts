@@ -1,6 +1,6 @@
 /* eslint-disable */
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AllBooksType, getAllBooks, getBook} from "./book-reducer";
+import {createSlice, isAnyOf, PayloadAction} from '@reduxjs/toolkit';
+import {AllBooksType, getAllBooks, getAllCategories, getBook} from './book-reducer';
 
 export type ErrorType = {
     "data": string | null;
@@ -52,7 +52,7 @@ const appSlice = createSlice({
             state.isLoading = action.payload
             document.body.style.overflow = 'hidden'
         },
-        setError: (state, action: PayloadAction<ErrorType | null>) => {
+        setError: (state, action) => {
             state.error = action.payload
         },
         isSortByRating: (state, action: PayloadAction<boolean>) => {
@@ -70,13 +70,29 @@ const appSlice = createSlice({
 
     },
     extraReducers(builder) {
-        builder
-            .addCase(getAllBooks.fulfilled, (state) => {
+        builder.addMatcher(
+            isAnyOf(getAllBooks.fulfilled, getAllCategories.fulfilled), (state) => {
+                debugger
+                // state.isLoading = false
+            })
+        builder.addMatcher(
+            isAnyOf(getAllBooks.rejected, getAllCategories.rejected), (state) => {
+                debugger
                 state.isLoading = false
             })
-            .addCase(getBook.fulfilled, (state) => {
-                state.isLoading = false
-            })
+
+            // .addCase(getAllBooks.pending, (state) => {
+            //     state.isLoading = true
+            // })
+            // .addCase(getBook.fulfilled, (state) => {
+            //     state.isLoading = false
+            // })
+            // .addCase(getAllBooks.rejected, (state, action) => {
+            //     console.log(action.error)
+            //     const {name, message, code} = action.error
+            //     state.isLoading = false
+            // })
+
     }
 
 

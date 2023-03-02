@@ -1,14 +1,17 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {setIsToggleMenu} from '../store/reducers/app-reducers';
 import {useAppDispatch, useAppSelector} from '../store/store';
 
 import {Loader} from './common-components/loader';
-import {Registration} from "./authorization/registration/registration";
-import {Main} from "./main/main";
-import {Footer} from "./footer/footer";
-import {Header} from "./header/header";
+import {Main} from './main/main';
+import {Footer} from './footer/footer';
+import {Header} from './header/header';
+import { Route, Routes} from 'react-router-dom';
+import {LoginField} from './authorization/login/loginField';
+import {Authorization} from './authorization/authorization';
+import {getAllBooks, getAllCategories} from '../store/reducers/book-reducer';
 
 export const App = React.memo(() => {
 
@@ -16,22 +19,63 @@ export const App = React.memo(() => {
 
     const isToggleMenu = useAppSelector(state => state.app.isToggleMenu)
 
+
     const closeToggleMenu = () => {
         isToggleMenu && dispatch(setIsToggleMenu(false))
     }
+    useEffect(() => {
+        dispatch(getAllBooks())
+        dispatch(getAllCategories())
+    }, [])
+
+    useEffect(()=>{
+
+    }, [dispatch])
+
     return (
         <div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'}
              onClick={closeToggleMenu}>
-         <Loader/>
+            <Routes>
+                <Route path={'/'}
+                       element={<div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'}
+                                     onClick={closeToggleMenu}>
+                           <Loader/>
 
-            {/*<Registration/>*/}
+                           <Header/>
+                           <Main/>
+                           <Footer/>
+                       </div>}/>
+                <Route path={'/authorization/*'} element={<Authorization/>} />
 
-            <Header/>
-            <Main/>
-            <Footer/>
+            </Routes>
+
+            {/* <Routes> */}
+            {/*     <Route path={'/'} element={  <div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'} */}
+            {/*                                       onClick={closeToggleMenu}> */}
+            {/*         <Loader/> */}
+
+            {/*         <Header/> */}
+            {/*         <Main/> */}
+            {/*         <Footer/> */}
+            {/*     </div>}/> */}
+            {/*     /!* <Route path={'/register'} element={<Registration/>}/> *!/ */}
+            {/* </Routes> */}
+            {/* {!isAuth ? */}
+            {/*     <div><Registration/></div> */}
+
+
+            {/*            : <div className={isToggleMenu ? 'wrapper wrapper-active' : 'wrapper'} */}
+            {/*                  onClick={closeToggleMenu}> */}
+            {/*                 <Loader/> */}
+
+            {/*                 <Header/> */}
+            {/*                 /!* <Main/> *!/ */}
+            {/*                 <Footer/> */}
+            {/*             </div> */}
+            {/*         } */}
+
 
         </div>
-
     )
 
 })

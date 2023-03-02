@@ -16,12 +16,12 @@ import {
     getAllBooks,
     getAllCategories,
     setCountsBook
-} from "../../store/reducers/book-reducer";
+} from '../../store/reducers/book-reducer';
 
 export const Main = () => {
-        const dispatch = useAppDispatch()
-    const categories = useAppSelector<CategoryType[]>(state => state.books.categories)
-    const books = useAppSelector(state => state.books.allBooks)
+            const dispatch = useAppDispatch()
+        const categories = useAppSelector<CategoryType[]>(state => state.books.categories)
+        const books = useAppSelector(state => state.books.allBooks)
 
         const {category} = useParams()
         const size = useWindowSize()
@@ -30,32 +30,33 @@ export const Main = () => {
             category && dispatch(setCurrentCategory(category))
         }, [dispatch, category])
 
-    useEffect(()=>{
-        dispatch(getAllBooks())
-        dispatch(getAllCategories())
-    },[])
+        useEffect(() => {
+            dispatch(getAllBooks())
+            dispatch(getAllCategories())
+        }, [])
 
-    useEffect(() => {
-        if (books.length > 0 && categories.length > 0) {
-            categories && categories.map(cat => {
-                const booksCount = books && books.filter(el => el.categories[0] === cat.name)
-                dispatch(setCountsBook({category: cat.name, count: booksCount.length}))
-            })
-        }
-    }, [dispatch, books, categories])
+        useEffect(() => {
+            if (books.length > 0 && categories.length > 0) {
+                categories && categories.map(cat => {
+                    const booksCount = books && books.filter(el => el.categories[0] === cat.name)
+                    dispatch(setCountsBook({category: cat.name, count: booksCount.length}))
+                })
+            }
+        }, [dispatch, books, categories])
 
-
+    const isAuth = useAppSelector(state => state.auth.isAuth)
+    if(!isAuth) return <Navigate to={'/authorization'}/>
         return (
             <main className="layout-main-page main_wrapper">
 
 
                 <section className=" main_wrapper">
                     {size.width > 768 && < Navbar sidebar={false}
-                                                  showcase='navigation-showcase'
-                                                  books='navigation-books'
-                                                  terms='navigation-terms'
-                                                  contract='navigation-contract'
-                                                  dataTestId='navigation'
+                                                  showcase="navigation-showcase"
+                                                  books="navigation-books"
+                                                  terms="navigation-terms"
+                                                  contract="navigation-contract"
+                                                  dataTestId="navigation"
                     />}
                     <Routes>
                         <Route path="/" element={<Navigate to="/books/all"/>}/>

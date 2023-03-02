@@ -27,21 +27,23 @@
 }
 
 .registrationField-input {
-    position: relative;
     width: 100%;
     height: 56px;
     border: none;
     border-bottom: 1px solid #BFC4C9;
     transition: 0.4s;
     background-color: #F9F9FA;
-    padding-left: 12px;
+    padding: 10px 0 0 12px;
+
     &:focus{
         transition: 1s;
         outline: none;
+
     }
     &::placeholder{
         color: black;
     }
+
 }
 .registrationField-form_input{
     position: relative;
@@ -65,9 +67,20 @@
     padding-left: 12px;
 }
 .registrationField-input:focus + .registrationField-input-label{
-    top: 0;
+    top: 6px;
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
     color: #A7A7A7;
 }
+
+.filledInput{
+    position: absolute;
+    left: 12px;
+    top: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #A7A7A7;
+}
+

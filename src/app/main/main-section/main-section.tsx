@@ -2,7 +2,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
-import {isSortByRating, setInputSortValue, setSearchData} from '../../../store/reducers/app-reducers';
+import {
+    isSortByRating,
+    setInputSortValue,
+    setSearchData
+} from '../../../store/reducers/app-reducers';
 import {
     AllBooksType,
     CategoryType,
@@ -13,7 +17,7 @@ import {useAppDispatch, useAppSelector} from '../../../store/store';
 
 import {ItemsMainSection} from './items-main-section';
 import {SortingItems} from './sorting-items';
-import {Error} from "../../common-components/error";
+import {Error} from '../../common-components/error';
 
 
 export const MainSection = React.memo(() => {
@@ -29,16 +33,21 @@ export const MainSection = React.memo(() => {
     const sortByRating = useAppSelector(state => state.app.sortByRating)
     const searchData = useAppSelector(state => state.app.searchData)
     const inputSortValue = useAppSelector(state => state.app.inputSortValue)
+    const isLoading = useAppSelector(state => state.app.isLoading)
 
     useEffect(() => {
-        if(categories.length === 0 || books.length===0){
-            if (books.length === 0) {
-                dispatch(getAllBooks())
-            }
-            if (categories.length === 0) {
-                dispatch(getAllCategories())
+        if(isLoading){
+            if ( categories.length === 0 || books.length === 0) {
+                if (books.length === 0) {
+                    debugger
+                    dispatch(getAllBooks())
+                }
+                if (categories.length === 0) {
+                    dispatch(getAllCategories())
+                }
             }
         }
+
     }, [dispatch, books, categories])
 
     const {category} = useParams()
@@ -46,8 +55,14 @@ export const MainSection = React.memo(() => {
     let showBooks = books
 
     function arraysEqual(arr1: AllBooksType[], arr2: AllBooksType[]) {
-        return arr1.length === arr2.length  &&
-            arr1.every((value: AllBooksType, index: number) => JSON.stringify(value) === JSON.stringify(arr2[index]));
+        console.log(arr1)
+        if (arr1.length === 0){
+            return true
+        } else {
+            return arr1.length === arr2.length &&
+                arr1.every((value: AllBooksType, index: number) => JSON.stringify(value) === JSON.stringify(arr2[index]));
+        }
+
     }
 
     if (currentCategory && currentCategory.length !== 0) {
@@ -67,17 +82,17 @@ export const MainSection = React.memo(() => {
         } else {
             const equal = arraysEqual(showBooks, ratingBooks)
 
-            if (!equal ) {
+            if (!equal) {
                 setRatingBooks(showBooks)
             }
         }
 
     }, [showBooks, ratingBooks])
 
-
-    useEffect(() => {
-        setRatingBooks(searchData)
-    }, [ inputSortValue])
+    console.log(showBooks)
+    // useEffect(() => {
+    //     setRatingBooks(searchData)
+    // }, [ inputSortValue])
 
     const setBooksHandler = useCallback((sort: boolean) => {
         dispatch(isSortByRating(!sort))
@@ -87,14 +102,14 @@ export const MainSection = React.memo(() => {
         dispatch(setInputSortValue(value))
         const newArr = showBooks
             .filter(book => book.title.toLowerCase().includes(value.toLowerCase()))
-            .map(book => {
-                const newTitle = book.title.replace(
-                    new RegExp(value, 'gi'),
-                    match => `<mark class="highlights"><span   >${match}</span></mark>`
-                )
+            // .map(book => {
+            //     const newTitle = book.title.replace(
+            //         new RegExp(value, 'gi'),
+            //         match => `<mark class="highlights"><span   >${match}</span></mark>`
+            //     )
 
-                return {...book, title: newTitle}
-            })
+            //     return {...book, title: newTitle}
+            // })
 
         dispatch(setSearchData(newArr))
     }
@@ -106,20 +121,21 @@ export const MainSection = React.memo(() => {
     return (
         <div>
             {error ? <Error/> : false}
-            {!error && <div>
-                <SortingItems changeView={changeView}
-                              view={viewItems}
-                              sortByRating={sortByRating}
-                              setBooksHandler={setBooksHandler}
-                              ratingBooks={ratingBooks}
-                              handleInputSort={handleInputSort}
-                />
-                <ItemsMainSection error={error}
+            {!error &&
+                <div>
+                    <SortingItems changeView={changeView}
+                                  view={viewItems}
+                                  sortByRating={sortByRating}
+                                  setBooksHandler={setBooksHandler}
                                   ratingBooks={ratingBooks}
-                                  viewItems={viewItems}
-                />
+                                  handleInputSort={handleInputSort}
+                    />
+                    {ratingBooks.length > 0 && <ItemsMainSection error={error}
+                                      ratingBooks={ratingBooks}
+                                      viewItems={viewItems}
+                    />}
 
-            </div>
+                </div>
             }
         </div>
     )

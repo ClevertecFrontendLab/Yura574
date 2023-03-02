@@ -74,7 +74,7 @@ export const Navbar = (props: NavbarType) => {
 
                     </li>
                 }
-                {!error && categories && categories.map(el => (
+                {!error && categories.length> 0 && categories.map(el => (
                     <li key={el.id}>
                         <NavLink to={`/books/${el.path}`}
                                  onClick={clickCategory}

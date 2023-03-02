@@ -1,7 +1,145 @@
 /* eslint-disable */
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {booksApi} from "../../api/api";
-import {setError, setIsLoading} from "./app-reducers";
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {booksApi} from '../../api/api';
+import {setError, setIsLoading} from './app-reducers';
+import {AxiosError} from 'axios';
+
+
+const initialState: InitialStateType = {
+    allBooks: [],
+    book: {
+        id: 0,
+        title: '',
+        categories: [],
+        pages: '',
+        format: '',
+        ISBN: '',
+        weight: '',
+        cover: '',
+        issueYear: '',
+        publish: '',
+        rating: '',
+        booking: {
+            id: 0,
+            customerFirstName: '',
+            customerLastName: '',
+            customerId: 0,
+            order: false,
+            dateOrder: ''
+        },
+        description: '',
+        authors: [],
+        delivery: {
+            id: 0,
+            dateHandedFrom: '',
+            handed: false,
+            dateHandedTo: '',
+            recipientFirstName: '',
+            recipientId: 0,
+            recipientLastName: ''
+        },
+        histories: [],
+        comments: [],
+        images: [],
+        producer: ''
+
+
+    },
+    categories: [],
+
+};
+
+
+export const getAllCategories = createAsyncThunk('books/getCategories', async (arg, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoading(true))
+
+    try {
+        thunkAPI.dispatch(setError(null))
+        const res = await booksApi.getAllCategories()
+
+        console.log(res)
+        return res.data
+    } catch (err) {
+        const error = err as AxiosError
+        // thunkAPI.dispatch(setIsLoading(false))
+
+        thunkAPI.dispatch(setError(error.response?.data))
+        return   thunkAPI.rejectWithValue('some error')
+    }
+})
+export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoading(true))
+
+    try {
+        const res = await booksApi.getAllBooks()
+        return res.data
+    } catch (e) {
+        const err = e as AxiosError
+        // thunkAPI.dispatch(setIsLoading(false))
+        thunkAPI.dispatch(setError(err.response?.data))
+        const error = {
+            'data': null,
+            'error': {
+                'status': 401,
+                'name': 'string',
+                'message': 'string',
+                'details': {}
+            }
+        }
+        thunkAPI.dispatch(setError(err.response?.data))
+        return thunkAPI.rejectWithValue('some error')
+    }
+
+})
+export const getBook = createAsyncThunk('books/getBook', async (id: string, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoading(true))
+    // thunkAPI.dispatch(setError(null))
+    try {
+        const res = await booksApi.getBook(id)
+        return res.data
+    } catch (e) {
+        // thunkAPI.dispatch(setIsLoading(false))
+        const error = {
+            'data': null,
+            'error': {
+                'status': 401,
+                'name': 'string',
+                'message': 'string',
+                'details': {}
+            }
+        }
+        return error
+    }
+})
+
+const booksSlice = createSlice({
+    name: 'books',
+    initialState,
+    reducers: {
+        setCountsBook: (state, action: PayloadAction<{ category: string, count: number }>) => {
+            const index = state.categories.findIndex(cat => cat.name === action.payload.category)
+            state.categories[index].booksCount = action.payload.count
+        }
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(getAllCategories.fulfilled, (state, action) => {
+                state.categories = action.payload
+            })
+            .addCase(getAllBooks.fulfilled, (state, action) => {
+                state.allBooks = action.payload
+            })
+            .addCase(getBook.fulfilled, (state, action) => {
+
+                state.book = action.payload
+            })
+    }
+});
+
+export const {setCountsBook} = booksSlice.actions;
+
+export const booksReducer = booksSlice.reducer;
+
 
 export type AllBooksType = {
     issueYear: string
@@ -80,139 +218,3 @@ type InitialStateType = {
     book: BookType
     categories: CategoryType[]
 }
-const initialState: InitialStateType = {
-    allBooks: [],
-    book: {
-        id: 0,
-        title: '',
-        categories: [],
-        pages: '',
-        format: '',
-        ISBN: '',
-        weight: '',
-        cover: '',
-        issueYear: '',
-        publish: '',
-        rating: '',
-        booking: {
-            id: 0,
-            customerFirstName: '',
-            customerLastName: '',
-            customerId: 0,
-            order: false,
-            dateOrder: ''
-        },
-        description: '',
-        authors: [],
-        delivery: {
-            id: 0,
-            dateHandedFrom: '',
-            handed: false,
-            dateHandedTo: '',
-            recipientFirstName: '',
-            recipientId: 0,
-            recipientLastName: ''
-        },
-        histories: [],
-        comments: [],
-        images: [],
-        producer: ''
-
-
-    },
-    categories: [],
-
-};
-
-
-export const getAllCategories = createAsyncThunk('books/getCategories', async (arg, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true))
-    try {
-        thunkAPI.dispatch(setError(null))
-        const res = await booksApi.getAllCategories()
-        return res.data
-    } catch (e) {
-        debugger
-        thunkAPI.dispatch(setIsLoading(false))
-        const error = {
-            "data": null,
-            "error": {
-                "status": 401,
-                "name": 'string',
-                "message": 'string',
-                "details": {}
-            }
-        }
-        return thunkAPI.dispatch(setError(error))
-    }
-})
-export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true))
-    try {
-        thunkAPI.dispatch(setError(null))
-        const res = await booksApi.getAllBooks()
-        return res.data
-    } catch (e) {
-        debugger
-        thunkAPI.dispatch(setIsLoading(false))
-        const error = {
-            "data": null,
-            "error": {
-                "status": 401,
-                "name": 'string',
-                "message": 'string',
-                "details": {}
-            }
-        }
-        return thunkAPI.dispatch(setError(error))
-    }
-})
-export const getBook = createAsyncThunk('books/getBook', async (id: string, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true))
-    thunkAPI.dispatch(setError(null))
-    try {
-        const res = await booksApi.getBook(id)
-        return res.data
-    } catch (e) {
-        thunkAPI.dispatch(setIsLoading(false))
-        const error = {
-            "data": null,
-            "error": {
-                "status": 401,
-                "name": 'string',
-                "message": 'string',
-                "details": {}
-            }
-        }
-        return thunkAPI.dispatch(setError(error))
-    }
-})
-
-const booksSlice = createSlice({
-    name: "books",
-    initialState,
-    reducers: {
-        setCountsBook: (state, action:PayloadAction<{category: string,count:number}>) => {
-            const index = state.categories.findIndex(cat => cat.name === action.payload.category)
-            state.categories[index].booksCount = action.payload.count
-        }
-    },
-    extraReducers(builder) {
-        builder
-            .addCase(getAllCategories.fulfilled, (state, action) => {
-                state.categories = action.payload
-            })
-            .addCase(getAllBooks.fulfilled, (state, action) => {
-                state.allBooks = action.payload
-            })
-            .addCase(getBook.fulfilled, (state, action) => {
-                state.book = action.payload
-            })
-    }
-});
-
-export const {setCountsBook} = booksSlice.actions;
-
-export const booksReducer = booksSlice.reducer;
-
-

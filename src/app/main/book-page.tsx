@@ -31,9 +31,9 @@ export const BookPage = React.memo(() => {
         const clickToggleReviews = () => {
             setToggleReviews(!toggleReviews)
         }
-        useEffect(() => {
-            id && dispatch(getBook(id))
-        }, [id])
+        // useEffect(() => {
+        //     id && dispatch(getBook(id))
+        // }, [id])
 
         const bookNotFound = (id: string) => {
 

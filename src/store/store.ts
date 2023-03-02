@@ -5,12 +5,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { appReducer } from "./reducers/app-reducers";
 import {booksReducer} from "./reducers/book-reducer";
 import {paginationReducer} from "./reducers/pagination-reducers";
+import {authReducer} from './reducers/auth-reducer';
 
 
 const rootReducer = combineReducers({
     app: appReducer,
     books: booksReducer,
     pagination: paginationReducer,
+    auth: authReducer,
 });
 
 
