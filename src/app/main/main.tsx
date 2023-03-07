@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import {Navigate, Route, Routes, useParams} from 'react-router-dom';
 
-import {setCurrentCategory} from '../../store/reducers/app-reducers';
+import {setCurrentCategory, setIsLoading} from '../../store/reducers/app-reducers';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {useWindowSize} from '../../utils/utils';
 
@@ -14,7 +14,7 @@ import {BookPage} from './book-page';
 import {
     CategoryType,
     getAllBooks,
-    getAllCategories,
+    getAllCategories, getAllCategoriesAndBooks,
     setCountsBook
 } from '../../store/reducers/book-reducer';
 
@@ -22,6 +22,7 @@ export const Main = () => {
             const dispatch = useAppDispatch()
         const categories = useAppSelector<CategoryType[]>(state => state.books.categories)
         const books = useAppSelector(state => state.books.allBooks)
+        const isAuth = useAppSelector(state => state.auth.isAuth)
 
         const {category} = useParams()
         const size = useWindowSize()
@@ -30,10 +31,17 @@ export const Main = () => {
             category && dispatch(setCurrentCategory(category))
         }, [dispatch, category])
 
-        useEffect(() => {
-            dispatch(getAllBooks())
-            dispatch(getAllCategories())
-        }, [])
+    useEffect(() => {
+        if (localStorage.getItem('jwtToken') !== null && books.length === 0 && categories.length === 0 ) {
+            console.log(localStorage.getItem('jwtToken'))
+            // dispatch(getAllCategories())
+            dispatch(setIsLoading(true))
+            // dispatch(getAllCategories())
+            dispatch(getAllCategoriesAndBooks())
+            // dispatch(getAllBooks())
+
+        }
+    }, [])
 
         useEffect(() => {
             if (books.length > 0 && categories.length > 0) {
@@ -44,8 +52,8 @@ export const Main = () => {
             }
         }, [dispatch, books, categories])
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
-    if(!isAuth) return <Navigate to={'/authorization'}/>
+    if(!isAuth) return <Navigate to={'/authorization/login'}/>
+
         return (
             <main className="layout-main-page main_wrapper">
 

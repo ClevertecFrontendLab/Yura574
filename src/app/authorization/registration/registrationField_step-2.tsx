@@ -1,78 +1,60 @@
 /* eslint-disable */
-import nextStep from '../../../assets/svg/next-step.svg'
-import {useForm} from 'react-hook-form';
-import {useAppDispatch} from '../../../store/store';
-import {
-    setRegistryDataName
-} from '../../../store/reducers/auth-reducer';
+import React from 'react';
 
-export const RegistrationField_step2 = () => {
-    const dispatch = useAppDispatch()
-    const {handleSubmit, register, formState: {errors,}} = useForm({
-        defaultValues: {
-            firstName: '',
-            lastName: ''
-        }
+import {FieldErrors, UseFormRegister, UseFormWatch} from 'react-hook-form';
+import {DataType} from './registration';
 
-    })
 
-    const onSubmit = (firstName: string, lastName: string, registryStep: number) => {
-        dispatch(setRegistryDataName({firstName, lastName, registryStep}))
-    }
-    console.log(errors)
+type RegistrationField_step2_Type = {
+    register: UseFormRegister<DataType>
+    watch: UseFormWatch<DataType>
+    errors: FieldErrors<DataType>
+}
+export const RegistrationField_step2 = (props: RegistrationField_step2_Type) => {
+    const {register, watch, errors} = props
     return (
-        <div className="registrationField">
-            <div>
-                <div className="registrationField-title">Регистрация</div>
-                <div className="registrationField-step">2 шаг из 3</div>
+        <React.Fragment>
+            <div className="registrationField-form_input">
+                <input type="text"
+                       id="registration-login"
+                       {...register('firstName', {required: 'поле не может быть пустым',})}
+                       className={errors.firstName ? 'registrationField-input registrationField-input-error ' : 'registrationField-input'}
+
+                />
+                <label htmlFor="registration-login"
+                       className={watch('firstName') !== ''
+                           ? 'registrationField-input-label filledInput'
+                           : 'registrationField-input-label'}
+                >
+                    Имя
+                </label>
             </div>
-            <div className="registrationField-input-container">
-                <form onSubmit={handleSubmit((data) => onSubmit(data.firstName, data.lastName,3 ))}>
-                    <div className="registrationField-form_input">
-                        <input type="text"
-                               id="registration-login"
-                               {...register('firstName', {required: 'email is required'})}
-                               className="registrationField-input"
-                        />
-                        <label htmlFor="registration-login"
-                               className="registrationField-input-label filledInput"
-                        >
-                           Имя
-                        </label>
-                        <div className="registrationField-input-prompt">
-                            {errors.firstName?.message}
-                        </div>
-                    </div>
-
-                    {/* include validation with required or other standard HTML validation rules */}
-                    <div
-                        className="registrationField-form_input registrationField-form_input-password">
-                        <input
-                            type="password"
-                            {...register('lastName', {required: 'this field is required'})}
-                            id="registration-password"
-                            className="registrationField-input"
-
-                        />
-                        <label htmlFor="registration-password"
-                               className="registrationField-input-label filledInput">
-                            Фамилия
-                        </label>
-                        {errors.lastName?.message}
-
-                    </div>
-
-                    <button type="submit" className="authorization-next_step"> следующий шаг
-                    </button>
-
-                </form>
-
-            </div>
-            <div className="authorization-account_exist">
-                <span>Есть учетная запись?</span>
-                <button><span>Войти</span> <img src={nextStep} alt="next-step"/></button>
+            <div         className={errors.firstName?.message ? 'registrationField-input-prompt errorText' : 'registrationField-input-prompt'}>
+                {errors.firstName?.message}
             </div>
 
-        </div>
+            <div className="registrationField-form_input registrationField-form_input-password">
+                <input
+                    type={'text'}
+                    {...register('lastName', {required: 'поле не может быть пустым',})}
+                    id="registration-password"
+                    className={errors.lastName ? 'registrationField-input registrationField-input-error ' : 'registrationField-input'}
+
+                />
+                <label htmlFor="registration-password"
+                       className={watch('lastName') !== ''
+                           ? 'registrationField-input-label filledInput'
+                           : 'registrationField-input-label'}>
+                    Фамилия
+                </label>
+
+            </div>
+            <div
+                className={errors.lastName?.message ? 'registrationField-input-prompt errorText' : 'registrationField-input-prompt'}>
+                {errors.lastName?.message}
+            </div>
+
+
+        </React.Fragment>
     )
 }

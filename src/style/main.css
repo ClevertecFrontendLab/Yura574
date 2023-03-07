@@ -109,16 +109,36 @@ select {
 }
 
 .login-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 300px;
+  cursor: pointer;
 }
 
 .name {
   margin-right: 16px;
   font-weight: 600;
   font-size: 14px;
+}
+
+.extra_button_profile {
+  position: absolute;
+  width: 270px;
+  padding: 32px 24px;
+  text-align: right;
+  top: 72px;
+  z-index: 200;
+  background: white;
+  box-shadow: 4px 4px 4px rgba(54, 54, 54, 0.05), -4px 4px 4px rgba(54, 54, 54, 0.05);
+  border-radius: 0 0 10px 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #363636;
+}
+.extra_button_profile .exit {
+  margin-top: 32px;
 }
 
 @media (max-width: 768px) {
@@ -1595,6 +1615,9 @@ select {
 .registrationField-input::placeholder {
   color: black;
 }
+.registrationField-input-error {
+  border-bottom-color: #F42C4F;
+}
 
 .registrationField-form_input {
   position: relative;
@@ -1606,8 +1629,9 @@ select {
 
 .registrationField-input-label {
   position: absolute;
+  top: 50%;
   left: 12px;
-  top: calc(50% - 18px);
+  transform: translateY(-50%);
   transition: top 0.5s;
 }
 
@@ -1617,6 +1641,28 @@ select {
   line-height: 16px;
   color: #A7A7A7;
   padding-left: 12px;
+  margin-top: 2px;
+}
+.registrationField-input-prompt .recovery {
+  color: #363636;
+}
+
+.errorText {
+  color: red;
+}
+
+.forgot-password {
+  margin-top: 20px;
+}
+.forgot-password-error {
+  color: #F42C4F;
+}
+
+.showIconPassword {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
 }
 
 .registrationField-input:focus + .registrationField-input-label {
@@ -1665,12 +1711,21 @@ select {
   background: linear-gradient(231.58deg, #F83600 -53.35%, #F9D423 297.76%);
   height: 52px;
   border-radius: 30px;
+  margin-top: 32px;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authorization-last-step {
+  margin-top: 68px;
 }
 
 .authorization-account_exist {
+  display: flex;
   margin-top: 16px;
 }
 .authorization-account_exist span {
@@ -1680,13 +1735,20 @@ select {
 }
 .authorization-account_exist button {
   margin-left: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 18px;
   border: none;
   background: rgba(1, 1, 1, 0);
   text-transform: uppercase;
-  height: 18px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.authorization-account_exist button img {
+  margin-left: 12px;
+}
+.authorization-account_exist .isExist {
+  font-weight: 600;
+  font-size: 12px;
 }
 
 /*# sourceMappingURL=main.css.map */

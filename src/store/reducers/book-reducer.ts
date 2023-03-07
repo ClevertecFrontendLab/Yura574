@@ -3,6 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {booksApi} from '../../api/api';
 import {setError, setIsLoading} from './app-reducers';
 import {AxiosError} from 'axios';
+import {setIsAuth} from './auth-reducer';
 
 
 const initialState: InitialStateType = {
@@ -49,7 +50,20 @@ const initialState: InitialStateType = {
 
 };
 
+export const getAllCategoriesAndBooks = createAsyncThunk('books/allCategoriesAndBooks', (arg, {dispatch}) => {
+    return booksApi.getAllCategories()
+        .then((categories) => {
+            booksApi.getAllBooks()
+                .then(books => {
+                    dispatch(setAllBooks(books.data))
+                    dispatch(setAllCategories(categories.data))
+                    dispatch(setIsAuth(true))
+                }).finally(() => {
+                dispatch(setIsLoading(false))
+            })
+        })
 
+})
 export const getAllCategories = createAsyncThunk('books/getCategories', async (arg, thunkAPI) => {
     thunkAPI.dispatch(setIsLoading(true))
 
@@ -64,7 +78,7 @@ export const getAllCategories = createAsyncThunk('books/getCategories', async (a
         // thunkAPI.dispatch(setIsLoading(false))
 
         thunkAPI.dispatch(setError(error.response?.data))
-        return   thunkAPI.rejectWithValue('some error')
+        return thunkAPI.rejectWithValue('some error')
     }
 })
 export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thunkAPI) => {
@@ -91,25 +105,28 @@ export const getAllBooks = createAsyncThunk('books/getAllBooks', async (arg, thu
     }
 
 })
-export const getBook = createAsyncThunk('books/getBook', async (id: string, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoading(true))
+export const getBook = createAsyncThunk('books/getBook', async (id: string, {dispatch}) => {
+    dispatch(setIsLoading(true))
     // thunkAPI.dispatch(setError(null))
-    try {
-        const res = await booksApi.getBook(id)
-        return res.data
-    } catch (e) {
-        // thunkAPI.dispatch(setIsLoading(false))
-        const error = {
-            'data': null,
-            'error': {
-                'status': 401,
-                'name': 'string',
-                'message': 'string',
-                'details': {}
+
+    booksApi.getBook(id)
+        .then((res) => {
+            dispatch(setBook(res.data))
+        })
+
+        .catch(e => {
+            // thunkAPI.dispatch(setIsLoading(false))
+            const error = {
+                'data': null,
+                'error': {
+                    'status': 401,
+                    'name': 'string',
+                    'message': 'string',
+                    'details': {}
+                }
             }
-        }
-        return error
-    }
+        })
+        .finally(()=> dispatch(setIsLoading(false)))
 })
 
 const booksSlice = createSlice({
@@ -119,24 +136,21 @@ const booksSlice = createSlice({
         setCountsBook: (state, action: PayloadAction<{ category: string, count: number }>) => {
             const index = state.categories.findIndex(cat => cat.name === action.payload.category)
             state.categories[index].booksCount = action.payload.count
-        }
+        },
+        setAllCategories: (state, action) => {
+            state.categories = action.payload
+        },
+        setAllBooks: (state, action) => {
+            state.allBooks = action.payload
+        },
+        setBook: (state, action) => {
+            state.book = action.payload
+        },
     },
-    extraReducers(builder) {
-        builder
-            .addCase(getAllCategories.fulfilled, (state, action) => {
-                state.categories = action.payload
-            })
-            .addCase(getAllBooks.fulfilled, (state, action) => {
-                state.allBooks = action.payload
-            })
-            .addCase(getBook.fulfilled, (state, action) => {
 
-                state.book = action.payload
-            })
-    }
 });
 
-export const {setCountsBook} = booksSlice.actions;
+export const {setCountsBook, setAllBooks, setAllCategories, setBook} = booksSlice.actions;
 
 export const booksReducer = booksSlice.reducer;
 

@@ -22,6 +22,7 @@ type InitialStateType = {
     inputSortValue: string
     searchData: AllBooksType[]
     currentCategory: string
+    isExtraMenu: boolean
 }
 const initialState: InitialStateType = {
     isToggleMenu: false,
@@ -33,6 +34,7 @@ const initialState: InitialStateType = {
     inputSortValue: '',
     searchData: [],
     currentCategory: '',
+    isExtraMenu: false
 };
 
 const appSlice = createSlice({
@@ -66,18 +68,21 @@ const appSlice = createSlice({
         },
         setCurrentCategory: (state, action:PayloadAction<string>)=>{
             state.currentCategory =action.payload
+        },
+        setExtraMenu: (state, action:PayloadAction<boolean>)=>{
+            state.isExtraMenu = action.payload
         }
 
     },
     extraReducers(builder) {
         builder.addMatcher(
             isAnyOf(getAllBooks.fulfilled, getAllCategories.fulfilled), (state) => {
-                debugger
-                // state.isLoading = false
+
+                state.isLoading = false
             })
         builder.addMatcher(
             isAnyOf(getAllBooks.rejected, getAllCategories.rejected), (state) => {
-                debugger
+
                 state.isLoading = false
             })
 
@@ -107,7 +112,8 @@ export const {
     isSortByRating,
     setInputSortValue,
     setSearchData,
-    setCurrentCategory
+    setCurrentCategory,
+    setExtraMenu,
 } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;

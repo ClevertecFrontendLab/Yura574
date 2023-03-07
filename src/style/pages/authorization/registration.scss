@@ -43,6 +43,9 @@
     &::placeholder{
         color: black;
     }
+    &-error{
+        border-bottom-color: #F42C4F;
+    }
 
 }
 .registrationField-form_input{
@@ -54,8 +57,9 @@
 }
 .registrationField-input-label{
     position: absolute;
+    top: 50%;
     left: 12px;
-    top: calc(50% - 18px);
+    transform: translateY(-50%);
     transition: top 0.5s;
 }
 
@@ -65,7 +69,29 @@
     line-height: 16px;
     color: #A7A7A7;
     padding-left: 12px;
+    margin-top: 2px;
+    & .recovery{
+        color: #363636 ;
+    }
+
 }
+.errorText{
+    color: red;
+}
+.forgot-password{
+    margin-top: 20px;
+    &-error{
+color: #F42C4F;
+    }
+}
+
+.showIconPassword{
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+}
+
 .registrationField-input:focus + .registrationField-input-label{
     top: 6px;
     font-size: 12px;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 
 import {
@@ -7,14 +8,51 @@ import {
     ResetPasswordType
 } from '../store/reducers/auth-reducer';
 
+let jwtToken = localStorage.getItem('jwtToken')
+console.log(jwtToken)
 export const instance = axios.create({
     baseURL: 'https://strapi.cleverland.by/api/',
     withCredentials: true,
     headers:{
-        // Authorization: `Bearer ${jwtToken}`
+        Authorization: `Bearer ${jwtToken? jwtToken : ''}`
     }
 
 })
+
+// axios.interceptors.response.use((response) =>{
+//     console.log(response)
+//     return response
+// },  (error) =>{
+//     const b = 1
+//     return Promise.reject(error)
+// })
+instance.interceptors.request.use(
+    (config) => {
+        let jwt = localStorage.getItem('jwtToken') as string
+        jwtToken = jwt
+        return config;
+    },
+    (error) => {
+        // Do something with request error
+        return Promise.reject(error);
+    }
+);
+console.log(jwtToken)
+
+instance.interceptors.response.use(
+
+    function (response) {
+        console.log(response.data.jwt)
+        if(response.data.jwt !== undefined){
+            localStorage.setItem('jwtToken', response.data.jwt)
+        }
+
+        return response;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
 
 
 

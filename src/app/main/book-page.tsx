@@ -31,9 +31,9 @@ export const BookPage = React.memo(() => {
         const clickToggleReviews = () => {
             setToggleReviews(!toggleReviews)
         }
-        // useEffect(() => {
-        //     id && dispatch(getBook(id))
-        // }, [id])
+        useEffect(() => {
+            id && dispatch(getBook(id))
+        }, [id])
 
         const bookNotFound = (id: string) => {
 
@@ -178,8 +178,8 @@ export const BookPage = React.memo(() => {
                             ? book.comments && book.comments.map(comment =>
                             <div key={comment.id} className="review-container">
                                 <div className="review-header-1100">
-                                    <div><img
-                                        src={comment.user.avatarUrl ? 'https://strapi.cleverland.by/' + comment.user.avatarUrl : avatar}
+                                    <div><img style={{width: '32px', height: '32px'}}
+                                        src={comment.user.avatarUrl ? 'https://strapi.cleverland.by' + comment.user.avatarUrl : avatar}
                                         alt="ava"/></div>
                                     <div>{comment.user.firstName} {comment.user.lastName}</div>
                                     <div><Data data={comment.createdAt}/></div>

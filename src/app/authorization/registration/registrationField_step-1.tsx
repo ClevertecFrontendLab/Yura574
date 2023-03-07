@@ -1,80 +1,110 @@
 /* eslint-disable */
-import nextStep from '../../../assets/svg/next-step.svg'
-import {useForm} from 'react-hook-form';
-import {useAppDispatch} from '../../../store/store';
-import {
-    setRegistryDataLoginPassword
-} from '../../../store/reducers/auth-reducer';
+import React from 'react';
 
-export const RegistrationField_step1 = () => {
-    const dispatch = useAppDispatch()
-    const {handleSubmit, register, formState: {errors,}} = useForm({
-        defaultValues: {
-            login: '',
-            password: ''
-        }
-
-    })
-
-    const onSubmit = (login: string, password: string, registryStep: number) => {
-        dispatch(setRegistryDataLoginPassword({login, password, registryStep}))
-    }
+import {handleLogin, handlePassword} from './registration-utils';
+import truePassword from '../../../assets/svg/true-password.svg';
+import openedPassword from '../../../assets/svg/opened-password.svg';
+import closedPassword from '../../../assets/svg/closed-password.svg';
+import {FieldErrors, UseFormRegister, UseFormWatch} from 'react-hook-form';
+import {DataType} from './registration';
 
 
-    console.log(errors)
+type RegistrationField_step1_Type = {
+    register: UseFormRegister<DataType>
+    commonError: string[]
+    watch: UseFormWatch<DataType>
+    onFocusHandlerError: (value: string)=> void
+    isShowPassword: boolean
+    setIsShowPassword: (show: boolean)=> void
+    commonPasswordError: ()=> void
+    passwordError: string[] | undefined
+    commonLoginError: ()=> void
+    loginError: string[] | undefined
+    errors: FieldErrors<DataType>
+}
+export const RegistrationField_step1 = (props: RegistrationField_step1_Type) => {
+    const { register, commonError, watch, onFocusHandlerError, setIsShowPassword,errors,
+    isShowPassword, commonPasswordError, passwordError, commonLoginError, loginError}= props
     return (
-        <div className="registrationField">
-            <div>
-                <div className="registrationField-title">Регистрация</div>
-                <div className="registrationField-step">1 шаг из 3</div>
-            </div>
-            <div className="registrationField-input-container">
-                <form onSubmit={handleSubmit((data) => onSubmit(data.login, data.password, 2))}>
-                    <div className="registrationField-form_input">
-                        <input type="text"
-                               id="registration-login"
-                               {...register('login', {required: 'email is required'})}
-                               className="registrationField-input"
-                        />
-                        <label htmlFor="registration-login"
-                               className="registrationField-input-label filledInput"
-                        >
-                            Придумайте логин для входа
-                        </label>
-                        <div className="registrationField-input-prompt">
-                            {errors.login?.message}
-                        </div>
-                    </div>
+      <React.Fragment>
+          <div className="registrationField-form_input">
+              <input type="text"
 
-                    <div
-                        className="registrationField-form_input registrationField-form_input-password">
-                        <input
-                            type="password"
-                            {...register('password', {required: 'this field is required'})}
-                            id="registration-password"
-                            className="registrationField-input"
+                     id="registration-login"
+                     {...register('login',
+                         {
+                             required: 'login is required',
+                             validate: {
+                                 validateLogin: () => handleLogin(watch('login'))
+                             },
 
-                        />
-                        <label htmlFor="registration-password"
-                               className="registrationField-input-label filledInput">
-                            пароль
-                        </label>
-                        {errors.password?.message}
-                        <div className="registrationField-input-prompt">
-                            Пароль не менее 8 символов, с заглавной буквой и цифрой
-                        </div>
-                    </div>
+                         }
+                     )}
+                     onFocus={() => onFocusHandlerError('login')}
+                     onBlur={commonLoginError}
+                     className={errors.login ?"registrationField-input registrationField-input-error ": 'registrationField-input'}
 
-                    <button type="submit" className="authorization-next_step"> следующий шаг
-                    </button>
+              />
+              <label htmlFor="registration-login"
+                     className={watch('login') !== ''
+                         ? 'registrationField-input-label filledInput'
+                         : 'registrationField-input-label'}
+              >
+                  Придумайте логин для входа
+              </label>
+          </div>
+          <div
+              className={commonError.includes('login') || errors.login?.message ==='login is required' ? 'registrationField-input-prompt errorText' : 'registrationField-input-prompt'}>
+              Используйте для логина
+              <span className={loginError?.includes('only latin') ? 'errorText' : ''}> латинский алфавит</span> и
+              <span
+                  className={loginError?.includes('no figure') ? 'errorText' : ''}> цифры</span>
+          </div>
 
-                </form>
-            </div>
-            <div className="authorization-account_exist">
-                <span>Есть учетная запись?</span>
-                <button><span>Войти</span> <img src={nextStep} alt="next-step"/></button>
-            </div>
+          <div
+              className="registrationField-form_input registrationField-form_input-password">
+              <input
+                  type={isShowPassword ? 'text' : 'password'}
 
-        </div>
+                  {...register('password',
+                      {
+                          required: 'password is required',
+                          validate: {
+                              validatePassword: () => handlePassword(watch('password'))
+                          }
+                      })}
+                  id="registration-password"
+                  onBlur={() => commonPasswordError()}
+                  onFocus={() => onFocusHandlerError('password')}
+                  className={errors.password ?"registrationField-input registrationField-input-error ": 'registrationField-input'}
+
+              />
+
+
+              <label htmlFor="registration-password"
+                     className={watch('password') !== ''
+                         ? 'registrationField-input-label filledInput'
+                         : 'registrationField-input-label'}>
+                  пароль
+              </label>
+              <div className="showIconPassword"
+                   onClick={() => setIsShowPassword(!isShowPassword)}>
+                  {watch('password') && passwordError?.join('') === '' &&
+                      <img src={truePassword} alt="open  password"/>}
+                  <img src={isShowPassword ? openedPassword : closedPassword}
+                       alt="open  password"/>
+              </div>
+          </div>
+          <div
+              className={commonError.includes('password') || errors.password?.message === 'password is required' ? 'registrationField-input-prompt errorText' : 'registrationField-input-prompt'}>
+              Пароль <span
+              className={passwordError?.includes('min length < 8') ? 'errorText' : ''}>не менее 8 символов</span>,
+              с <span
+              className={passwordError?.includes('no capital letter') ? 'errorText' : ''}>заглавной буквой </span>
+              и <span
+              className={passwordError?.includes('no figure') ? 'errorText' : ''}>цифрой</span>
+          </div>
+
+      </React.Fragment>
     )
 }

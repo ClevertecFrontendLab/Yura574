@@ -39,7 +39,6 @@ export const MainSection = React.memo(() => {
         if(isLoading){
             if ( categories.length === 0 || books.length === 0) {
                 if (books.length === 0) {
-                    debugger
                     dispatch(getAllBooks())
                 }
                 if (categories.length === 0) {
@@ -55,7 +54,7 @@ export const MainSection = React.memo(() => {
     let showBooks = books
 
     function arraysEqual(arr1: AllBooksType[], arr2: AllBooksType[]) {
-        console.log(arr1)
+        // console.log(arr1)
         if (arr1.length === 0){
             return true
         } else {
@@ -89,7 +88,6 @@ export const MainSection = React.memo(() => {
 
     }, [showBooks, ratingBooks])
 
-    console.log(showBooks)
     // useEffect(() => {
     //     setRatingBooks(searchData)
     // }, [ inputSortValue])

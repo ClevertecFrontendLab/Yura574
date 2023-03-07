@@ -1,15 +1,20 @@
 /* eslint-disable */
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, isAnyOf, PayloadAction} from '@reduxjs/toolkit';
 import {AppRootStateType} from '../store';
 import {authApi} from '../../api/api';
 import {setError, setIsLoading} from './app-reducers';
 import {AxiosError} from 'axios';
+import {getAllBooks, getAllCategories} from './book-reducer';
+import {Simulate} from 'react-dom/test-utils';
+import error = Simulate.error;
+import {log} from 'util';
 
 type InitialStateType = {
     isAuth: boolean
     registryStep: number
     registryData: RegisterDataType
     userData: UserDataType
+    jwtToken: string
 }
 const initialState: InitialStateType = {
     isAuth: false,
@@ -34,7 +39,8 @@ const initialState: InitialStateType = {
         firstName: '',
         lastName: '',
         phone: ''
-    }
+    },
+    jwtToken: ''
 }
 
 export const registryUserTC = createAsyncThunk('registry', async (arg, {
@@ -60,21 +66,49 @@ export const authMeTC = createAsyncThunk('authMe', async (arg, {dispatch, reject
     dispatch(setIsLoading(true))
     try {
         dispatch(setIsLoading(false))
-        const res  = await authApi.auth()
+        const res = await authApi.auth()
         return res.data
     } catch (e) {
         dispatch(setIsLoading(false))
     }
 })
-export const loginTC = createAsyncThunk('authMe', async (loginData: LoginDataType, {dispatch, rejectWithValue}) => {
+export const loginTC = createAsyncThunk('authMe', async (loginData: LoginDataType, {
+    dispatch,
+    rejectWithValue
+}) => {
     dispatch(setIsLoading(true))
-    try {
-        dispatch(setIsLoading(false))
-        const res  = await authApi.login(loginData)
-        return res.data
-    } catch (e) {
-        dispatch(setIsLoading(false))
-    }
+    // try {
+    //     dispatch(setIsLoading(false))
+    //     const res = await authApi.login(loginData)
+    //     console.log(res)
+    //     return res.data
+    // } catch (e) {
+    //     dispatch(setIsLoading(false))
+    //     return  rejectWithValue(error)
+    // }
+    authApi.login(loginData)
+        .then(res => {
+            console.log(res)
+            dispatch(setIsAuth(true))
+        })
+        .catch(_err => {
+            const error = _err as AxiosError
+            if(error.response?.status === 400){
+                const err = {
+                    data: null,
+                    error: {
+                        status: error.response?.status,
+                        name: '',
+                        message: 'Не верный логин или пароль',
+                        details: {}
+                    }
+                }
+                dispatch(setError(err))
+            } else { dispatch(setError(error.response?.data))}
+
+
+        })
+        .finally(() => dispatch(setIsLoading(false)))
 })
 
 
@@ -85,7 +119,7 @@ const authSlice = createSlice({
         setIsAuth: (state, action: PayloadAction<boolean>) => {
             state.isAuth = action.payload
         },
-        setRegistryDataLoginPassword: (state, action: PayloadAction<{ login: string, password: string, registryStep: number }>) => {
+        setRegistryDataLoginPassword: (state, action: PayloadAction<{ login: string, password: string }>) => {
             state.registryData.username = action.payload.login
             state.registryData.password = action.payload.password
             state.registryStep = 2
@@ -99,12 +133,21 @@ const authSlice = createSlice({
             state.registryData.email = action.payload.email
             state.registryData.phone = action.payload.phone
         },
+        setJwtToken: (state, action) => {
+            state.jwtToken = action.payload
+        }
     },
-    extraReducers( builder) {
-     builder
-         .addCase(loginTC.fulfilled, (state, action)=>{
-             state.isAuth = true
-         } )
+    extraReducers(builder) {
+
+        // builder.addCase(loginTC.fulfilled, (state, action) => {
+        //     console.log(action)
+        //     // state.isAuth = true
+        // })
+        builder.addMatcher(
+            isAnyOf(getAllBooks.fulfilled, getAllCategories.fulfilled), (state) => {
+
+                state.isAuth = true
+            })
     }
 })
 

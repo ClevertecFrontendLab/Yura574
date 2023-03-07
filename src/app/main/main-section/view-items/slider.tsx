@@ -33,6 +33,7 @@ export const Slider = (props: SliderType) => {
             slides = 5;
         }
     }
+    console.log(images)
     return (
         <div className="slider-container">
             <div className="slider-wrapper">

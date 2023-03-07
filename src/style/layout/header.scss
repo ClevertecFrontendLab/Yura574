@@ -40,10 +40,12 @@
 
 
 .login-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 300px;
+    cursor: pointer;
 }
 
 .name {
@@ -51,6 +53,26 @@
     font-weight: 600;
     font-size: 14px;
 }
+
+.extra_button_profile{
+    position: absolute;
+    width: 270px;
+    padding: 32px 24px;
+    text-align: right;
+    top: 72px;
+    z-index: 200;
+    background: white;
+    box-shadow: 4px 4px 4px rgba(54, 54, 54, 0.05), -4px 4px 4px rgba(54, 54, 54, 0.05);
+    border-radius: 0 0 10px 10px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #363636;
+    .exit{
+        margin-top: 32px ;
+    }
+
+}
+
 @media (max-width: 768px) {
     .logo-container{
         display: none;
