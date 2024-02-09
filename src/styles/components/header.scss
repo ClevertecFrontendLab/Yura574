@@ -1,0 +1,37 @@
+@import "./../colors/colors";
+@import "./../typography/typography";
+
+
+.header {
+    background: $color-light-blue-1;
+    height: auto;
+    //display: flex;
+    padding: 0px 24px;
+
+}
+
+.header_position {
+    display: flex;
+    //flex-direction: row;
+    flex-wrap: nowrap;
+
+
+    h1 {
+        padding-top: 8px;
+        font-size: $font-size-h1;
+        font-weight: $font-weight-bold;
+        line-height: $line-height;
+    }
+
+}
+.header_main{
+    margin-top: 16px;
+}
+
+.settings{
+    display: flex;
+    padding: 4px 15px;
+    .img{
+        margin-right: 10px;
+    }
+}

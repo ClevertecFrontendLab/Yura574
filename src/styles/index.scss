@@ -1,0 +1,15 @@
+
+@import "components/header";
+@import "components/main";
+@import "colors/colors";
+@import "typography/typography";
+@import "common/common";
+@import "icons/calendar";
+
+
+.main_page_image-light{
+    width: 100%;
+    height: 100vh; /* Например, 100% высоты окна просмотра */
+    background: url("../assets/png/Main-page_light1.jpg") no-repeat center center;
+    background-size: cover;
+}

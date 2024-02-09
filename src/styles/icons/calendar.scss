@@ -1,0 +1,14 @@
+.custom-calendar {
+    color: #1890ff; // Цвет иконки, измените на свой
+}
+
+.custom-calendar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    background-color: #061178; // Цвет верхней части, измените на свой
+    z-index: -1;
+}

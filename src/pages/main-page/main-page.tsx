@@ -1,34 +1,41 @@
-import React, { useState } from 'react';
-
-import reactLogo from '/react.svg';
-import viteLogo from '/vite.svg';
-import tsLogo from '/ts.svg';
+import React from 'react';
 import './main-page.css';
+import {Col, Row} from 'antd';
+import {Sidebar} from '@pages/main-page/components/sidebar.tsx';
+import {MainContent} from '@pages/main-page/components/mainContent.tsx';
+import {AppHeader} from '@pages/main-page/components/header.tsx';
+import {Footer} from '@pages/main-page/components/footer.tsx';
 
+// const layoutStyle = {
+//     borderRadius: 8,
+//     overflow: 'hidden',
+//     width: 'calc(50% - 8px)',
+//     maxWidth: 'calc(50% - 8px)',
+// };
 export const MainPage: React.FC = () => {
-    const [count, setCount] = useState(0);
 
     return (
-        <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-                <a href='https://www.typescriptlang.org/' target='_blank'>
-                    <img src={tsLogo} className='logo' alt='TS logo' />
-                </a>
-            </div>
-            <h1>Vite + React + TS</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/pages/main-page.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </>
+
+        <Row style={{height: "100vh", display: 'flex', flexDirection:'column'}}>
+            <Col  className={'sidebar'} style={{background: "white"}}>
+                <Sidebar/>
+            </Col>
+            <Col  style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
+                <Row>
+                    <Col>
+                        <AppHeader/>
+                    </Col>
+                </Row>
+
+                <Row className={'main_page_image-light'}
+                     style={{display: 'flex', flexDirection: 'column', flex: '1', justifyContent: "space-between"}}>
+                    <Col style={{}}><MainContent/></Col>
+                    <Col> <Footer/></Col>
+                </Row>
+
+
+            </Col>
+        </Row>
+
     );
 };
