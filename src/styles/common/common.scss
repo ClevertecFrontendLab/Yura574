@@ -16,3 +16,10 @@
     line-height: $line-height;
     font-weight: $font-weight-medium;
 }
+
+.ant-layout-sider-children {
+    /* Ваши стили здесь */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -1,4 +1,4 @@
-import {Col, Row} from 'antd';
+import {Col, Divider, Row} from 'antd';
 import React from 'react';
 
 
@@ -47,21 +47,30 @@ export const MainContent: React.FC = () => {
             <Row  className={'body_regular_16'} style={{
              margin:"16px 0 0 24px"
             }}>
-                <Col>
-                    <Row style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col style={{padding: "12px 24px", borderBottom: "1px solid #d9d9d9"}}>Расписать тренировки</Col>
+                <Col >
+                    <Row className={'body_regular_16'} style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
+                        <Col className={'body_regular_16'} style={{padding: "12px 24px"}}>Расписать тренировки</Col>
+                        <Divider style={{
+                            margin: '0'
+                        }}/>
                         <Col style={{margin: "12px", textAlign: "center"}}>Тренировки</Col>
                     </Row>
                 </Col>
                 <Col>
                     <Row style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col style={{padding: "12px 24px", borderBottom: "1px solid #d9d9d9"}}>Назначить календарь</Col>
+                        <Col style={{padding: "12px 24px"}}>Назначить календарь</Col>
+                        <Divider style={{
+                            margin: '0'
+                        }}/>
                         <Col style={{margin: "12px", textAlign: "center"}}>Календарь</Col>
                     </Row>
                 </Col>
                 <Col>
                     <Row style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col style={{padding: "12px 24px", borderBottom: "1px solid #d9d9d9"}}>Заполнить профиль</Col>
+                        <Col style={{padding: "12px 24px", }}>Заполнить профиль</Col>
+                        <Divider style={{
+                            margin: '0'
+                        }}/>
                         <Col style={{margin: "12px", textAlign: "center"}}>Профиль</Col>
                     </Row>
                 </Col>

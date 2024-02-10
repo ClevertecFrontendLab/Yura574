@@ -1,43 +1,50 @@
-import {Col, Image, Layout, Menu, Row} from 'antd';
+import {Col, Divider, Image, Layout, Menu, Row} from 'antd';
 import logo from '../../../assets/svg/logo.svg'
-import './sidebar.css'
-import { HeartFilled,  TrophyFilled} from '@ant-design/icons';
+import {HeartFilled, TrophyFilled} from '@ant-design/icons';
 import calendar from '../../../assets/svg/calendar.svg'
 import profile from '../../../assets/svg/profile.svg'
+import exit from '../../../assets/svg/exit.svg'
 
 const {Sider} = Layout;
 
 
 export const Sidebar = () => {
     return (
-        <Sider className={'siderStyle'}  width={'208px'} theme="dark" style={{background: "inherit"}}>
+        <Sider width={'208px'} style={{background: "inherit"}}>
 
-            <Row style={{flexDirection: 'column'}}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                justifyContent: 'space-between'
+            }}><Row style={{flexDirection: 'column'}}>
                 <Col style={{margin: '30px 0 50px 0', padding: '14px 46px 17px 29px'}}>
-                        <Image src={logo}
-                               preview={false}
-                               alt={'logo'}
-                        />
+                    <Image src={logo}
+                           preview={false}
+                           alt={'logo'}
+                    />
                 </Col>
-                {/*<Col style={{marginTop:'16px'}}>*/}
-                {/*    <CalendarTwoTone style={{color: 'red'}} twoToneColor={'#061178'}  />*/}
-                {/*    Календарь*/}
-                {/*</Col>*/}
-                {/*<Col style={{marginTop:'16px'}}>Тренировки</Col>*/}
-                {/*<Col style={{marginTop:'16px'}}>Достижения</Col>*/}
-                {/*<Col style={{marginTop:'16px'}}>Профиль</Col>*/}
                 <Menu
+
                     mode='inline'
                     defaultSelectedKeys={['1']}
                     items={[
                         {
+                            style: {
+                                marginBottom: '16px',
+                                paddingLeft: '16px'
+                            },
                             key: '1',
                             icon: (
-                               <img src={calendar}/>
+                                <img src={calendar}/>
                             ),
                             label: 'Календарь',
                         },
                         {
+                            style: {
+                                marginBottom: '16px',
+                                paddingLeft: '16px'
+                            },
                             key: '2',
                             icon: (
                                 <HeartFilled
@@ -51,6 +58,10 @@ export const Sidebar = () => {
                             label: 'Тренировки',
                         },
                         {
+                            style: {
+                                marginBottom: '16px',
+                                paddingLeft: '16px'
+                            },
                             key: '3',
                             icon: (
                                 <TrophyFilled
@@ -64,20 +75,35 @@ export const Sidebar = () => {
                             label: 'Достижения',
                         },
                         {
+                            style: {
+                                marginBottom: '16px',
+                                paddingLeft: '16px'
+                            },
                             key: '4',
                             icon: (
-                            <img src={profile}/>
+                                <img src={profile}/>
                             ),
                             label: 'Профиль',
                         },
                     ]}
                 />
             </Row>
-            <Row>
-                <Col className={'body_regular_14'}>
-                    Выход
-                </Col>
-            </Row>
+                <Row>
+                    <Col className={'body_regular_14'} style={{width: '100%'}}>
+                        <Divider style={{
+                            margin: '0'
+                        }}/>
+                        <div style={{marginLeft:'16px',padding: '12px 0', display: 'flex'}}>
+                            <div style={{margin: '12px 0 12px 16px', display: 'flex'}}><img
+                                src={exit}
+                                alt={'exit'}
+                                style={{}}/>
+                                <span style={{padding: '4px 15px', marginLeft: '10px'}}>Выход</span>
+                            </div>
+                        </div>
+                    </Col>
+                </Row></div>
+            <button className={'button'} style={{ }}>x</button>
         </Sider>
     );
 };

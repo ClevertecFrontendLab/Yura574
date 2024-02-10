@@ -1,0 +1,12 @@
+.button {
+   position: absolute;
+    right: 0;
+    bottom: 50%;
+    transform: translateX(100%);
+    z-index: 1;
+    border-radius: 0;
+    background: red;
+    clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
+    width: 20px;
+    height: 66px;
+}
