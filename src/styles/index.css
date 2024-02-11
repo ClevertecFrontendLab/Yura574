@@ -78,10 +78,10 @@
   font-display: swap;
 }
 .header_wrapper {
-  background: #e6f7ff;
+  background: #f0f5ff;
   height: auto;
   width: 100%;
-  padding: 0px 24px 16px 24px;
+  padding: 0 24px 16px 24px;
 }
 
 .header_position {
@@ -91,9 +91,6 @@
 }
 .header_position h1 {
   padding: 6px 0;
-}
-.header_position h1 {
-  padding-top: 14px;
   font-size: 38px;
   font-weight: 700;
   line-height: 130%;
@@ -113,10 +110,28 @@
   margin-right: 10px;
 }
 
-@media screen and (max-width: 835px) {
+.settingsIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 834px) {
   .header_position h1 {
     font-size: 24px;
     font-weight: 500;
+  }
+}
+@media screen and (max-width: 360px) {
+  .settings {
+    padding: 4px 0;
+  }
+  .header_position h1 {
+    font-size: 20px;
   }
 }
 .mainContent {
@@ -138,7 +153,7 @@
 .mainContent_cardsActionsWrapper {
   display: flex;
   justify-content: space-between;
-  margin: 16px 0px 0 0px;
+  margin: 16px 0 0 0;
   gap: 16px;
 }
 
@@ -168,8 +183,16 @@
   padding: 5px 0;
 }
 
+@media screen and (max-width: 360px) {
+  .mainContent_cardsActionsWrapper {
+    flex-direction: column;
+  }
+  .mainContent_wrapper {
+    padding: 16px;
+  }
+}
 .footerWrapper {
-  margin: 0 0 42px 24px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -181,9 +204,9 @@
 }
 
 .forAppWrapper {
-  margin-right: 24px;
   background: white;
   min-width: 240px;
+  margin: 24px;
 }
 
 .footer_downloadDescriptionWrapper {
@@ -214,10 +237,42 @@
   padding-left: 8px;
 }
 
+@media screen and (max-width: 360px) {
+  .forAppWrapper {
+    background: white;
+    min-width: 100%;
+    margin: 0 0 0 0;
+  }
+  .reviews {
+    padding: 33px 0 10px 0;
+  }
+  .footerWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.sidebar_sider {
+  background: white;
+}
+
+.sidebar_sider_none {
+  display: none;
+}
+
+.sidebar_sider360 {
+  background: inherit;
+  position: absolute;
+  z-index: 1;
+  height: 100vh;
+}
+
 .sidebar_wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   justify-content: space-between;
 }
 
@@ -242,7 +297,6 @@
   bottom: 50%;
   transform: translate(100%, 50%);
   z-index: 1;
-  border-radius: 0;
   background: white;
   clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
   width: 20px;
@@ -256,6 +310,50 @@
   height: 14px;
 }
 
+.sidebar_button360 {
+  width: 25px;
+  height: 48px;
+  left: 0;
+  top: 0;
+  transform: translate(0, 25%);
+}
+
+.sidebar_button360Uncollapsed {
+  width: 25px;
+  height: 48px;
+  top: 0;
+  transform: translate(100%, 25%);
+}
+
+.hide {
+  opacity: 0;
+}
+
+.sidebar_exitWrapper {
+  width: 100%;
+}
+
+.sidebar_exitButton {
+  margin-left: 16px;
+  padding: 12px 0;
+  display: flex;
+}
+
+.sidebar_exitButtonTitle {
+  padding: 4px 15px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 360px) {
+  .sidebar_logo {
+    padding: 16px 17px;
+  }
+  .sidebar_sider {
+    position: absolute;
+    z-index: 1;
+    height: 100vh;
+  }
+}
 .body_regular_16 {
   font-size: 16px;
   line-height: 130%;
@@ -309,7 +407,7 @@ h4 {
 }
 
 .mainPages_layoutPageWrapper {
-  height: 100vh;
+  min-height: 100vh;
   background: white;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
@@ -321,17 +419,28 @@ h4 {
 }
 
 .mainPages_mainContentWrapper {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
 }
 
-.main_page_image-light {
+.mainPages_footerWrapper {
   width: 100%;
-  height: 100vh; /* Например, 100% высоты окна просмотра */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 24px 24px 42px 24px;
+}
+
+@media screen and (max-width: 360px) {
+  .mainContent_cardsActionsWrapper {
+    flex-direction: column;
+  }
+}
+.main_page_image-light {
+  background: url("../assets/png/Main-page_light1.jpg") no-repeat center;
   background-size: cover;
-  background: url("../assets/png/Main-page_light1.jpg") no-repeat top;
+  width: 100%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -54,58 +54,7 @@ export const MainContent = (props: MainContentType) => {
                     altImg={'profile'}
                 />
             </div>
-            {/*    /!*<Col>*!/*/}
-            {/*    /!*    <Row className={'mainContent_cardAction'}>*!/*/}
-            {/*    /!*        <Col*!/*/}
-            {/*    /!*            className={'mainContent_card'}>*!/*/}
-            {/*    /!*            <span>Расписать тренировки</span>*!/*/}
-            {/*    /!*        </Col>*!/*/}
-            {/*    /!*        <Divider style={{*!/*/}
-            {/*    /!*            margin: '0'*!/*/}
-            {/*    /!*        }}/>*!/*/}
-            {/*    /!*        <Col*!/*/}
-            {/*    /!*            className={'body_regular_14 mainContent_cardActionButtonWrapper'}>*!/*/}
-            {/*    /!*            <img src={like} alt="training"/>*!/*/}
-            {/*    /!*            <span className={'mainContent_cardActionButton'}>Тренировки</span>*!/*/}
-            {/*    /!*        </Col>*!/*/}
-            {/*    /!*    </Row>*!/*/}
-            {/*    /!*</Col>*!/*/}
-            {/*    /!*<Col>*!/*/}
-            {/*    /!*    <Row*!/*/}
-            {/*    /!*        className={'mainContent_cardAction'}>*!/*/}
-            {/*    /!*        <Col className={'mainContent_card'}>Назначить календарь</Col>*!/*/}
-            {/*    /!*        <Divider style={{*!/*/}
-            {/*    /!*            margin: '0'*!/*/}
-            {/*    /!*        }}/>*!/*/}
-            {/*    /!*        <Col className={'mainContent_cardActionButtonWrapper'}>*!/*/}
-            {/*    /!*            <img src={calendar} alt="calendar"/>*!/*/}
-            {/*    /!*            <span className={'body_regular_14 mainContent_cardActionButton'}>*!/*/}
-            {/*    /!*                Календарь*!/*/}
-            {/*    /!*            </span></Col>*!/*/}
-            {/*    /!*    </Row>*!/*/}
-            {/*    /!*</Col>*!/*/}
-            {/*    /!*<Col>*!/*/}
-            {/*    /!*    <Row*!/*/}
-            {/*    /!*        className={'mainContent_cardAction'}>*!/*/}
-            {/*    /!*        <Col className={'mainContent_card'}>*!/*/}
-            {/*    /!*            Заполнить профиль*!/*/}
-            {/*    /!*        </Col>*!/*/}
-            {/*    /!*        <Divider style={{*!/*/}
-            {/*    /!*            margin: '0'*!/*/}
-            {/*    /!*        }}/>*!/*/}
-            {/*    /!*        <Col className={'body_regular_14 mainContent_cardActionButtonWrapper'}>*!/*/}
-            {/*    /!*            <img src={profile} alt=""/>*!/*/}
-            {/*    /!*            <span className={'mainContent_cardActionButton'}>Профиль</span></Col>*!/*/}
-            {/*    /!*    </Row>*!/*/}
-            {/*    /!*</Col>*!/*/}
-            {/*   */}
 
-            {/*</div>*/}
-            {/*<div style={{display: 'flex', flexWrap: 'wrap', gap: '16px', maxWidth: '752px'}}>*/}
-            {/*    <div style={{flex: '1 0 150px', height: '100px', background: 'red'}}></div>*/}
-            {/*    <div style={{flex: '1 0 150px', height: '100px', background: 'green'}}></div>*/}
-            {/*    <div style={{flex: '1 0 150px', height: '100px', background: 'blue'}}></div>*/}
-            {/*</div>*/}
         </div>
     )
 

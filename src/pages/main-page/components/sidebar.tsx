@@ -1,8 +1,6 @@
 import {Col, Divider, Image, Layout, Menu, Row} from 'antd';
 import logo from '../../../assets/svg/logo.svg'
-import {HeartFilled, TrophyFilled} from '@ant-design/icons';
-import calendar from '../../../assets/svg/calendar.svg'
-import profile from '../../../assets/svg/profile.svg'
+import {CalendarTwoTone, HeartFilled, IdcardTwoTone, TrophyFilled} from '@ant-design/icons';
 import exit from '../../../assets/svg/exit.svg'
 import collapsedImg from '../../../assets/svg/collapsedSidebar.svg'
 import logoCollapsed from '../../../assets/svg/logoCollapsed.svg'
@@ -12,20 +10,23 @@ const {Sider} = Layout;
 type SidebarType = {
     collapsed: boolean,
     setCollapsed: (collapsed: boolean) => void
+    windowWidth: number
+    isNone: boolean
+    dataTestId: string
 }
 
 
 export const Sidebar = (props: SidebarType) => {
-    const {collapsed, setCollapsed} = props
-    if (collapsed) {
-    }
+    const {collapsed, setCollapsed, isNone, windowWidth, dataTestId} = props
+    console.log(dataTestId === 'sider-switch-mobile')
     return (
-        <Sider width={collapsed ? '64px' : '208px'} style={{background: "inherit"}}>
+        <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
+               className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
 
             <div className={'sidebar_wrapper'}>
                 <Row className={'sidebar_itemsWrapper'}>
-                    <Col className={collapsed? 'sidebar_logoCollapsed':'sidebar_logo'}>
-                        <Image src={collapsed? logoCollapsed :logo}
+                    <Col className={collapsed ? 'sidebar_logoCollapsed' : 'sidebar_logo'}>
+                        <Image src={collapsed ? logoCollapsed : logo}
                                preview={false}
                                alt={'logo'}
                         />
@@ -42,7 +43,7 @@ export const Sidebar = (props: SidebarType) => {
                                 },
                                 key: '1',
                                 icon: (
-                                    <img src={calendar}/>
+                                    windowWidth > 360 && <CalendarTwoTone twoToneColor={['#061178', '#061178']} />
                                 ),
                                 label: `${collapsed ? '' : 'Календарь'}`,
                             },
@@ -53,7 +54,7 @@ export const Sidebar = (props: SidebarType) => {
                                 },
                                 key: '2',
                                 icon: (
-                                    <HeartFilled
+                                    windowWidth > 360 && <HeartFilled
                                         style={{
                                             fontSize: '14px',
                                             color: '#061178',
@@ -61,7 +62,7 @@ export const Sidebar = (props: SidebarType) => {
                                         twoToneColor='#061178'
                                     />
                                 ),
-                                label:  `${collapsed ? '' : 'Тренировки'}`,
+                                label: `${collapsed ? '' : 'Тренировки'}`,
                             },
                             {
                                 style: {
@@ -70,7 +71,7 @@ export const Sidebar = (props: SidebarType) => {
                                 },
                                 key: '3',
                                 icon: (
-                                    <TrophyFilled
+                                    windowWidth > 360 && <TrophyFilled
                                         style={{
                                             fontSize: '14px',
                                             color: '#061178',
@@ -78,7 +79,7 @@ export const Sidebar = (props: SidebarType) => {
                                         twoToneColor='#061178'
                                     />
                                 ),
-                                label: `${collapsed ? '' : 'Достижения'}` ,
+                                label: `${collapsed ? '' : 'Достижения'}`,
                             },
                             {
                                 style: {
@@ -87,29 +88,33 @@ export const Sidebar = (props: SidebarType) => {
                                 },
                                 key: '4',
                                 icon: (
-                                    <img src={profile}/>
+                                    windowWidth > 360 && <IdcardTwoTone twoToneColor={['#061178', '#fff', ]}/>
                                 ),
-                                label: `${collapsed ? '' : 'Профиль'}` ,
+                                label: `${collapsed ? '' : 'Профиль'}`,
                             },
                         ]}
                     />
                 </Row>
                 <Row>
-                    <Col className={'body_regular_14'} style={{width: '100%'}}>
+                    <Col className={'body_regular_14 sidebar_exitWrapper'}>
                         <Divider style={{
                             margin: '0'
                         }}/>
-                        <div style={{marginLeft: '16px', padding: '12px 0', display: 'flex'}}>
-                            <div style={{display: 'flex'}}><img
-                                src={exit}
-                                alt={'exit'}
-                                style={{}}/>
-                                <span style={{padding: '4px 15px', marginLeft: '10px'}}> {collapsed? '': 'Выход'}</span>
+                        <div className={'sidebar_exitButton'}>
+                            <div style={{display: 'flex'}}>
+                                {windowWidth > 360 && <img
+                                    src={exit}
+                                    alt={'exit'}
+                                    style={{}}/>}
+                                <span className={'sidebar_exitButtonTitle'}> {collapsed ? '' : 'Выход'}</span>
                             </div>
                         </div>
                     </Col>
                 </Row></div>
-            <div data-test-id='sider-switch' className={'sidebar_button'} onClick={()=> setCollapsed(!collapsed)}><img src={collapsedImg} alt={'button'}/></div>
+            <div data-test-id={dataTestId}
+                 className={`sidebar_button ${windowWidth <= 360 && 'sidebar_button360Uncollapsed'}`}
+                 onClick={() => setCollapsed(!collapsed)}><img src={collapsedImg} alt={'button'}/>
+            </div>
         </Sider>
     );
 };

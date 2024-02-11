@@ -1,5 +1,6 @@
 import {SettingOutlined} from '@ant-design/icons';
 import {Col, Layout, Row} from 'antd';
+import setting from '../../../assets/svg/setting.svg'
 
 const {Header} = Layout;
 
@@ -26,7 +27,9 @@ export const AppHeader = (props: HeaderType) => {
                 <Col>
                     <div className={'settings'}>
                         {windowWidth <= 835 ? '' : <SettingOutlined className={'img'} />}
-                        <div className={windowWidth <= 835 ?'body_regular_14':'body_regular_16'}>Настройки</div>
+                        <div className={windowWidth <= 835 ?'body_regular_14':'body_regular_16'}>
+                            {windowWidth<= 360? <div className={'settingsIcon'}><img src={setting} alt=""/></div> :'Настройки'}
+                        </div>
                     </div>
                 </Col>
             </Row>

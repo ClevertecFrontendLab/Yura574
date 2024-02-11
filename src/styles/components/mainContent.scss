@@ -1,8 +1,9 @@
-.mainContent{
+.mainContent {
     max-width: 752px;
-    margin:0 24px;
+    margin: 0 24px;
 }
-.mainContent_wrapper{
+
+.mainContent_wrapper {
     background: white;
     padding: 24px;
     color: $color-primary-light-9;
@@ -14,47 +15,46 @@
     max-width: 752px
 }
 
-.mainContent_cardsActionsWrapper{
+.mainContent_cardsActionsWrapper {
     display: flex;
     justify-content: space-between;
-    margin: 16px 0px 0 0px;
-gap: 16px;
-    //&:last-child{
-    //    margin-right: 0;
-    //}
+    margin: 16px 0 0 0;
+    gap: 16px;
 }
 
-.mainContent_cardAction{
+.mainContent_cardAction {
     flex-direction: column;
     background: white;
-    //width: 240px;
-    //margin-right: 16px;
-    //&:last-child{
-    //    margin-right: 0;
-    //}
 }
 
-.mainContent_card{
+.mainContent_card {
     padding: 12px 10px;
     display: flex;
     justify-content: center;
-    span{
+
+    span {
         padding: 0 20px;
     }
 }
 
-.mainContent_cardActionButtonWrapper{
+.mainContent_cardActionButtonWrapper {
     padding: 14px 0;
     display: flex;
     justify-content: center
 }
-.mainContent_cardActionButton{
+
+.mainContent_cardActionButton {
     color: $color-primary-light-6;
     margin-left: 8px;
     padding: 5px 0
 }
 
-@media screen and (max-width: 835px){
-
+@media screen and (max-width: 360px) {
+    .mainContent_cardsActionsWrapper {
+        flex-direction: column;
+    }
+    .mainContent_wrapper{
+        padding: 16px;
+    }
 
 }
