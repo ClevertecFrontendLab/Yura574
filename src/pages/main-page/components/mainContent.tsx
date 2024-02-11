@@ -1,20 +1,15 @@
 import {Col, Divider, Row} from 'antd';
 import React from 'react';
+import like from '../../../assets/svg/like.svg'
+import calendar from '../../../assets/svg/calendar1.svg'
+import profile from '../../../assets/svg/profile1.svg'
 
 
 export const MainContent: React.FC = () => {
     return (
-        <div className={''} >
+        <div >
             <Row>
-                <Col className={'body_regular_16'} style={{
-                    maxWidth: "752px",
-                    background: "white",
-                    padding: "24px",
-                    color: "#061178",
-                    marginLeft: "24px",
-                    marginTop: "24px"
-                }}>
-
+                <Col className={'body_regular_16 mainContent_wrapper'}>
                     С CleverFit ты сможешь: <br/>
                     — планировать свои тренировки на календаре, выбирая тип
                     и
@@ -22,10 +17,10 @@ export const MainContent: React.FC = () => {
                     — отслеживать свои достижения в разделе статистики,
                     сравнивая
                     свои
-                    результаты с нормами и рекордами; <br/>
+                    результаты <br/>с нормами и рекордами; <br/>
                     — создавать свой профиль, где ты можешь
                     загружать
-                    свои фото, видео и отзывы о тренировках;
+                    свои фото, видео и отзывы <br/> о тренировках;
                     <br/>— выполнять расписанные тренировки
                     для
                     разных частей тела, следуя подробным инструкциям и советам профессиональных
@@ -33,45 +28,55 @@ export const MainContent: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Col  className={'body_regular_20'} style={{
-                    maxWidth: "752px",
-                    background: "white",
-                    padding: "24px",
-                    color: "#262626",
-                    marginLeft: "24px",
-                    marginTop: "24px"
-                }}>CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не
-                    откладывай на завтра — начни тренироваться уже сегодня!
+                <Col className={'mainContent_wrapper'}><h4>CleverFit — это не просто приложение, а
+                    твой личный помощник
+                    <br/>в мире фитнеса.
+                    Не откладывай на завтра — начни тренироваться уже сегодня!</h4>
                 </Col>
             </Row>
-            <Row  className={'body_regular_16'} style={{
-             margin:"16px 0 0 24px"
-            }}>
-                <Col >
-                    <Row className={'body_regular_16'} style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col className={'body_regular_16'} style={{padding: "12px 24px"}}>Расписать тренировки</Col>
+            <Row className={'body_regular_16 mainContent_cardsActionsWrapper'}>
+                <Col>
+                    <Row className={'mainContent_cardAction'}>
+                        <Col
+                            className={'mainContent_card'}>
+                            <span>Расписать тренировки</span>
+                        </Col>
                         <Divider style={{
                             margin: '0'
                         }}/>
-                        <Col style={{margin: "12px", textAlign: "center"}}>Тренировки</Col>
+                        <Col
+                            className={'body_regular_14 mainContent_cardActionButtonWrapper'}>
+                            <img src={like} alt="training"/>
+                            <span className={'mainContent_cardActionButton'}>Тренировки</span>
+                        </Col>
                     </Row>
                 </Col>
                 <Col>
-                    <Row style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col style={{padding: "12px 24px"}}>Назначить календарь</Col>
+                    <Row
+                        className={'mainContent_cardAction'}>
+                        <Col className={'mainContent_card'}>Назначить календарь</Col>
                         <Divider style={{
                             margin: '0'
                         }}/>
-                        <Col style={{margin: "12px", textAlign: "center"}}>Календарь</Col>
+                        <Col className={'mainContent_cardActionButtonWrapper'}>
+                            <img src={calendar} alt="calendar"/>
+                            <span className={'body_regular_14 mainContent_cardActionButton'}>
+                                Календарь
+                            </span></Col>
                     </Row>
                 </Col>
                 <Col>
-                    <Row style={{flexDirection: 'column', background: "white", marginRight: "16px"}}>
-                        <Col style={{padding: "12px 24px", }}>Заполнить профиль</Col>
+                    <Row
+                        className={'mainContent_cardAction'}>
+                        <Col className={'mainContent_card'}>
+                            Заполнить профиль
+                        </Col>
                         <Divider style={{
                             margin: '0'
                         }}/>
-                        <Col style={{margin: "12px", textAlign: "center"}}>Профиль</Col>
+                        <Col className={'body_regular_14 mainContent_cardActionButtonWrapper'}>
+                            <img src={profile} alt=""/>
+                            <span className={'mainContent_cardActionButton'}>Профиль</span></Col>
                     </Row>
                 </Col>
 

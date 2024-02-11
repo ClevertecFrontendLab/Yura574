@@ -1,0 +1,19 @@
+.mainPages_layoutPageWrapper {
+    height: 100vh;
+    background: white;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.mainPages_mainPageWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.mainPages_mainContentWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between
+}

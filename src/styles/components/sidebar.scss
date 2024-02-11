@@ -1,12 +1,22 @@
 .button {
-   position: absolute;
+    position: absolute;
     right: 0;
     bottom: 50%;
-    transform: translateX(100%);
+    transform: translate(100%, 50%);
     z-index: 1;
     border-radius: 0;
-    background: red;
-    clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
+    background: white;
+    clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
     width: 20px;
     height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //transform: translateY(100%);
+
+    img {
+        width: 14px;
+        height: 14px;
+
+    }
 }

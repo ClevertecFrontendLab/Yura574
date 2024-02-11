@@ -4,11 +4,19 @@ import {HeartFilled, TrophyFilled} from '@ant-design/icons';
 import calendar from '../../../assets/svg/calendar.svg'
 import profile from '../../../assets/svg/profile.svg'
 import exit from '../../../assets/svg/exit.svg'
+import collapsedImg from '../../../assets/svg/collapsedSidebar.svg'
+
 
 const {Sider} = Layout;
+type SidebarType = {
+    collapsed: boolean,
+    setCollapsed: (collapsed: boolean)=> void
+}
 
 
-export const Sidebar = () => {
+export const Sidebar = (props: SidebarType) => {
+    const {collapsed} = props
+   if(collapsed){}
     return (
         <Sider width={'208px'} style={{background: "inherit"}}>
 
@@ -94,7 +102,7 @@ export const Sidebar = () => {
                             margin: '0'
                         }}/>
                         <div style={{marginLeft:'16px',padding: '12px 0', display: 'flex'}}>
-                            <div style={{margin: '12px 0 12px 16px', display: 'flex'}}><img
+                            <div style={{ display: 'flex'}}><img
                                 src={exit}
                                 alt={'exit'}
                                 style={{}}/>
@@ -103,7 +111,7 @@ export const Sidebar = () => {
                         </div>
                     </Col>
                 </Row></div>
-            <button className={'button'} style={{ }}>x</button>
+            <div className={'button'}  style={{ }}> <img src={collapsedImg} alt={''}/></div>
         </Sider>
     );
 };
