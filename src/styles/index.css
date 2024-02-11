@@ -1,0 +1,337 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Inter;
+  src: url("./../../assets/fonts/inter/Inter-Regular.eot?") format("eot"), url("./../../assets/fonts/inter/Inter-Regular.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Regular.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Light.eot");
+  src: url("./../../assets/fonts/inter/Inter-Light.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Light.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-ExtraBold.eot");
+  src: url("./../../assets/fonts/inter/Inter-ExtraBold.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-ExtraBold.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-ExtraBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Bold.eot");
+  src: url("./../../assets/fonts/inter/Inter-Bold.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Bold.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Medium.eot");
+  src: url("./../../assets/fonts/inter/Inter-Medium.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Medium.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-ExtraLight.eot");
+  src: url("./../../assets/fonts/inter/Inter-ExtraLight.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-ExtraLight.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Black.eot");
+  src: url("./../../assets/fonts/inter/Inter-Black.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Black.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-SemiBold.eot");
+  src: url("./../../assets/fonts/inter/Inter-SemiBold.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-SemiBold.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Regular.eot");
+  src: url("./../../assets/fonts/inter/Inter-Regular.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Regular.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./../../assets/fonts/inter/Inter-Thin.eot");
+  src: url("./../../assets/fonts/inter/Inter-Thin.eot?#iefix") format("embedded-opentype"), url("./../../assets/fonts/inter/Inter-Thin.woff2") format("woff2"), url("./../../assets/fonts/inter/Inter-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+.header_wrapper {
+  background: #e6f7ff;
+  height: auto;
+  width: 100%;
+  padding: 0px 24px 16px 24px;
+}
+
+.header_position {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.header_position h1 {
+  padding: 6px 0;
+}
+.header_position h1 {
+  padding-top: 14px;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.header_main {
+  margin-top: 16px;
+  display: block;
+}
+
+.settings {
+  display: flex;
+  padding: 4px 15px;
+  margin-top: 8px;
+}
+.settings .img {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 835px) {
+  .header_position h1 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
+.mainContent {
+  max-width: 752px;
+  margin: 0 24px;
+}
+
+.mainContent_wrapper {
+  background: white;
+  padding: 24px;
+  color: #061178;
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 752px;
+}
+
+.mainContent_cardsActionsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0px 0 0px;
+  gap: 16px;
+}
+
+.mainContent_cardAction {
+  flex-direction: column;
+  background: white;
+}
+
+.mainContent_card {
+  padding: 12px 10px;
+  display: flex;
+  justify-content: center;
+}
+.mainContent_card span {
+  padding: 0 20px;
+}
+
+.mainContent_cardActionButtonWrapper {
+  padding: 14px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mainContent_cardActionButton {
+  color: #2f54eb;
+  margin-left: 8px;
+  padding: 5px 0;
+}
+
+.footerWrapper {
+  margin: 0 0 42px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.reviews {
+  padding: 5px 15px;
+  color: #2f54eb;
+}
+
+.forAppWrapper {
+  margin-right: 24px;
+  background: white;
+  min-width: 240px;
+}
+
+.footer_downloadDescriptionWrapper {
+  flex-direction: column;
+  padding: 12px 24px;
+}
+
+.footer_downloadForPhone {
+  padding-bottom: 8px;
+  color: #2f54eb;
+}
+
+.footer_forPro {
+  color: #8c8c8c;
+}
+
+.os {
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.osButtonWrapper {
+  padding: 7px 11px;
+  display: flex;
+}
+.osButtonWrapper span {
+  padding-left: 8px;
+}
+
+.sidebar_wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.sidebar_itemsWrapper {
+  flex-direction: column;
+}
+
+.sidebar_logo {
+  margin: 30px 0 50px 0;
+  padding: 14px 46px 17px 29px;
+}
+
+.sidebar_logoCollapsed {
+  margin: 30px 0 50px 0;
+  padding: 18px;
+}
+
+.sidebar_button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+  transform: translate(100%, 50%);
+  z-index: 1;
+  border-radius: 0;
+  background: white;
+  clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
+  width: 20px;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar_button img {
+  width: 14px;
+  height: 14px;
+}
+
+.body_regular_16 {
+  font-size: 16px;
+  line-height: 130%;
+  font-weight: 400;
+}
+
+.body_regular_14 {
+  font-size: 14px;
+  line-height: 130%;
+  font-weight: 400;
+}
+
+.body_regular_20 {
+  font-size: 20px;
+  line-height: 130%;
+  font-weight: 500;
+}
+
+.ant-layout-sider-children {
+  /* Ваши стили здесь */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #262626;
+}
+
+.custom-calendar {
+  color: #1890ff;
+}
+
+.custom-calendar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  background-color: #061178;
+  z-index: -1;
+}
+
+.mainPages_layoutPageWrapper {
+  height: 100vh;
+  background: white;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.mainPages_mainPageWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainPages_mainContentWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.main_page_image-light {
+  width: 100%;
+  height: 100vh; /* Например, 100% высоты окна просмотра */
+  background-size: cover;
+  background: url("../assets/png/Main-page_light1.jpg") no-repeat top;
+}
+
+/*# sourceMappingURL=index.css.map */

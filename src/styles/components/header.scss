@@ -2,18 +2,19 @@
 @import "./../typography/typography";
 
 
-.header {
+.header_wrapper {
     background: $color-light-blue-1;
     height: auto;
     //display: flex;
+    width: 100%;
     padding: 0px 24px 16px 24px;
 
 }
 
 .header_position {
     display: flex;
-    //flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-between;
     h1{
         padding: 6px 0;
     }
@@ -29,6 +30,7 @@
 }
 .header_main{
     margin-top: 16px;
+    display: block;
 }
 
 .settings{
@@ -38,4 +40,14 @@
     .img{
         margin-right: 10px;
     }
+}
+
+@media screen and (max-width: 835px){
+.header_position{
+    h1{
+        font-size: 24px;
+        font-weight: 500;
+    }
+}
+
 }
