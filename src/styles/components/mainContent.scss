@@ -1,0 +1,60 @@
+.mainContent {
+    max-width: 752px;
+    margin: 0 24px;
+}
+
+.mainContent_wrapper {
+    background: white;
+    padding: 24px;
+    color: $color-primary-light-9;
+    //margin-left: 24px;
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 752px
+}
+
+.mainContent_cardsActionsWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0 0 0;
+    gap: 16px;
+}
+
+.mainContent_cardAction {
+    flex-direction: column;
+    background: white;
+}
+
+.mainContent_card {
+    padding: 12px 10px;
+    display: flex;
+    justify-content: center;
+
+    span {
+        padding: 0 20px;
+    }
+}
+
+.mainContent_cardActionButtonWrapper {
+    padding: 14px 0;
+    display: flex;
+    justify-content: center
+}
+
+.mainContent_cardActionButton {
+    color: $color-primary-light-6;
+    margin-left: 8px;
+    padding: 5px 0
+}
+
+@media screen and (max-width: 360px) {
+    .mainContent_cardsActionsWrapper {
+        flex-direction: column;
+    }
+    .mainContent_wrapper{
+        padding: 16px;
+    }
+
+}

@@ -1,0 +1,39 @@
+.mainPages_layoutPageWrapper {
+    min-height: 100vh;
+    background: white;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    //overflow: hidden;
+}
+
+.mainPages_mainPageWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.mainPages_mainContentWrapper {
+    width: 100%;
+    display: flex;
+    //flex-direction: column;
+    //flex: 1;
+    //justify-content: space-between
+    //justify-content: flex-end;
+}
+
+.mainPages_footerWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 24px 24px 42px 24px;
+}
+
+@media screen and (max-width: 360px){
+    .mainContent_cardsActionsWrapper{
+        flex-direction: column;
+    }
+    .mainPages_mainContentWrapper{
+        //flex-direction: row;
+    }
+}
