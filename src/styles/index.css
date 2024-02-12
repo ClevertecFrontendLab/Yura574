@@ -253,6 +253,9 @@
     justify-content: space-between;
     align-items: center;
   }
+  .footer_downloadDescriptionWrapper {
+    align-items: center;
+  }
 }
 .sidebar_sider {
   background: white;
