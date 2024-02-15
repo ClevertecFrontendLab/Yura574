@@ -413,6 +413,8 @@ h4 {
   min-height: 100vh;
   background: white;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .mainPages_mainPageWrapper {
@@ -439,8 +441,113 @@ h4 {
     flex-direction: column;
   }
 }
+.loginPage_layoutPageWrapper {
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+}
+
+.loginPage_loginFieldWrapper {
+  background: white;
+  padding: 64px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginPage_forms {
+  width: 368px;
+  margin: 48px 85px 110px 85px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loginPage_logo {
+  width: 309px;
+  height: 76px;
+}
+
+.loginPage_tabsWrapper {
+  display: flex;
+  align-items: center;
+  margin: 0px 0 24px 0;
+}
+
+.loginPage_tab {
+  border-bottom: 1px solid black;
+  width: 50%;
+  text-align: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.loginPage_activeTab {
+  color: #2f54eb;
+  border-bottom: 2px solid #2f54eb;
+}
+
+.loginPage_extra {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.loginPage_inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loginPage_inputItem {
+  height: 70px;
+}
+.loginPage_inputItem:first-child {
+  height: 56px;
+}
+
+.loginPage_checkArea {
+  display: flex;
+  justify-content: space-between;
+}
+.loginPage_checkArea div {
+  cursor: pointer;
+  color: #2f54eb;
+}
+
+.loginPage_buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  color: #262626;
+  gap: 16px;
+}
+.loginPage_buttonsWrapper img {
+  margin-right: 10px;
+}
+
+.loginPage_registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.loginPage_registerFormWrapper div {
+  margin: 0;
+}
+
 .main_page_image-light {
-  background: url("../assets/png/Main-page_light1.jpg") no-repeat center;
+  background: url("../assets/webp/Main-page_light.webp") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.login_page_image-light {
+  background: url("../assets/webp/Enter-page_light.webp") no-repeat center;
   background-size: cover;
   width: 100%;
   height: 100%;

@@ -6,12 +6,15 @@ import {MainContent} from '@pages/main-page/components/mainContent.tsx';
 import {AppHeader} from '@pages/main-page/components/header.tsx';
 import {Footer} from '@pages/main-page/components/footer.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
+import {Navigate} from 'react-router-dom';
 
 
 export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
+
+    const [auth, setAuth] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -38,6 +41,10 @@ export const MainPage: React.FC = () => {
             setDataTestId('sider-switch')
         }
     }, [windowWidth, dataTestId]);
+
+    if(!auth){
+      return  <Navigate to={'login'}/>
+    }
     return (
         <Layout className={'mainPages_layoutPageWrapper'}>
             <Sidebar isNone={windowWidth <= 360 && collapsed}
