@@ -1,13 +1,33 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authApi} from '../../api.ts';
+import {authApi} from '../../api/api.ts';
+import {LoginType} from '../../api/apiTypes.ts';
+import {setIsPending} from '@redux/reducers/common-reducer.ts';
 
-const registrationUser = createAsyncThunk(
-    'auth/registration', async ({email, password}: {
-        email: string,
-        password: string
-    }, thunkAPI) => {
-        const response = await authApi.registrationUser(email, password)
-        return response.data
+
+export const singUp = createAsyncThunk(
+    'auth/registration', async (data: LoginType, {rejectWithValue}) => {
+        try {
+            const response = await authApi.registrationUser(data)
+            console.log(response)
+            return response.data
+        } catch (error: any) {
+            console.log(error)
+            return rejectWithValue(error.response.data);
+        }
+    }
+)
+
+export const singIn = createAsyncThunk(
+    'auth/login', async (data: LoginType, {rejectWithValue}) => {
+
+        try {
+            const response = await authApi.loginUser(data)
+            console.log(response.data)
+        } catch (error: any) {
+            console.log(error)
+            return rejectWithValue(error)
+        }
+
     }
 )
 
@@ -21,8 +41,9 @@ const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(registrationUser.fulfilled, (state, action) => {
+        builder.addCase(singUp.fulfilled, (state, action) => {
             state.isAuth = true
+            action.payload.dispath(setIsPending(false))
         })
     }
 })
