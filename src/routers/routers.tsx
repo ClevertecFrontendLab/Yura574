@@ -4,6 +4,9 @@ import {LayoutLoginPage} from '@pages/login-page/layoutLoginPage.tsx';
 import React from 'react';
 import {LoginTab} from '@pages/login-page/loginTab.tsx';
 import {RegisterTab} from '@pages/login-page/registerTab.tsx';
+import {ResultPage} from '@pages/resultPage/resultPage.tsx';
+import {ErrorResult} from '@pages/login-page/result/errorResult.tsx';
+import {SuccessResult} from '@pages/login-page/result/successResult.tsx';
 
 
 type RouteType = {
@@ -26,7 +29,7 @@ const routersPath: RouteType[] = [
         element: <MainPage />,
     },
     {
-        path: 'login',
+        path: '/login',
         element: <LayoutLoginPage />,
         children: [
             {
@@ -37,8 +40,24 @@ const routersPath: RouteType[] = [
                 path: 'singUp',
                 element: <RegisterTab />,
             },
+
         ],
     },
+    {
+        path:'/result',
+        element: <ResultPage/>,
+        children:[
+            {
+                path: 'error',
+                element: <ErrorResult/>
+        },
+            {
+                path: 'success',
+                element: <SuccessResult/>
+            }
+        ]
+    }
+
 ];
 
 export const publicRouters = <Routes>{renderRoutes(routersPath)}</Routes>;

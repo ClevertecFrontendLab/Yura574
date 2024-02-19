@@ -1,32 +1,26 @@
-import {useAppSelector} from '@redux/configure-store.ts';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {Layout} from 'antd';
 import {Loader} from '@utils/loader.tsx';
-import {Link, Outlet, useNavigate} from 'react-router-dom';
+import {NavLink, Outlet,  useNavigate} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
+import {push} from 'redux-first-history';
 
-const tabs = {
-    login: 'login',
-    register: 'register'
-}
 export const LayoutLoginPage = () => {
+    const dispatch = useAppDispatch()
     const isPending = useAppSelector(state => state.common.isPending)
     const navigate = useNavigate();
-    const [tab, setTab] = useState(tabs.login)
-
-    const tabHandler = (tab: string) => {
-        setTab(tab)
-    }
+    const router = useAppSelector(state => state.router.location)
     useEffect(() => {
-        // Проверьте условие для перехода
-        if (window.location.pathname === '/login') {
-            navigate('/login/singIn');
+        if (router?.pathname === '/login') {
+            dispatch(push('/login/singIn'));
         }
-    }, [navigate]);
+    }, [navigate, router]);
 
 
     return (
         <div className={`login_page_image-light ${isPending && 'login_page_image-light_blur'}`}>
+            {isPending &&<Loader/>}
             <Layout className={'loginPage_layoutPageWrapper'}>
 
                 <div className={'loginPage_loginFieldWrapper'}>
@@ -35,19 +29,19 @@ export const LayoutLoginPage = () => {
                     <div className={'loginPage_forms body_regular_16'}>
 
                         <div className={'loginPage_tabsWrapper'}>
-                            <Link to={'singIn'}>
-                            <div
-                                className={`loginPage_tab ${tab === tabs.login && 'loginPage_activeTab'} `}
-                                onClick={() => tabHandler(tabs.login)}>Вход
-                            </div>
-                            </Link>
-                            <Link to={'singUp'}> <div
-                                className={`loginPage_tab ${tab === tabs.register && 'loginPage_activeTab'}`}
-                                onClick={() => tabHandler(tabs.register)}>Регестрация
-                            </div>
-                            </Link>
+                            <NavLink to={'singIn'}
+                                     className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'}>
+                                Вход
+
+                            </NavLink>
+                            <NavLink to={'singUp'}
+                                     className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'
+                                     }>
+
+                                Регестрация
+                            </NavLink>
                         </div>
-                        {isPending && <Loader/>}
+                        {/*{!isPending &&<Loader/>}*/}
                         <Outlet/>
                     </div>
                 </div>

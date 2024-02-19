@@ -2,15 +2,21 @@ import {Button,  Form, Input} from 'antd';
 import google from '../../assets/svg/google.svg';
 import  {useState} from 'react';
 import {Rule} from 'antd/lib/form';
+import {useAppDispatch} from '@redux/configure-store.ts';
+import {LoginType} from '../../api/apiTypes.ts';
+import {singUp} from '@redux/reducers/auth-reducer.ts';
 
 
 export const RegisterTab = () => {
+
+    const dispatch = useAppDispatch()
     const [form] = Form.useForm();
     const [errors, setError] = useState<string[]>([])
     const [focus, setFocus] = useState(false)
     const handleBlur = () => {
         setFocus(false)
     };
+
     const handleFocus = () => {
         setFocus(true)
     };
@@ -54,13 +60,12 @@ export const RegisterTab = () => {
     const validateMatchPassword: Rule = ({getFieldValue}) => ({
         validator(_: any, value: string) {
             return new Promise((resolve, reject) => {
-                console.log('match')
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && getFieldValue('password') === value) {
                     setError(errors.filter(err => err !== 'password match'))
                     resolve('');
                 }
-                if (!value && !focus || !emailRegex.test(value) && !focus) {
+                if (!value && !focus || !passwordRegex.test(value) && !focus) {
                     !errors.includes('password match') && setError([...errors, 'password match'])
                     reject(new Error(''))
                 }
@@ -69,38 +74,16 @@ export const RegisterTab = () => {
         },
     });
 
-    return (
+        const finish = (value: LoginType) => {
+            const {email, password} = value
+            console.log(value)
+            dispatch(singUp({email, password}))
+        }
 
-        // <Form className={'loginPage_registerFormWrapper'}>
-        //     <Form.Item rules={[validateEmail]}
-        //                validateTrigger={['onBlur', 'onChange']}>
-        //         <Input addonBefore={'e-mail:'} className={'loginPage_inputItem'}/>
-        //     </Form.Item>
-        //     <Form.Item className={'loginPage_inputItem'}
-        //                rules={[validatePassword]}
-        //                validateTrigger={['onBlur', 'onChange']}
-        //                extra={<span className={'loginPage_extra'}>Пароль не менее 8 латинских букв с заглавной и цифрой</span>}>
-        //         <Input.Password placeholder={'пароль'}
-        //
-        //
-        //         />
-        //     </Form.Item>
-        //     <Form.Item className={'loginPage_inputItem'}
-        //                rules={[validateMatchPassword]}>
-        //         <Input.Password placeholder={'Повторите пароль'}
-        //         />
-        //     </Form.Item>
-        //     <div className={'loginPage_checkArea '}>
-        //         <Checkbox> Запомнить меня</Checkbox>
-        //         <div className={'body_regular_16'}>Забыли пароль?</div>
-        //     </div>
-        //     <div className={'loginPage_buttonsWrapper'}>
-        //         <Button type={'primary'} onClick={handleButtonClick}>Зарегестрироваться</Button>
-        //         <Button type={'default'}><img src={google} alt={'google'}/>Регестрация через
-        //             Google</Button>
-        //     </div>
-        // </Form>
-        <Form form={form} className={'loginPage_registerFormWrapper'}>
+
+
+    return (
+        <Form form={form} onFinish={values=> finish(values)} className={'loginPage_registerFormWrapper'}>
             <Form.Item
                 name={'email'}
                 validateTrigger={['onBlur', 'onChange']}
@@ -131,7 +114,7 @@ export const RegisterTab = () => {
 
             <Form.Item name={'password match'} className={'loginPage_inputItem'}
                        extra={errors.includes('password match') && <span
-                           className={` loginPage_extra loginPage_extraError`}>Пароли не совпадают</span>}
+                           className={`loginPage_extra loginPage_extraError`}>Пароли не совпадают</span>}
                        rules={[
                            validateMatchPassword
                        ]}
@@ -141,11 +124,11 @@ export const RegisterTab = () => {
             </Form.Item>
 
             <div className={'loginPage_buttonsWrapper'}>
-                <Button type={'primary'} onClick={handleButtonClick}
+                <Button type={'primary'} htmlType={'submit'} onClick={handleButtonClick}
                         disabled={errors.length !== 0}>
                     Зарегестрироваться
                 </Button>
-                <Button type={'default'}><img src={google} alt={'google'}/>
+                <Button type={'default'} ><img src={google} alt={'google'}/>
                     Регистрация через Google
                 </Button>
             </div>

@@ -191,6 +191,14 @@
     padding: 16px;
   }
 }
+.loader {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .footerWrapper {
   width: 100%;
   display: flex;
@@ -482,12 +490,12 @@ h4 {
 }
 
 .loginPage_tab {
-  border-bottom: 1px solid black;
   width: 50%;
   text-align: center;
   padding: 16px 0;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
+  color: #262626;
 }
 
 .loginPage_activeTab {

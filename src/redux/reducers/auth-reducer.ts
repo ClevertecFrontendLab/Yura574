@@ -1,30 +1,37 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {authApi} from '../../api/api.ts';
 import {LoginType} from '../../api/apiTypes.ts';
+import {push} from 'redux-first-history';
 import {setIsPending} from '@redux/reducers/common-reducer.ts';
 
 
 export const singUp = createAsyncThunk(
-    'auth/registration', async (data: LoginType, {rejectWithValue}) => {
+    'auth/registration', async (data: LoginType, {rejectWithValue, dispatch}) => {
         try {
             const response = await authApi.registrationUser(data)
             console.log(response)
-            return response.data
+            dispatch(push('/result/success', {fromServer: true}))
+            return response
         } catch (error: any) {
             console.log(error)
+            dispatch(push('/result/error', {fromServer: true}))
             return rejectWithValue(error.response.data);
         }
     }
 )
 
 export const singIn = createAsyncThunk(
-    'auth/login', async (data: LoginType, {rejectWithValue}) => {
-
+    'auth/login', async (dataLogin: LoginType, {dispatch, rejectWithValue}) => {
+        dispatch(setIsPending(true))
         try {
-            const response = await authApi.loginUser(data)
-            console.log(response.data)
+            const response = await authApi.loginUser(dataLogin)
+            console.log(response)
+            dispatch(push('/result/success', {fromServer: true}))
+            dispatch(setIsPending(false))
+            return  response
         } catch (error: any) {
-            console.log(error)
+            dispatch(setIsPending(false))
+            dispatch(push('/result/error', {fromServer: true}))
             return rejectWithValue(error)
         }
 
@@ -41,9 +48,10 @@ const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(singUp.fulfilled, (state, action) => {
+        builder.addCase(singIn.fulfilled, (state, action) => {
             state.isAuth = true
-            action.payload.dispath(setIsPending(false))
+            debugger
+            console.log(action.payload)
         })
     }
 })

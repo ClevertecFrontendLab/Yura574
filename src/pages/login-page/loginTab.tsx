@@ -16,7 +16,6 @@ export const LoginTab = () => {
 
     const finish = (value: LoginType) => {
         const {email, password} = value
-
         dispatch(singIn({email, password}))
     }
 
@@ -64,3 +63,11 @@ export const LoginTab = () => {
         </Form>
     )
 }
+//
+// config    :{transitional: {…},
+//     adapter: Array(2), transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}
+// data    :    ""
+// headers    :    AxiosHeaders {content-length: '0'}
+// request    :    XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: true, upload: XMLHttpRequestUpload, …}
+// status    :    201
+// statusText    :    ""
