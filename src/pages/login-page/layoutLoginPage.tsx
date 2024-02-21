@@ -5,15 +5,22 @@ import {NavLink, Outlet,  useNavigate} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
+import {pathName} from '../../routers/routers.tsx';
 
 export const LayoutLoginPage = () => {
     const dispatch = useAppDispatch()
     const isPending = useAppSelector(state => state.common.isPending)
     const navigate = useNavigate();
     const router = useAppSelector(state => state.router.location)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     useEffect(() => {
-        if (router?.pathname === '/login') {
-            dispatch(push('/login/singIn'));
+        if(isAuth){
+            dispatch(push(pathName.main))
+        }
+    }, [dispatch, isAuth]);
+    useEffect(() => {
+        if (router?.pathname === pathName.auth) {
+            dispatch(push(`${pathName.auth}/${pathName.singIn}`));
         }
     }, [navigate, router]);
 
@@ -29,16 +36,16 @@ export const LayoutLoginPage = () => {
                     <div className={'loginPage_forms body_regular_16'}>
 
                         <div className={'loginPage_tabsWrapper'}>
-                            <NavLink to={'singIn'}
+                            <NavLink to={pathName.singIn}
                                      className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'}>
                                 Вход
 
                             </NavLink>
-                            <NavLink to={'singUp'}
+                            <NavLink to={pathName.singUp}
                                      className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'
                                      }>
 
-                                Регестрация
+                                Регистрация
                             </NavLink>
                         </div>
                         {/*{!isPending &&<Loader/>}*/}

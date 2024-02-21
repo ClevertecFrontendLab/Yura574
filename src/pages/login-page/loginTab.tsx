@@ -3,10 +3,15 @@ import google from '../../assets/svg/google.svg';
 import {useAppDispatch} from '@redux/configure-store.ts';
 import {singIn} from '@redux/reducers/auth-reducer.ts';
 import {LoginType} from '../../api/apiTypes.ts';
-
+import {Rule} from 'antd/lib/form';
+import {useState} from 'react';
+// import {useState} from 'react';
+// import {Rule} from 'antd/lib/form';
 export const LoginTab = () => {
     const dispatch = useAppDispatch()
     const [form] = Form.useForm();
+
+    const [errors, setError] = useState<string[]>([])
 
     const handleButtonClick = () => {
         form.validateFields()
@@ -15,14 +20,32 @@ export const LoginTab = () => {
     };
 
     const finish = (value: LoginType) => {
-        const {email, password} = value
-        dispatch(singIn({email, password}))
+        const {email, password, rememberMe = false} = value
+        dispatch(singIn({email, password, rememberMe}))
     }
+    const validatePassword: Rule = () => ({
+        validator(_: any, value: string) {
+            return new Promise((resolve, reject) => {
+
+                const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+                if (value && passwordRegex.test(value)) {
+                    setError(errors.filter((p) => p !== 'password'))
+                    resolve('');
+                }
+                if (!value || !passwordRegex.test(value)) {
+                    !errors.includes('password') && setError([...errors, 'password'])
+                    reject(new Error('error'))
+                }
+            });
+        },
+    });
+
 
     return (
         <Form form={form} onFinish={values => finish(values)}
               className={'loginPage_registerFormWrapper'}>
             <Form.Item
+
                 name={'email'}
                 validateTrigger={['onBlur', 'onChange']}
                 rules={[{
@@ -32,32 +55,50 @@ export const LoginTab = () => {
                 }]}
             >
                 <Input
+                    data-test-id='login-email'
                     addonBefore={'e-mail:'}
                     className={'loginPage_inputItem'}
                 />
             </Form.Item>
             <Form.Item
+
                 name={'password'}
+
                 validateTrigger={['onBlur', 'onChange']}
                 className={'loginPage_inputItem'}
                 rules={[{
                     required: true,
                     message: ''
-                }]}
+                },
+                    validatePassword
+                ]}
 
             >
-                <Input.Password placeholder={'Пароль'}
+                <Input.Password
+                    data-test-id='login-password'
+                    placeholder={'Пароль'}
                 />
             </Form.Item>
 
             <div className={'loginPage_checkArea '}>
-                <Checkbox> Запомнить меня</Checkbox>
-                <div className={'body_regular_16'}>Забыли пароль?</div>
+                <Form.Item
+                    name="rememberMe"
+                    valuePropName="checked"
+                >
+                    <Checkbox
+                        data-test-id='login-remember'
+                        defaultChecked={false}
+                    >
+                        Запомнить меня
+                    </Checkbox>
+                </Form.Item>
+                <Button data-test-id='login-forgot-button' type={'link'}
+                        className={'body_regular_16'}>Забыли пароль?</Button>
             </div>
             <div className={'loginPage_buttonsWrapper'}>
-                <Button type={'primary'} htmlType={'submit'}
-                        onClick={handleButtonClick}>Вход</Button>
-                <Button type={'default'}><img src={google} alt={'google'}/>Войти через
+                <Button data-test-id='login-submit-button' type={'primary'} htmlType={'submit'}
+                        onClick={handleButtonClick}>Войти</Button>
+                <Button type={'default'}><img className={'loginPage_svgGoogle'} src={google} alt={'google'}/>Войти через
                     Google</Button>
             </div>
         </Form>

@@ -3,7 +3,12 @@
 
 export type LoginType = {
     email: string,
-    password: string
+    password: string,
+    rememberMe: boolean
+}
+export type RegisterType = {
+    email: string,
+    password: string,
 }
 
 export type ConfirmType ={

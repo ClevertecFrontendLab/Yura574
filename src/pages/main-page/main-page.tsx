@@ -7,6 +7,8 @@ import {AppHeader} from '@pages/main-page/components/header.tsx';
 import {Footer} from '@pages/main-page/components/footer.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
 import {Navigate} from 'react-router-dom';
+import {useAppSelector} from '@redux/configure-store.ts';
+import {pathName} from '../../routers/routers.tsx';
 
 
 export const MainPage: React.FC = () => {
@@ -14,7 +16,7 @@ export const MainPage: React.FC = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
 
-    const [auth, setAuth] = useState(false)
+    const auth = useAppSelector(state => state.auth.isAuth)
 
     useEffect(() => {
         const handleResize = () => {
@@ -43,7 +45,7 @@ export const MainPage: React.FC = () => {
     }, [windowWidth, dataTestId]);
 
     if(!auth){
-      return  <Navigate to={'login'}/>
+      return  <Navigate to={pathName.auth}/>
     }
     return (
         <Layout className={'mainPages_layoutPageWrapper'}>

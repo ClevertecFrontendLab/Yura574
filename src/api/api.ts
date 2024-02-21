@@ -3,7 +3,7 @@ import {
     ChangePasswordType,
     ConfirmType,
     createFeedbackType,
-    LoginType,
+    LoginType, RegisterType,
     TrainingType, UploadImageType
 } from './apiTypes.ts';
 
@@ -13,11 +13,11 @@ const instance = axios.create({
 })
 
 export const authApi = {
-    registrationUser(data: LoginType) {
+    registrationUser(data: RegisterType) {
         return instance.post('/auth/registration', data)
     },
     loginUser(data: LoginType) {
-        return instance.post('/auth/login', data)
+        return instance.post('/auth/login', {email: data.email, password: data.password})
     },
     checkEmail(email: string) {
         return instance.post('/auth/check-email', {email})

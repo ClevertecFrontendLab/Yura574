@@ -348,6 +348,7 @@
   margin-left: 16px;
   padding: 12px 0;
   display: flex;
+  cursor: pointer;
 }
 
 .sidebar_exitButtonTitle {
@@ -463,7 +464,7 @@ h4 {
 
 .loginPage_loginFieldWrapper {
   background: white;
-  padding: 64px 0;
+  padding-top: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -472,7 +473,7 @@ h4 {
 
 .loginPage_forms {
   width: 368px;
-  margin: 48px 85px 110px 85px;
+  margin: 48px 85px 174px 85px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -553,6 +554,22 @@ h4 {
   margin: 0;
 }
 
+@media screen and (max-width: 360px) {
+  .loginPage_logo {
+    width: 203px;
+    height: 50px;
+  }
+  .loginPage_forms {
+    width: 328px;
+    margin: 32px 16px 124px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .loginPage_svgGoogle {
+    display: none;
+  }
+}
 .main_page_image-light {
   background: url("../assets/webp/Main-page_light.webp") no-repeat center;
   background-size: cover;

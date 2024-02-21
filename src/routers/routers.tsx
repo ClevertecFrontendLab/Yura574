@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {MainPage} from '@pages/main-page/main-page.tsx';
 import {LayoutLoginPage} from '@pages/login-page/layoutLoginPage.tsx';
 import React from 'react';
@@ -7,6 +7,8 @@ import {RegisterTab} from '@pages/login-page/registerTab.tsx';
 import {ResultPage} from '@pages/resultPage/resultPage.tsx';
 import {ErrorResult} from '@pages/login-page/result/errorResult.tsx';
 import {SuccessResult} from '@pages/login-page/result/successResult.tsx';
+import {ErrorLogin} from '@pages/login-page/result/errorLogin.tsx';
+import {ErrorUserExist} from '@pages/login-page/result/errorUserExist.tsx';
 
 
 type RouteType = {
@@ -22,37 +24,60 @@ const renderRoutes = (routes: RouteType[]) => {
         </Route>
     ));
 };
+export const pathName = {
+    main: '/main',
+    auth:'/auth',
+    singIn:'singIn',
+    singUp:'registration',
+    result: '/result',
+    error: 'error',
+    errorLogin: 'error-login',
+    errorUserExist:'error-user-exist',
+    success: 'success'
+}
 
 const routersPath: RouteType[] = [
     {
         path: '/',
-        element: <MainPage />,
+        element: <Navigate to={pathName.main}/>
     },
     {
-        path: '/login',
-        element: <LayoutLoginPage />,
+        path: pathName.main,
+        element: <MainPage/>,
+    },
+    {
+        path: pathName.auth,
+        element: <LayoutLoginPage/>,
         children: [
             {
-                path: 'singIn',
-                element: <LoginTab />,
+                path: pathName.singIn,
+                element: <LoginTab/>,
             },
             {
-                path: 'singUp',
-                element: <RegisterTab />,
+                path: pathName.singUp,
+                element: <RegisterTab/>,
             },
 
         ],
     },
     {
-        path:'/result',
+        path: pathName.result,
         element: <ResultPage/>,
-        children:[
+        children: [
             {
-                path: 'error',
+                path: pathName.errorLogin,
+                element: <ErrorLogin/>
+            },
+            {
+                path: pathName.errorUserExist,
+                element: <ErrorUserExist/>
+            },
+            {
+                path: pathName.error,
                 element: <ErrorResult/>
-        },
+            },
             {
-                path: 'success',
+                path: pathName.success,
                 element: <SuccessResult/>
             }
         ]

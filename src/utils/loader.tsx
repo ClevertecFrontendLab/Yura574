@@ -12,6 +12,6 @@ export const Loader = () => {
         }
     };
     return (
-        <div className={'loader'}> <Lottie options={defaultOptions} height={200} width={200} /></div>
+        <div className={'loader'} data-test-id='loader'> <Lottie options={defaultOptions} height={200} width={200} /></div>
     )
 }

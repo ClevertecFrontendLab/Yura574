@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts'
 import {Outlet, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
+import {pathName} from '../../routers/routers.tsx';
 // import {useEffect} from 'react';
 
 export const ResultPage = () => {
@@ -14,7 +15,7 @@ export const ResultPage = () => {
     useEffect(() => {
         if (!location.state) {
             console.log(location)
-            dispatch(push('/login'))
+            dispatch(push(pathName.auth))
         }
     }, [location, dispatch]);
     return (
