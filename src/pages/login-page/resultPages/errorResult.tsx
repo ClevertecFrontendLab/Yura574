@@ -31,7 +31,7 @@ export const ErrorResult = () => {
             <Button
                 data-test-id='registration-retry-button'
                 onClick={handleButton}>
-                Назад к регистрации
+                Повторить
             </Button>
         </div>
     )

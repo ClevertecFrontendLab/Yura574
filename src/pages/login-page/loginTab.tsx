@@ -1,22 +1,23 @@
 import {Button, Checkbox, Form, Input} from 'antd';
 import google from '../../assets/svg/google.svg';
-import {useAppDispatch} from '@redux/configure-store.ts';
-import {singIn} from '@redux/reducers/auth-reducer.ts';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {LoginType} from '../../api/apiTypes.ts';
 import {Rule} from 'antd/lib/form';
-import {useState} from 'react';
-// import {useState} from 'react';
-// import {Rule} from 'antd/lib/form';
+import {useEffect, useState} from 'react';
+import {checkEmail, setRepeatedCheckEmail} from '@redux/reducers/auth/checkEmail-reducer.ts';
+import {singIn} from '@redux/reducers/auth/auth-reducer.ts';
+
 export const LoginTab = () => {
     const dispatch = useAppDispatch()
     const [form] = Form.useForm();
-
+    const repeatedEmail = useAppSelector(state => state.checkEmail.repeatedCheckEmail)
     const [errors, setError] = useState<string[]>([])
-
     const handleButtonClick = () => {
         form.validateFields()
             .then()
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+            });
     };
 
     const finish = (value: LoginType) => {
@@ -34,13 +35,28 @@ export const LoginTab = () => {
                 }
                 if (!value || !passwordRegex.test(value)) {
                     !errors.includes('password') && setError([...errors, 'password'])
-                    reject(new Error('error'))
+                    reject()
                 }
             });
         },
     });
 
+    const verifyCheckEmail = () => {
+        form
+            .validateFields(['email']) // Валидация только для поля 'email'
+            .then(() => {
 
+                dispatch(checkEmail(form.getFieldValue('email')))
+            })
+            .catch(err => console.log(err));
+    }
+    useEffect(() => {
+        if (repeatedEmail) {
+            dispatch(checkEmail(repeatedEmail))
+        }
+
+        setRepeatedCheckEmail(null)
+    }, [repeatedEmail, dispatch]);
     return (
         <Form form={form} onFinish={values => finish(values)}
               className={'loginPage_registerFormWrapper'}>
@@ -92,23 +108,20 @@ export const LoginTab = () => {
                         Запомнить меня
                     </Checkbox>
                 </Form.Item>
-                <Button data-test-id='login-forgot-button' type={'link'}
-                        className={'body_regular_16'}>Забыли пароль?</Button>
+                <Button data-test-id='login-forgot-button' type={'link'} onClick={verifyCheckEmail}
+                        className={'body_regular_16'}>
+                    {/*<NavLink to={`${pathName.auth}/${pathName.checkEmail}`}>*/}
+                    Забыли пароль?
+                    {/*</NavLink>*/}
+                </Button>
             </div>
             <div className={'loginPage_buttonsWrapper'}>
                 <Button data-test-id='login-submit-button' type={'primary'} htmlType={'submit'}
                         onClick={handleButtonClick}>Войти</Button>
-                <Button type={'default'}><img className={'loginPage_svgGoogle'} src={google} alt={'google'}/>Войти через
+                <Button type={'default'}><img className={'loginPage_svgGoogle'} src={google}
+                                              alt={'google'}/>Войти через
                     Google</Button>
             </div>
         </Form>
     )
 }
-//
-// config    :{transitional: {…},
-//     adapter: Array(2), transformRequest: Array(1), transformResponse: Array(1), timeout: 0, …}
-// data    :    ""
-// headers    :    AxiosHeaders {content-length: '0'}
-// request    :    XMLHttpRequest {onreadystatechange: null, readyState: 4, timeout: 0, withCredentials: true, upload: XMLHttpRequestUpload, …}
-// status    :    201
-// statusText    :    ""

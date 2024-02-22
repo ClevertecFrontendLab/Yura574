@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {authReducer} from '@redux/reducers/auth-reducer.ts';
+import {authReducer} from '@redux/reducers/auth/auth-reducer.ts';
 import {commonReducer} from '@redux/reducers/common-reducer.ts';
 import {createBrowserHistory} from 'history';
 import {createReduxHistoryContext} from 'redux-first-history';
+import {checkEmailReducer} from '@redux/reducers/auth/checkEmail-reducer.ts';
 
 
 
@@ -12,6 +13,7 @@ const {routerMiddleware, routerReducer,createReduxHistory} = createReduxHistoryC
 const rootReducer = combineReducers({
     auth: authReducer,
     common: commonReducer,
+    checkEmail: checkEmailReducer,
     router: routerReducer
 })
 export const store = configureStore({

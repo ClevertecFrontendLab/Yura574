@@ -5,10 +5,14 @@ import React from 'react';
 import {LoginTab} from '@pages/login-page/loginTab.tsx';
 import {RegisterTab} from '@pages/login-page/registerTab.tsx';
 import {ResultPage} from '@pages/resultPage/resultPage.tsx';
-import {ErrorResult} from '@pages/login-page/result/errorResult.tsx';
-import {SuccessResult} from '@pages/login-page/result/successResult.tsx';
-import {ErrorLogin} from '@pages/login-page/result/errorLogin.tsx';
-import {ErrorUserExist} from '@pages/login-page/result/errorUserExist.tsx';
+import {ErrorResult} from '@pages/login-page/resultPages/errorResult.tsx';
+import {SuccessResult} from '@pages/login-page/resultPages/successResult.tsx';
+import {ErrorLogin} from '@pages/login-page/resultPages/errorLogin.tsx';
+import {ErrorUserExist} from '@pages/login-page/resultPages/errorUserExist.tsx';
+import {ConfirmEmail} from '@pages/login-page/resultPages/confirmEmail.tsx';
+import {ErrorCheckEmailNoExist} from '@pages/login-page/resultPages/error-check-email-no-exist.tsx';
+import {ErrorCheckEmail} from '@pages/login-page/resultPages/errorCheckEmail.tsx';
+import {ChangePassword} from '@pages/login-page/resultPages/changePassword.tsx';
 
 
 type RouteType = {
@@ -33,7 +37,11 @@ export const pathName = {
     error: 'error',
     errorLogin: 'error-login',
     errorUserExist:'error-user-exist',
-    success: 'success'
+    success: 'success',
+    confirmEmail: 'confirm-email',
+    errorCheckEmailNoExist: 'error-check-email-no-exist',
+    errorCheckEmail: 'error-check-email',
+    changePassword: 'change-password',
 }
 
 const routersPath: RouteType[] = [
@@ -57,6 +65,14 @@ const routersPath: RouteType[] = [
                 path: pathName.singUp,
                 element: <RegisterTab/>,
             },
+            {
+                path: pathName.confirmEmail,
+                element: <ConfirmEmail/>
+            },
+            {
+                path: pathName.changePassword,
+                element: <ChangePassword/>
+            }
 
         ],
     },
@@ -79,6 +95,14 @@ const routersPath: RouteType[] = [
             {
                 path: pathName.success,
                 element: <SuccessResult/>
+            },
+            {
+                path: pathName.errorCheckEmailNoExist,
+                element: <ErrorCheckEmailNoExist/>
+            },
+            {
+                path: pathName.errorCheckEmail,
+                element: <ErrorCheckEmail/>
             }
         ]
     }

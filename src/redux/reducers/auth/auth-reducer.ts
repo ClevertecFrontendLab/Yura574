@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authApi} from '../../api/api.ts';
-import {LoginType, RegisterType} from '../../api/apiTypes.ts';
+import {authApi} from '../../../api/api.ts';
+import {LoginType, RegisterType} from '../../../api/apiTypes.ts';
 import {push} from 'redux-first-history';
-import {setIsPending} from '@redux/reducers/common-reducer.ts';
-import {pathName} from '../../routers/routers.tsx';
+import {setIsPending, setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
+import {pathName} from '../../../routers/routers.tsx';
 
 
 export const singUp = createAsyncThunk(
@@ -18,10 +18,16 @@ export const singUp = createAsyncThunk(
             return response
         } catch (error: any) {
             dispatch(setIsPending(false))
-
-            // error.response.data.statusCode === 409
+            console.log(error.response)
+            console.log(+error.response.status === 409)
+            if (error.response.status === 409) {
                 dispatch(push(`${pathName.result}/${pathName.errorUserExist}`, {fromServer: true}))
-                // :dispatch(push(`${pathName.result}/${pathName.error}`, {fromServer: true}))
+
+            } else {
+                dispatch(push(`${pathName.result}/${pathName.error}`, {fromServer: true}))
+                dispatch(setRepeatedRequestData(data))
+            }
+
 
             return rejectWithValue(error.response.data);
         }
@@ -51,6 +57,8 @@ export const singIn = createAsyncThunk(
 )
 
 
+
+
 const initialState = {
     isAuth: !!localStorage.getItem('token')
 }
@@ -59,10 +67,10 @@ const authSlice = createSlice({
     name: 'authReducer',
     initialState,
     reducers: {
-        logout: (state)=>{
+        logout: (state) => {
             localStorage.removeItem('token')
-            state.isAuth =false
-}
+            state.isAuth = false
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(singIn.fulfilled, (state, action) => {
@@ -72,6 +80,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {logout}= authSlice.actions
+export const {logout} = authSlice.actions
 
 export const authReducer = authSlice.reducer

@@ -16,6 +16,7 @@ export type ConfirmType ={
     code: string
 }
 export type ChangePasswordType ={
+    email: string,
     password: string,
     confirmPassword: string
 }

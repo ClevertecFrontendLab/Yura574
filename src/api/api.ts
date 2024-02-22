@@ -26,7 +26,7 @@ export const authApi = {
         return instance.post('/auth/confirm-email', data)
     },
     changePassword(data: ChangePasswordType) {
-        return instance.post('/auth/check-email', data)
+        return instance.post('/auth/change-password', data)
     }
 }
 

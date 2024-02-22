@@ -1,33 +1,22 @@
 import {Button, Form, Input} from 'antd';
-import google from '../../assets/svg/google.svg';
-import {useEffect, useState} from 'react';
 import {Rule} from 'antd/lib/form';
+import { useState} from 'react';
 import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
-import {RegisterType} from '../../api/apiTypes.ts';
-import {singUp} from '@redux/reducers/auth/auth-reducer.ts';
 import {useForm} from 'antd/lib/form/Form';
-import {setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
+import {changePassword} from '@redux/reducers/auth/changePassword-reducer.ts';
+import {ChangePasswordType} from '../../../api/apiTypes.ts';
 
-
-export const RegisterTab = () => {
-
+export const ChangePassword = () => {
     const dispatch = useAppDispatch()
+    const email  = useAppSelector(state => state.common.email)
     const [form] = useForm();
     const [errors, setError] = useState<string[]>([])
-    const repeatedData = useAppSelector(state => state.common.repeatedRequest)
     const handleButtonClick = () => {
         form.validateFields()
             .then()
             .catch(err => console.log(err));
     };
-    console.log(repeatedData)
-    useEffect(() => {
-        if(repeatedData){
-            dispatch(singUp(repeatedData))
-        }
-        dispatch(setRepeatedRequestData(null))
 
-    }, [repeatedData, dispatch]);
     const validatePassword: Rule = () => ({
         validator(_: any, value: string) {
             return new Promise((resolve, reject) => {
@@ -45,22 +34,6 @@ export const RegisterTab = () => {
         },
     });
 
-    const validateEmail: Rule = () => ({
-        validator(_: any, value: string) {
-            return new Promise((resolve, reject) => {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (value && emailRegex.test(value)) {
-                    setError(errors.filter(err => err !== 'email'))
-                    resolve('');
-                }
-                if (!value && !focus || !emailRegex.test(value) && !focus) {
-                    !errors.includes('email') && setError([...errors, 'email'])
-                    reject(new Error(''))
-                }
-
-            });
-        },
-    });
     const validateMatchPassword: Rule = ({getFieldValue}) => ({
         validator(_: any, value: string) {
             return new Promise((resolve, reject) => {
@@ -78,28 +51,17 @@ export const RegisterTab = () => {
         },
     });
 
-    const finish = (value: RegisterType) => {
-        const {email, password} = value
-        // setFormData(value)
-        dispatch(singUp({email, password}))
+    const finish = (value:ChangePasswordType) => {
+        const {password, confirmPassword} = value
+        console.log(value)
+        dispatch(changePassword({password,confirmPassword,email}))
     }
 
     return (
+        <div className={'loginPage_loginFieldWrapper'}>
         <Form form={form} onFinish={values => finish(values)}
               className={'loginPage_registerFormWrapper'}>
-            <Form.Item
 
-                name={'email'}
-                validateTrigger={['onBlur', 'onChange']}
-                rules={[validateEmail]}
-            >
-                <Input
-                    data-test-id='registration-email'
-                    addonBefore={'e-mail:'}
-                    className={'loginPage_inputItem'}
-
-                />
-            </Form.Item>
             <Form.Item
                 name={'password'}
                 help={false}
@@ -121,7 +83,7 @@ export const RegisterTab = () => {
             </Form.Item>
 
 
-            <Form.Item name={'match'} className={'loginPage_inputItem'}
+            <Form.Item name={'confirmPassword'} className={'loginPage_inputItem'}
                        extra={errors.includes('match') && <span
                            className={`loginPage_extra loginPage_extraError`}>Пароли не совпадают</span>}
                        rules={[
@@ -139,13 +101,12 @@ export const RegisterTab = () => {
                     data-test-id='registration-submit-button'
                     type={'primary'} htmlType={'submit'} onClick={handleButtonClick}
                     disabled={errors.length !== 0}>
-                    Зарегестрироваться
+                   Сохранить
                 </Button>
-                <Button type={'default'}><img src={google} alt={'google'}/>
-                    Регистрация через Google
-                </Button>
+
 
             </div>
         </Form>
+        </div>
     )
 }

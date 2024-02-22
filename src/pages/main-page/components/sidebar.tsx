@@ -5,7 +5,7 @@ import exit from '../../../assets/svg/exit.svg'
 import collapsedImg from '../../../assets/svg/collapsedSidebar.svg'
 import logoCollapsed from '../../../assets/svg/logoCollapsed.svg'
 import {useAppDispatch} from '@redux/configure-store.ts';
-import {logout} from '@redux/reducers/auth-reducer.ts';
+import {logout} from '@redux/reducers/auth/auth-reducer.ts';
 
 
 const {Sider} = Layout;
