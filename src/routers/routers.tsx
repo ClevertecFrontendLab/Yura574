@@ -15,10 +15,7 @@ import {ErrorCheckEmail} from '@pages/login-page/resultPages/errorCheckEmail.tsx
 import {ChangePassword} from '@pages/login-page/resultPages/changePassword.tsx';
 import {SuccessChangePassword} from '@pages/login-page/resultPages/successChangePassword.tsx';
 import {ErrorChangePassword} from '@pages/login-page/resultPages/errorChangePassword.tsx';
-// import {Loader} from '@utils/loader.tsx';
 import {Loader} from '@utils/loader.tsx';
-import MainPageLazy from './test.ts';
-// import MainPage from '@pages/main-page/main-page.tsx';
 const MainPage = lazy(() => import('@pages/main-page/main-page.tsx'))
 
 type RouteType = {
@@ -60,9 +57,9 @@ const routersPath: RouteType[] = [
     },
     {
         path: pathName.main,
-        element: <Suspense fallback={<div data-test-id='loader'><Loader/></div>}>
+        element: <div data-test-id='loader'><Suspense fallback={<div data-test-id='loader'><Loader/></div>}>
             <MainPage/>
-        </Suspense>,
+        </Suspense></div>,
     },
     {
         path: pathName.auth,
@@ -128,4 +125,4 @@ const routersPath: RouteType[] = [
 
 ];
 
-export const publicRouters = <Routes>{renderRoutes(routersPath)}</Routes>;
+export const routers = <Routes>{renderRoutes(routersPath)}</Routes>;
