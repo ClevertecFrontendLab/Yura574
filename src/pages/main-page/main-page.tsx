@@ -7,14 +7,15 @@ import {AppHeader} from '@pages/main-page/components/header.tsx';
 import {Footer} from '@pages/main-page/components/footer.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
 import {Navigate} from 'react-router-dom';
-import {useAppSelector} from '@redux/configure-store.ts';
+import { useAppSelector} from '@redux/configure-store.ts';
 import {pathName} from '../../routers/routers.tsx';
 
 
-export const MainPage: React.FC = () => {
+ const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
+    const isPending = useAppSelector(state => state.common.isPending)
 
     const auth = useAppSelector(state => state.auth.isAuth)
 
@@ -35,6 +36,7 @@ export const MainPage: React.FC = () => {
         }
 
     }
+
     useEffect(() => {
         if (windowWidth < 360 && dataTestId !== 'sider-switch-mobile') {
             setDataTestId('sider-switch-mobile')
@@ -44,11 +46,12 @@ export const MainPage: React.FC = () => {
         }
     }, [windowWidth, dataTestId]);
 
-    if(!auth){
+
+     if(!auth){
       return  <Navigate to={pathName.auth}/>
     }
     return (
-        <Layout className={'mainPages_layoutPageWrapper'}>
+        <Layout className={`mainPages_layoutPageWrapper ${isPending && 'mainPages_layoutPageWrapper_blur'}`}>
             <Sidebar isNone={windowWidth <= 360 && collapsed}
                      collapsed={collapsed}
                      setCollapsed={setCollapsed}
@@ -85,3 +88,4 @@ export const MainPage: React.FC = () => {
 
     );
 };
+export default MainPage

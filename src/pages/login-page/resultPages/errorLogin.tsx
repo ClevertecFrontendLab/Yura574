@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
 import warning from '../../../assets/svg/warning.svg';
-import {Button} from 'antd';
+import {Button, Result} from 'antd';
 import {pathName} from '../../../routers/routers.tsx';
 
 
@@ -23,15 +23,20 @@ export const ErrorLogin = () => {
         dispatch(deleteError())
     }
     return (
-        <div className={'loginPage_loginFieldWrapper'}>
-            <div><img src={ warning } alt=""/></div>
-            <div>Вход не выполнен</div>
-            <div>Что-то пошло не так. Попробуйте еще раз</div>
-            <Button
-                data-test-id='login-retry-button'
-                onClick={handleButton}>
-                Повторить
-            </Button>
-        </div>
+        <Result
+            status={'warning'}
+            title="Вход не выполнен"
+            subTitle="Что-то пошло не так. Попробуйте еще раз"
+            className={'loginPage_loginFieldWrapper'}
+            extra={[
+                <Button
+                    type="primary"
+                    className={'loginPage_buttonPrimary loginPage_button100'}
+                    onClick={handleButton}
+                    data-test-id='login-retry-button'>
+                    Повторить
+                </Button>,
+            ]}
+        />
     )
 }

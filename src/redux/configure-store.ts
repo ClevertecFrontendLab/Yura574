@@ -5,20 +5,28 @@ import {commonReducer} from '@redux/reducers/common-reducer.ts';
 import {createBrowserHistory} from 'history';
 import {createReduxHistoryContext} from 'redux-first-history';
 import {checkEmailReducer} from '@redux/reducers/auth/checkEmail-reducer.ts';
+import {changePasswordReducer} from '@redux/reducers/auth/changePassword-reducer.ts';
 
 
-
-const {routerMiddleware, routerReducer,createReduxHistory} = createReduxHistoryContext({history: createBrowserHistory()})
+const {
+    routerMiddleware,
+    routerReducer,
+    createReduxHistory
+} = createReduxHistoryContext({
+    history: createBrowserHistory(),
+    savePreviousLocations: 1
+})
 
 const rootReducer = combineReducers({
     auth: authReducer,
     common: commonReducer,
     checkEmail: checkEmailReducer,
-    router: routerReducer
+    router: routerReducer,
+    changePassword: changePasswordReducer,
 })
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware)=> getDefaultMiddleware({serializableCheck:false}).concat(routerMiddleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(routerMiddleware)
 });
 
 export const history = createReduxHistory(store)

@@ -9,9 +9,10 @@ export const App = () => {
     return (
         <div>
             <HistoryRouter history={history}>
+                {isPending &&<Loader/>}
                 {publicRouters}
             </HistoryRouter>
-            {isPending &&<Loader/>}
+
         </div>
     )
 }

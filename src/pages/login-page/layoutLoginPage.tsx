@@ -11,6 +11,8 @@ export const LayoutLoginPage = () => {
     const isPending = useAppSelector(state => state.common.isPending)
     const router = useAppSelector(state => state.router.location)
     const isAuth = useAppSelector(state => state.auth.isAuth)
+
+
     useEffect(() => {
         if (isAuth) {
             dispatch(push(pathName.main))
@@ -23,12 +25,13 @@ export const LayoutLoginPage = () => {
     }, [router, dispatch]);
 
 
+
     return (
         <div className={`login_page_image-light ${isPending && 'login_page_image-light_blur'}`}>
 
             <Layout className={'loginPage_layoutPageWrapper'}>
-                {router?.pathname === `${pathName.auth}/${pathName.singIn}` || router?.pathname ===  `${pathName.auth}/${pathName.singUp}` ?
-                    <div className={'loginPage_loginFieldWrapper'}>
+                {router?.pathname === `${pathName.auth}/${pathName.singIn}` || router?.pathname === `${pathName.auth}/${pathName.singUp}`
+                    ? <div className={'loginPage_loginFieldWrapper'}>
                         <img src={logo} className={'loginPage_logo'} alt={'logo'}/>
 
                         <div className={'loginPage_forms body_regular_16'}>
@@ -37,19 +40,17 @@ export const LayoutLoginPage = () => {
                                 <NavLink to={pathName.singIn}
                                          className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'}>
                                     Вход
-
                                 </NavLink>
                                 <NavLink to={pathName.singUp}
                                          className={({isActive}) => isActive ? 'loginPage_tab loginPage_activeTab' : 'loginPage_tab'
                                          }>
-
                                     Регистрация
                                 </NavLink>
                             </div>
-                            {/*{!isPending &&<Loader/>}*/}
                             <Outlet/>
                         </div>
-                    </div> : <Outlet/>
+                    </div>
+                    : <Outlet/>
 
 
                 }

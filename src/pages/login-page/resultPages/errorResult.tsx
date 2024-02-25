@@ -1,5 +1,5 @@
 import error from '../../../assets/svg/error.svg';
-import {Button} from 'antd';
+import {Button, Result} from 'antd';
 import {useLocation} from 'react-router-dom';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
@@ -23,16 +23,20 @@ export const ErrorResult = () => {
         dispatch(deleteError())
     }
     return (
-        <div className={'loginPage_loginFieldWrapper'}>
-            <div><img src={error} alt=""/></div>
-            <div>Данные не сохранились</div>
-            <div>Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.
-            </div>
-            <Button
-                data-test-id='registration-retry-button'
-                onClick={handleButton}>
-                Повторить
-            </Button>
-        </div>
+        <Result
+            status={'error'}
+            title="Данные не сохранились"
+            subTitle="Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз."
+            className={'loginPage_loginFieldWrapper'}
+            extra={[
+                <Button
+                    type="primary"
+                    className={'loginPage_buttonPrimary loginPage_button100'}
+                    onClick={handleButton}
+                    data-test-id='registration-retry-button'>
+                    Назад к регестрации
+                </Button>,
+            ]}
+            />
     )
 };

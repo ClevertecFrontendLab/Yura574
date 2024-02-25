@@ -14,20 +14,23 @@ export const RegisterTab = () => {
     const dispatch = useAppDispatch()
     const [form] = useForm();
     const [errors, setError] = useState<string[]>([])
-    const repeatedData = useAppSelector(state => state.common.repeatedRequest)
+    const prevLoc = useAppSelector(state => state.router.previousLocations)
+    const prevLocation = prevLoc && prevLoc[1] && prevLoc[1].location?.pathname
     const handleButtonClick = () => {
         form.validateFields()
             .then()
             .catch(err => console.log(err));
     };
-    console.log(repeatedData)
     useEffect(() => {
-        if(repeatedData){
-            dispatch(singUp(repeatedData))
+        if (prevLocation === '/result/error') {
+            const email = sessionStorage.getItem('registerEmail')
+            const password = sessionStorage.getItem('registerPassword')
+            if (email && password) dispatch(singUp({email, password}))
         }
         dispatch(setRepeatedRequestData(null))
 
-    }, [repeatedData, dispatch]);
+    }, [prevLoc, dispatch]);
+
     const validatePassword: Rule = () => ({
         validator(_: any, value: string) {
             return new Promise((resolve, reject) => {
@@ -80,6 +83,8 @@ export const RegisterTab = () => {
 
     const finish = (value: RegisterType) => {
         const {email, password} = value
+        sessionStorage.setItem('registerEmail', email)
+        sessionStorage.setItem('registerPassword', password)
         // setFormData(value)
         dispatch(singUp({email, password}))
     }
@@ -94,6 +99,7 @@ export const RegisterTab = () => {
                 rules={[validateEmail]}
             >
                 <Input
+                    size={'large'}
                     data-test-id='registration-email'
                     addonBefore={'e-mail:'}
                     className={'loginPage_inputItem'}
@@ -114,6 +120,7 @@ export const RegisterTab = () => {
                 ]}
             >
                 <Input.Password
+                    size={'large'}
                     data-test-id='registration-password'
                     placeholder={'Пароль'}
 
@@ -129,6 +136,7 @@ export const RegisterTab = () => {
                        ]}
             >
                 <Input.Password
+                    size={'large'}
                     data-test-id='registration-confirm-password'
                     placeholder={'Повторите пароль'}
                 />
@@ -137,11 +145,13 @@ export const RegisterTab = () => {
             <div className={'loginPage_buttonsWrapper'}>
                 <Button
                     data-test-id='registration-submit-button'
+                    size={'large'}
+                    className={'loginPage_buttonPrimary'}
                     type={'primary'} htmlType={'submit'} onClick={handleButtonClick}
                     disabled={errors.length !== 0}>
                     Зарегестрироваться
                 </Button>
-                <Button type={'default'}><img src={google} alt={'google'}/>
+                <Button type={'default'} size={'large'}><img src={google} alt={'google'}/>
                     Регистрация через Google
                 </Button>
 

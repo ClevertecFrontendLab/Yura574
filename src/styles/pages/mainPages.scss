@@ -5,7 +5,21 @@
     max-width: 1440px;
     margin: 0 auto;
     //overflow: hidden;
+
 }
+.mainPages_layoutPageWrapper_blur::before{
+    z-index: 2;
+}
+.mainPages_layoutPageWrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+}
+
 
 .mainPages_mainPageWrapper {
     height: 100%;

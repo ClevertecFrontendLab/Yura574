@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-// import {singIn, singUp} from '@redux/reducers/auth/auth-reducer.ts';
 
 export type DataErrorType = {
     statusCode: 400 | 404 | 409 | 429 | 500,
@@ -50,20 +49,6 @@ const commonSlice = createSlice({
             state.email = action.payload
         },
     },
-    // extraReducers: (builder) => {
-    //
-    //     // builder.addCase(singUp.rejected, (state, action) => {
-    //     //     console.log(action)
-    //     //     const errorPayload = action.payload as DataErrorType
-    //     //     state.dataError = errorPayload            // state.dataError = {...action.payload}
-    //     // })
-    //     // builder.addCase(singIn.rejected, (state, action) => {
-    //     //     console.log(action)
-    //     //     const errorPayload = action.payload as DataErrorType
-    //     //     state.dataError = errorPayload            // state.dataError = {...action.payload}
-    //     // })
-    //
-    // }
 
 })
 

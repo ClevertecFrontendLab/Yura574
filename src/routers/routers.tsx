@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {MainPage} from '@pages/main-page/main-page.tsx';
+// import {MainPage} from '@pages/main-page/main-page.tsx';
 import {LayoutLoginPage} from '@pages/login-page/layoutLoginPage.tsx';
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {LoginTab} from '@pages/login-page/loginTab.tsx';
 import {RegisterTab} from '@pages/login-page/registerTab.tsx';
 import {ResultPage} from '@pages/resultPage/resultPage.tsx';
@@ -13,7 +13,13 @@ import {ConfirmEmail} from '@pages/login-page/resultPages/confirmEmail.tsx';
 import {ErrorCheckEmailNoExist} from '@pages/login-page/resultPages/error-check-email-no-exist.tsx';
 import {ErrorCheckEmail} from '@pages/login-page/resultPages/errorCheckEmail.tsx';
 import {ChangePassword} from '@pages/login-page/resultPages/changePassword.tsx';
-
+import {SuccessChangePassword} from '@pages/login-page/resultPages/successChangePassword.tsx';
+import {ErrorChangePassword} from '@pages/login-page/resultPages/errorChangePassword.tsx';
+// import {Loader} from '@utils/loader.tsx';
+import {Loader} from '@utils/loader.tsx';
+import MainPageLazy from './test.ts';
+// import MainPage from '@pages/main-page/main-page.tsx';
+const MainPage = lazy(() => import('@pages/main-page/main-page.tsx'))
 
 type RouteType = {
     path: string;
@@ -30,18 +36,21 @@ const renderRoutes = (routes: RouteType[]) => {
 };
 export const pathName = {
     main: '/main',
-    auth:'/auth',
-    singIn:'singIn',
-    singUp:'registration',
+    auth: '/auth',
+    singIn: 'singIn',
+    singUp: 'registration',
     result: '/result',
     error: 'error',
     errorLogin: 'error-login',
-    errorUserExist:'error-user-exist',
+    errorUserExist: 'error-user-exist',
     success: 'success',
     confirmEmail: 'confirm-email',
     errorCheckEmailNoExist: 'error-check-email-no-exist',
     errorCheckEmail: 'error-check-email',
     changePassword: 'change-password',
+    successChangePassword: 'success-change-password',
+    errorChangePassword: 'error-change-password'
+
 }
 
 const routersPath: RouteType[] = [
@@ -51,7 +60,9 @@ const routersPath: RouteType[] = [
     },
     {
         path: pathName.main,
-        element: <MainPage/>,
+        element: <Suspense fallback={<div data-test-id='loader'><Loader/></div>}>
+            <MainPage/>
+        </Suspense>,
     },
     {
         path: pathName.auth,
@@ -103,6 +114,14 @@ const routersPath: RouteType[] = [
             {
                 path: pathName.errorCheckEmail,
                 element: <ErrorCheckEmail/>
+            },
+            {
+                path: pathName.successChangePassword,
+                element: <SuccessChangePassword/>
+            },
+            {
+                path: pathName.errorChangePassword,
+                element: <ErrorChangePassword/>
             }
         ]
     }
