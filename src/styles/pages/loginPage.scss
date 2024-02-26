@@ -9,9 +9,10 @@
     justify-content: center;
     background: rgba(0, 0, 0, 0);
     z-index: 100;
-    & .ant-result{
-        padding: 64px 86px 56px 86px;
-    }
+
+    //& .ant-result {
+    //    padding: 64px 32px 56px 32px;
+    //}
 }
 
 .loginPage_loginFieldWrapper {
@@ -21,23 +22,27 @@
     flex-direction: column;
     align-items: center;
     z-index: 1;
-    & .ant-result-subtitle{
+
+    & .ant-result-subtitle {
         max-width: 368px;
         line-height: 130%;
     }
-    & .ant-result-title{
+
+    & .ant-result-title {
         font-weight: 500;
         line-height: 130%;
     }
 
 }
+
 .loginPage_resultRecoveryPassword {
 
-    & .ant-result-subtitle{
-        max-width: 475px;
+    & .ant-result-subtitle {
+        width: 475px;
         line-height: 130%;
     }
-    & .ant-result-title{
+
+    & .ant-result-title {
         font-weight: 500;
         line-height: 130%;
     }
@@ -116,7 +121,8 @@
         cursor: pointer;
         color: $color-primary-light-6;
     }
-    button{
+
+    button {
         padding: 0;
         color: $color-primary-light-6;
     }
@@ -131,6 +137,7 @@
         background-color: $color-primary-light-6;
     }
 }
+
 .loginPage_buttonsWrapper {
     display: flex;
     flex-direction: column;
@@ -152,43 +159,59 @@
     }
 }
 
-.loginPage_buttonPrimary{
+.loginPage_buttonPrimary {
     width: auto;
-background-color: $color-primary-light-6;
+    background-color: $color-primary-light-6;
     color: $color-character-light-primary-inverse
 }
 
-.loginPage_button100{
-width: 100%;
+.loginPage_button100 {
+    width: 100%;
 }
-.loginPage_spam{
+
+.loginPage_spam {
     margin-top: 20px;
     color: $color-character-light-secondary-45;
 }
 
 
-
 @media screen and (max-width: 360px) {
-    .loginPage_loginFieldWrapper{
+    .loginPage_loginFieldWrapper {
         padding-top: 32px;
-        & .ant-result-subtitle{
+
+        & .ant-result-subtitle {
             max-width: 296px;
         }
-        &  .ant-result-extra{
+
+        & .ant-result-extra {
             width: 100%;
             font-size: 14px;
         }
     }
     .loginPage_layoutPageWrapper {
-        & .ant-result{
+        & .ant-result {
             padding: 32px 16px;
         }
     }
+    .loginPage_resultRecoveryPassword {
+        & .ant-result-subtitle {
+            width: 264px;
+        }
+    }
 
- .loginPage_logo{
-     width: 203px;
-     height: 50px;
- }
+    .loginPage_forms {
+        width: 368px;
+        margin: 48px 85px 174px 85px;
+        display: flex;
+        flex-direction: column;
+        //gap: 24px;
+
+    }
+
+    .loginPage_logo {
+        width: 203px;
+        height: 50px;
+    }
     .loginPage_forms {
         width: 328px;
         margin: 32px 16px 124px 16px;
@@ -197,7 +220,7 @@ width: 100%;
         gap: 24px;
 
     }
-    .loginPage_svgGoogle{
+    .loginPage_svgGoogle {
         display: none;
     }
 }

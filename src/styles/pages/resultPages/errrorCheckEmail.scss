@@ -1,0 +1,41 @@
+
+
+
+
+
+.result_errorCheckEmail_wrapper {
+    background: white;
+    padding: 64px 86px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    line-height: 130%;
+
+    & .ant-result-title {
+        line-height: 130%;
+        font-weight: 500;
+    }
+    & .ant-result-subtitle {
+        width: 368px;
+        line-height: 130%;
+        font-weight: 400;
+    }
+
+    & .ant-result-extra {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+
+    .result_errorCheckEmail_wrapper {
+        padding: 32px 16px;
+        & .ant-result-subtitle {
+            width: auto;
+        }
+
+    }
+
+}

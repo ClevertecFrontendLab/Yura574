@@ -1,11 +1,8 @@
-import result from '../../../assets/svg/result.svg';
-import errorSvg from '../../../assets/svg/error.svg';
 import VerificationInput from 'react-verification-input';
 import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {confirmEmail, setError} from '@redux/reducers/auth/checkEmail-reducer.ts';
 import {useEffect, useState} from 'react';
-import {Button, Result} from 'antd';
-import {changePassword} from '@redux/reducers/auth/changePassword-reducer.ts';
+import { Result} from 'antd';
 import {pathName} from '../../../routers/routers.tsx';
 
 
@@ -30,7 +27,7 @@ export const ConfirmEmail = () => {
          dispatch(setError(null))
 
         }
-    }, [previousLocation, dispatch]);
+    }, [previousLocation, location, dispatch]);
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -51,7 +48,7 @@ export const ConfirmEmail = () => {
             }
             subTitle={<div>Мы отправили вам на e-mail <b>{email}</b>{windowWidth<=360 && <br/>} шестизначный код. Введите его в
                 поле{windowWidth<=360 && <br/>} ниже.</div>}
-            className={'loginPage_loginFieldWrapper loginPage_resultRecoveryPassword'}
+            className={'result_confirmEmail__wrapper'}
             extra={[<div>
                 <div data-test-id='verification-input'>
                     <VerificationInput

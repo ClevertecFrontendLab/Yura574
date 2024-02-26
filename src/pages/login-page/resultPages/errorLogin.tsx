@@ -3,7 +3,6 @@ import {useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
-import warning from '../../../assets/svg/warning.svg';
 import {Button, Result} from 'antd';
 import {pathName} from '../../../routers/routers.tsx';
 
@@ -27,7 +26,7 @@ export const ErrorLogin = () => {
             status={'warning'}
             title="Вход не выполнен"
             subTitle="Что-то пошло не так. Попробуйте еще раз"
-            className={'loginPage_loginFieldWrapper'}
+            className={'result_errorLogin_wrapper'}
             extra={[
                 <Button
                     type="primary"

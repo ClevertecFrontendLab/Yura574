@@ -11,19 +11,34 @@ export const ChangePassword = () => {
     const [form] = useForm();
     const [errors, setError] = useState<string[]>([])
     const previousLocation = useAppSelector(state => state.router.previousLocations)
-    const location = previousLocation &&previousLocation[1] &&previousLocation[1].location?.pathname
+    const location = previousLocation && previousLocation[1] && previousLocation[1].location?.pathname
     const email = sessionStorage.getItem('email')
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
     useEffect(() => {
-        if(location === '/result/error-change-password'){
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [])
+
+    useEffect(() => {
+        if (location === '/result/error-change-password') {
             const password = sessionStorage.getItem('password')
             const confirmPassword = sessionStorage.getItem('confirmPassword')
             console.log(password, confirmPassword, email)
-            if(password && confirmPassword && email){
-                dispatch(changePassword({ password, confirmPassword}))
+            if (password && confirmPassword && email) {
+                dispatch(changePassword({password, confirmPassword}))
             }
 
         }
-    }, [previousLocation, dispatch]);
+    }, [previousLocation,location, email, dispatch]);
     const handleButtonClick = () => {
         form.validateFields()
             .then()
@@ -64,67 +79,69 @@ export const ChangePassword = () => {
         },
     });
 
-    const finish = (value:ChangePasswordType) => {
+    const finish = (value: ChangePasswordType) => {
         const {password, confirmPassword} = value
-        sessionStorage.setItem('password', password),
+        sessionStorage.setItem('password', password)
             sessionStorage.setItem('confirmPassword', confirmPassword)
         console.log(value)
 
-       email && dispatch(changePassword({password,confirmPassword,email}))
+        email && dispatch(changePassword({password, confirmPassword, email}))
     }
 
     return (
-        <div className={'loginPage_loginFieldWrapper result_changePassword__wrapper'}>
-            <div className={'result_changePassword__title'}>Восстановление аккауанта</div>
-        <Form form={form} onFinish={values => finish(values)}
-              className={'loginPage_registerFormWrapper'}>
+        <div className={'result_changePassword__wrapper'}>
+            <div className={'result_changePassword__title'}>Восстановление{windowWidth <= 360&& <br/>} аккауанта</div>
+            <Form form={form} onFinish={values => finish(values)}
+                  className={'result_registerFormWrapper'}>
 
-            <div className={'result_changePassword__inputsWrapper'}><Form.Item
-                name={'password'}
-                help={false}
-                extra={<span
-                    className={`loginPage_extra ${errors.includes('password') && 'loginPage_extraError'}`}>Пароль не менее 8 символов, с заглавной буквой и цифрой</span>
-                }
-                validateTrigger={['onBlur', 'onChange']}
-                className={'loginPage_inputItem'}
-                rules={[
-                    validatePassword
+                <div className={'result_changePassword__inputsWrapper'}>
+                    <Form.Item
+                        name={'password'}
+                        className={'resultPage_inputItem'}
+                        help={false}
+                        extra={<span
+                            className={`loginPage_extra ${errors.includes('password') && 'loginPage_extraError'}`}>Пароль не менее 8 символов, с заглавной буквой и цифрой</span>
+                        }
+                        validateTrigger={['onBlur', 'onChange']}
+                        rules={[validatePassword]}
+                    >
+                        <Input.Password
+                            size={'large'}
+                            data-test-id='change-password'
+                            placeholder={'Новый пароль'}
 
-                ]}
-            >
-                <Input.Password
-                    data-test-id='change-password'
-                    placeholder={'Новый пароль'}
-
-                />
-            </Form.Item>
-
-
-                <Form.Item name={'confirmPassword'} className={'loginPage_inputItem'}
-                           extra={errors.includes('match') && <span
-                               className={`loginPage_extra loginPage_extraError`}>Пароли не совпадают</span>}
-                           rules={[
-                               validateMatchPassword
-                           ]}
-                >
-                    <Input.Password
-                        data-test-id='change-confirm-password'
-                        placeholder={'Повторите пароль'}
-                    />
-                </Form.Item></div>
-
-            <div className={'loginPage_buttonsWrapper'}>
-                <Button
-                    className={'loginPage_buttonPrimary loginPage_button100'}
-                    data-test-id='change-submit-button'
-                    type={'primary'} htmlType={'submit'} onClick={handleButtonClick}
-                    disabled={errors.length !== 0}>
-                   Сохранить
-                </Button>
+                        />
+                    </Form.Item>
 
 
-            </div>
-        </Form>
+                    <Form.Item name={'confirmPassword'}
+                               className={'resultPage_inputItem'}
+                               extra={errors.includes('match') && <span
+                                   className={`loginPage_extra loginPage_extraError`}>Пароли не совпадают</span>}
+                               rules={[
+                                   validateMatchPassword
+                               ]}
+                    >
+                        <Input.Password
+                            size={'large'}
+                            data-test-id='change-confirm-password'
+                            placeholder={'Повторите пароль'}
+                        />
+                    </Form.Item></div>
+
+                <div className={'loginPage_buttonsWrapper'}>
+                    <Button
+                        size={'large'}
+                        className={'loginPage_buttonPrimary'}
+                        data-test-id='change-submit-button'
+                        type={'primary'} htmlType={'submit'} onClick={handleButtonClick}
+                        disabled={errors.length !== 0}>
+                        Сохранить
+                    </Button>
+
+
+                </div>
+            </Form>
         </div>
 
     )

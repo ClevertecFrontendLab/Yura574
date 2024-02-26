@@ -1,4 +1,3 @@
-import somethingWasWrong from '../../../assets/svg/somethingWasWrong.svg';
 import {Button, Result} from 'antd';
 import {push} from 'redux-first-history';
 import {pathName} from '../../../routers/routers.tsx';
@@ -18,7 +17,7 @@ export const ErrorCheckEmail = () => {
             status={'500'}
             title="Что-то пошло не так"
             subTitle="Произошла ошибка, попробуйте отправить форму ещё раз."
-            className={'loginPage_loginFieldWrapper'}
+            className={'result_errorCheckEmail_wrapper'}
             extra={[
                 <Button
                     type="primary"

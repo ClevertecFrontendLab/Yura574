@@ -496,9 +496,6 @@ h4 {
   background: rgba(0, 0, 0, 0);
   z-index: 100;
 }
-.loginPage_layoutPageWrapper .ant-result {
-  padding: 64px 86px 56px 86px;
-}
 
 .loginPage_loginFieldWrapper {
   background: white;
@@ -518,7 +515,7 @@ h4 {
 }
 
 .loginPage_resultRecoveryPassword .ant-result-subtitle {
-  max-width: 475px;
+  width: 475px;
   line-height: 130%;
 }
 .loginPage_resultRecoveryPassword .ant-result-title {
@@ -650,6 +647,15 @@ h4 {
   .loginPage_layoutPageWrapper .ant-result {
     padding: 32px 16px;
   }
+  .loginPage_resultRecoveryPassword .ant-result-subtitle {
+    width: 264px;
+  }
+  .loginPage_forms {
+    width: 368px;
+    margin: 48px 85px 174px 85px;
+    display: flex;
+    flex-direction: column;
+  }
   .loginPage_logo {
     width: 203px;
     height: 50px;
@@ -666,7 +672,21 @@ h4 {
   }
 }
 .result_changePassword__wrapper {
-  padding: 64px 85px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+
+.result_registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.result_registerFormWrapper div {
+  margin: 0;
 }
 
 .result_changePassword__title {
@@ -675,15 +695,341 @@ h4 {
   line-height: 130%;
   text-align: center;
   color: #262626;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .result_changePassword__inputsWrapper {
+  width: 368px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+.resultPage_inputItem {
+  height: 70px;
+}
+
+@media screen and (max-width: 360px) {
+  .result_changePassword__wrapper {
+    padding: 32px 16px;
+  }
+  .result_changePassword__wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+  .result_changePassword__inputsWrapper {
+    width: 296px;
+  }
+  .result_registerFormWrapper {
+    width: 296px;
+  }
+}
+.result_confirmEmail__wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+.result_confirmEmail__wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+}
+.result_confirmEmail__wrapper .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.result_confirmEmail__wrapper .ant-result-extra {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 360px) {
+  .result_confirmEmail__wrapper {
+    padding: 32px 16px;
+  }
+  .result_confirmEmail__wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+}
+.result_errorChangePassword__wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+.result_errorChangePassword__wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+}
+.result_errorChangePassword__wrapper .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.result_errorChangePassword__wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorChangePassword__wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorChangePassword__wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+}
+.result_errorCheckEmailNoExist_wrapper {
+  background: white;
+  padding: 64px 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  line-height: 130%;
+}
+.result_errorCheckEmailNoExist_wrapper .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+.result_errorCheckEmailNoExist_wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+  font-weight: 400;
+}
+.result_errorCheckEmailNoExist_wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorCheckEmailNoExist_wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorCheckEmailNoExist_wrapper .ant-result-subtitle {
+    width: auto;
+  }
+  .result_errorCheckEmailNoExist_wrapper .ant-result-subtitle {
+    width: 264px;
+    line-height: 130%;
+    font-weight: 400;
+  }
+}
+.result_errorLogin_wrapper {
+  background: white;
+  padding: 64px 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  line-height: 130%;
+}
+.result_errorLogin_wrapper .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+.result_errorLogin_wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+  font-weight: 400;
+}
+.result_errorLogin_wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorLogin_wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorLogin_wrapper .ant-result-subtitle {
+    width: auto;
+  }
+}
+.result_errorCheckEmail_wrapper {
+  background: white;
+  padding: 64px 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  line-height: 130%;
+}
+.result_errorCheckEmail_wrapper .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+.result_errorCheckEmail_wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+  font-weight: 400;
+}
+.result_errorCheckEmail_wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorCheckEmail_wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorCheckEmail_wrapper .ant-result-subtitle {
+    width: auto;
+  }
+}
+.resultPage_layoutWrapperRecoveryPassword {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 32px;
+}
+.resultPage_layoutWrapperRecoveryPassword .ant-result-subtitle {
+  width: 475px;
+  line-height: 130%;
+}
+.resultPage_layoutWrapperRecoveryPassword .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.resultPage_layoutWrapperRecoveryPassword .ant-result-extra {
+  width: auto;
+}
+
+@media screen and (max-width: 360px) {
+  .resultPage_layoutWrapperWidth100 {
+    padding: 32px 16px;
+  }
+  .resultPage_layoutWrapperWidth100 .ant-result-subtitle {
+    width: auto;
+  }
+  .resultPage_layoutWrapperNormalButton {
+    padding: 32px 16px;
+  }
+  .resultPage_layoutWrapperNormalButton .ant-result-subtitle {
+    width: 264px;
+  }
+}
+.result_successResult__wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+.result_successResult__wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+}
+.result_successResult__wrapper .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.result_successResult__wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_successResult__wrapper {
+    padding: 32px 16px;
+  }
+  .result_successResult__wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+}
+.result_successChangePassword_wrapper {
+  background: white;
+  padding: 64px 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  line-height: 130%;
+}
+.result_successChangePassword_wrapper .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+.result_successChangePassword_wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+  font-weight: 400;
+}
+.result_successChangePassword_wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_successChangePassword_wrapper {
+    padding: 32px 16px;
+  }
+  .result_successChangePassword_wrapper .ant-result-subtitle {
+    width: auto;
+  }
+}
+.result_errorUserExist__wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+.result_errorUserExist__wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+}
+.result_errorUserExist__wrapper .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.result_errorUserExist__wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorUserExist__wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorUserExist__wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+}
+.result_errorResult_wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  padding: 64px 86px;
+}
+.result_errorResult_wrapper .ant-result-subtitle {
+  width: 368px;
+  line-height: 130%;
+}
+.result_errorResult_wrapper .ant-result-title {
+  font-weight: 500;
+  line-height: 130%;
+}
+.result_errorResult_wrapper .ant-result-extra {
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .result_errorResult_wrapper {
+    padding: 32px 16px;
+  }
+  .result_errorResult_wrapper .ant-result-subtitle {
+    width: 296px;
+    line-height: 130%;
+  }
+}
 .main_page_image-light {
   background: url("../assets/webp/Main-page_light.webp") no-repeat center;
   background-size: cover;

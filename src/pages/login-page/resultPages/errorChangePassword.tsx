@@ -1,7 +1,6 @@
 import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
-import error from '../../../assets/svg/error.svg';
 import {Button, Result} from 'antd';
 
 
@@ -22,10 +21,11 @@ export const ErrorChangePassword = () => {
             status={'error'}
             title="Данные не сохранились"
             subTitle="Что-то пошло не так. Попробуйте ещё раз"
-            className={'loginPage_loginFieldWrapper loginPage_resultRecoveryPassword'}
+            className={'result_errorChangePassword__wrapper'}
             extra={[
                 <Button
                     type="primary"
+                    size={'large'}
                     className={'loginPage_buttonPrimary loginPage_button100'}
                     onClick={handleButton}
                     data-test-id='change-retry-button'>
