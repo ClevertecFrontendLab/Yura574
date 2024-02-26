@@ -1,0 +1,30 @@
+
+
+.vi__character {
+
+}
+.character {
+    font-size: 14px;
+    border-radius: 2px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* light theme */
+    color: $color-character-light-title-85;
+   border:1px solid $color-character-light-border;
+
+
+
+    ///* dark theme */
+    //color: #fff;
+    //background-color: #222;
+    //box-shadow: 0 2px 0 #444;
+}
+.character--inactive{
+    background: inherit;
+}
+.characterError{
+    border-color: red;
+}

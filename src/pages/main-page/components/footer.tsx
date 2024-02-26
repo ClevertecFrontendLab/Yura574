@@ -19,11 +19,5 @@ export const Footer = () => {
                 </Row>
             </Col>
         </Row>
-        // <div >
-        //     <div style={{width: '100%', height: '100px', margin: '24px'}}>lo
-        //     </div>
-        //     <div  style={{ height: '100px', background: 'white', margin: '24px'}}>lo
-        //     </div>
-        // </div>
     )
 }

@@ -1,0 +1,226 @@
+
+.loginPage_layoutPageWrapper {
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+    z-index: 100;
+
+    //& .ant-result {
+    //    padding: 64px 32px 56px 32px;
+    //}
+}
+
+.loginPage_loginFieldWrapper {
+    background: white;
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+
+    & .ant-result-subtitle {
+        max-width: 368px;
+        line-height: 130%;
+    }
+
+    & .ant-result-title {
+        font-weight: 500;
+        line-height: 130%;
+    }
+
+}
+
+.loginPage_resultRecoveryPassword {
+
+    & .ant-result-subtitle {
+        width: 475px;
+        line-height: 130%;
+    }
+
+    & .ant-result-title {
+        font-weight: 500;
+        line-height: 130%;
+    }
+
+}
+
+.loginPage_forms {
+    width: 368px;
+    margin: 48px 85px 174px 85px;
+    display: flex;
+    flex-direction: column;
+    //gap: 24px;
+
+}
+
+.loginPage_logo {
+    width: 309px;
+    height: 76px;
+}
+
+.loginPage_tabsWrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 0 24px 0;
+}
+
+.loginPage_tab {
+    width: 50%;
+    text-align: center;
+    padding: 12px 0;
+    border-bottom: 1px solid $color-character-light-dividers;
+    cursor: pointer;
+    color: $color-character-light-primary-85;
+}
+
+.loginPage_activeTab {
+    color: $color-primary-light-6;
+    border-bottom: 2px solid $color-primary-light-6;
+}
+
+.loginPage_inputGroup {
+    //margin-bottom: 24px;
+}
+
+.loginPage_extra {
+    font-size: 12px;
+    color: $color-character-light-secondary-45;
+}
+
+.loginPage_extraError {
+
+    color: $color-character-light-error;
+}
+
+.loginPage_inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.loginPage_inputItem {
+    height: 70px;
+
+    &:first-child {
+        height: 56px;
+    }
+}
+
+.loginPage_checkArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+
+    div {
+        cursor: pointer;
+        color: $color-primary-light-6;
+    }
+
+    button {
+        padding: 0;
+        color: $color-primary-light-6;
+    }
+}
+
+.loginPage_rememberMe {
+    .ant-checkbox-inner {
+        border-color: $color-primary-light-6; // Замените #yourBorderColor на желаемый цвет границы
+    }
+
+    .ant-checkbox-input:checked + .ant-checkbox-inner {
+        background-color: $color-primary-light-6;
+    }
+}
+
+.loginPage_buttonsWrapper {
+    display: flex;
+    flex-direction: column;
+    color: $color-character-light-title-85;
+    gap: 16px;
+
+    img {
+        margin-right: 10px;
+    }
+}
+
+.loginPage_registerFormWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    div {
+        margin: 0;
+    }
+}
+
+.loginPage_buttonPrimary {
+    width: auto;
+    background-color: $color-primary-light-6;
+    color: $color-character-light-primary-inverse
+}
+
+.loginPage_button100 {
+    width: 100%;
+}
+
+.loginPage_spam {
+    margin-top: 20px;
+    color: $color-character-light-secondary-45;
+}
+
+
+@media screen and (max-width: 360px) {
+    .loginPage_loginFieldWrapper {
+        padding-top: 32px;
+
+        & .ant-result-subtitle {
+            max-width: 296px;
+        }
+
+        & .ant-result-extra {
+            width: 100%;
+            font-size: 14px;
+        }
+    }
+    .loginPage_layoutPageWrapper {
+        & .ant-result {
+            padding: 32px 16px;
+        }
+    }
+    .loginPage_resultRecoveryPassword {
+        & .ant-result-subtitle {
+            width: 264px;
+        }
+    }
+
+    .loginPage_forms {
+        width: 368px;
+        margin: 48px 85px 174px 85px;
+        display: flex;
+        flex-direction: column;
+        //gap: 24px;
+
+    }
+
+    .loginPage_logo {
+        width: 203px;
+        height: 50px;
+    }
+    .loginPage_forms {
+        width: 328px;
+        margin: 32px 16px 124px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+    }
+    .loginPage_svgGoogle {
+        display: none;
+    }
+}

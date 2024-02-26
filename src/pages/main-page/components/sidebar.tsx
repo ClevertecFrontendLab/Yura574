@@ -4,6 +4,8 @@ import {CalendarTwoTone, HeartFilled, IdcardTwoTone, TrophyFilled} from '@ant-de
 import exit from '../../../assets/svg/exit.svg'
 import collapsedImg from '../../../assets/svg/collapsedSidebar.svg'
 import logoCollapsed from '../../../assets/svg/logoCollapsed.svg'
+import {useAppDispatch} from '@redux/configure-store.ts';
+import {logout} from '@redux/reducers/auth/auth-reducer.ts';
 
 
 const {Sider} = Layout;
@@ -17,8 +19,13 @@ type SidebarType = {
 
 
 export const Sidebar = (props: SidebarType) => {
+    const dispatch = useAppDispatch()
     const {collapsed, setCollapsed, isNone, windowWidth, dataTestId} = props
     console.log(dataTestId === 'sider-switch-mobile')
+
+    const logoutHandler = ()=> {
+        dispatch(logout())
+    }
     return (
         <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
                className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
@@ -100,13 +107,13 @@ export const Sidebar = (props: SidebarType) => {
                         <Divider style={{
                             margin: '0'
                         }}/>
-                        <div className={'sidebar_exitButton'}>
+                        <div className={'sidebar_exitButton'} onClick={logoutHandler}>
                             <div style={{display: 'flex'}}>
                                 {windowWidth > 360 && <img
                                     src={exit}
                                     alt={'exit'}
                                     style={{}}/>}
-                                <span className={'sidebar_exitButtonTitle'}> {collapsed ? '' : 'Выход'}</span>
+                                <span className={'sidebar_exitButtonTitle'} > {collapsed ? '' : 'Выход'}</span>
                             </div>
                         </div>
                     </Col>

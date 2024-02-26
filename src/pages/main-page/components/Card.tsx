@@ -1,5 +1,4 @@
 import {Divider} from 'antd';
-import like from '../../../assets/svg/like.svg';
 import React from 'react';
 
 
