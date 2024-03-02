@@ -8,7 +8,9 @@
 @import "colors/colors";
 @import "typography/typography";
 @import "common/common";
+@import "common/modals";
 @import "icons/calendar";
+@import "modals/wrong";
 @import "pages/mainPages";
 @import "pages/loginPage";
 @import "pages/resultPages/resultPage";
@@ -23,11 +25,13 @@
 @import "pages/resultPages/successChangePassword";
 @import "pages/resultPages/errorUserExist";
 @import "pages/resultPages/errorResult";
+@import "pages/feedbackPage/feedbackPage";
+@import "pages/feedbackPage/review";
 
 
 
 .main_page_image-light {
-    background: url("../assets/webp/Main-page_light.webp") no-repeat center ;
+    background: url("../assets/webp/Main-page_light.webp") no-repeat center fixed ;
     background-size:cover;
     width: 100%;
     height: 100%;

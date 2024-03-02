@@ -21,7 +21,6 @@ type SidebarType = {
 export const Sidebar = (props: SidebarType) => {
     const dispatch = useAppDispatch()
     const {collapsed, setCollapsed, isNone, windowWidth, dataTestId} = props
-    console.log(dataTestId === 'sider-switch-mobile')
 
     const logoutHandler = ()=> {
         dispatch(logout())
@@ -30,98 +29,108 @@ export const Sidebar = (props: SidebarType) => {
         <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
                className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
 
-            <div className={'sidebar_wrapper'}>
-                <Row className={'sidebar_itemsWrapper'}>
-                    <Col className={collapsed ? 'sidebar_logoCollapsed' : 'sidebar_logo'}>
-                        <Image src={collapsed ? logoCollapsed : logo}
-                               preview={false}
-                               alt={'logo'}
-                        />
-                    </Col>
-                    <Menu
+            <div style={{position: 'fixed'}}>
+                <div className={'sidebar_wrapper'}>
+                    <Row className={'sidebar_itemsWrapper'}>
+                        <Col className={collapsed ? 'sidebar_logoCollapsed' : 'sidebar_logo'}>
+                            <Image src={collapsed ? logoCollapsed : logo}
+                                   preview={false}
+                                   alt={'logo'}
+                            />
+                        </Col>
+                        <Menu
 
-                        mode='inline'
-                        defaultSelectedKeys={['1']}
-                        items={[
-                            {
-                                style: {
-                                    marginBottom: '16px',
-                                    paddingLeft: '16px'
+                            mode='inline'
+                            defaultSelectedKeys={['1']}
+                            items={[
+                                {
+                                    style: {
+                                        marginBottom: '16px',
+                                        paddingLeft: '16px'
+                                    },
+                                    key: '1',
+                                    icon: (
+                                        windowWidth > 360 &&
+                                        <CalendarTwoTone twoToneColor={['#061178', '#061178']}/>
+                                    ),
+                                    label: `${collapsed ? '' : 'Календарь'}`,
                                 },
-                                key: '1',
-                                icon: (
-                                    windowWidth > 360 && <CalendarTwoTone twoToneColor={['#061178', '#061178']} />
-                                ),
-                                label: `${collapsed ? '' : 'Календарь'}`,
-                            },
-                            {
-                                style: {
-                                    marginBottom: '16px',
-                                    paddingLeft: '16px'
+                                {
+                                    style: {
+                                        marginBottom: '16px',
+                                        paddingLeft: '16px'
+                                    },
+                                    key: '2',
+                                    icon: (
+                                        windowWidth > 360 && <HeartFilled
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#061178',
+                                            }}
+                                            twoToneColor='#061178'
+                                        />
+                                    ),
+                                    label: `${collapsed ? '' : 'Тренировки'}`,
                                 },
-                                key: '2',
-                                icon: (
-                                    windowWidth > 360 && <HeartFilled
-                                        style={{
-                                            fontSize: '14px',
-                                            color: '#061178',
-                                        }}
-                                        twoToneColor='#061178'
-                                    />
-                                ),
-                                label: `${collapsed ? '' : 'Тренировки'}`,
-                            },
-                            {
-                                style: {
-                                    marginBottom: '16px',
-                                    paddingLeft: '16px'
+                                {
+                                    style: {
+                                        marginBottom: '16px',
+                                        paddingLeft: '16px'
+                                    },
+                                    key: '3',
+                                    icon: (
+                                        windowWidth > 360 && <TrophyFilled
+                                            style={{
+                                                fontSize: '14px',
+                                                color: '#061178',
+                                            }}
+                                            twoToneColor='#061178'
+                                        />
+                                    ),
+                                    label: `${collapsed ? '' : 'Достижения'}`,
                                 },
-                                key: '3',
-                                icon: (
-                                    windowWidth > 360 && <TrophyFilled
-                                        style={{
-                                            fontSize: '14px',
-                                            color: '#061178',
-                                        }}
-                                        twoToneColor='#061178'
-                                    />
-                                ),
-                                label: `${collapsed ? '' : 'Достижения'}`,
-                            },
-                            {
-                                style: {
-                                    marginBottom: '16px',
-                                    paddingLeft: '16px'
+                                {
+                                    style: {
+                                        marginBottom: '16px',
+                                        paddingLeft: '16px'
+                                    },
+                                    key: '4',
+                                    icon: (
+                                        windowWidth > 360 &&
+                                        <IdcardTwoTone twoToneColor={['#061178', '#fff',]}/>
+                                    ),
+                                    label: `${collapsed ? '' : 'Профиль'}`,
                                 },
-                                key: '4',
-                                icon: (
-                                    windowWidth > 360 && <IdcardTwoTone twoToneColor={['#061178', '#fff', ]}/>
-                                ),
-                                label: `${collapsed ? '' : 'Профиль'}`,
-                            },
-                        ]}
-                    />
-                </Row>
-                <Row>
-                    <Col className={'body_regular_14 sidebar_exitWrapper'}>
-                        <Divider style={{
-                            margin: '0'
-                        }}/>
-                        <div className={'sidebar_exitButton'} onClick={logoutHandler}>
-                            <div style={{display: 'flex'}}>
-                                {windowWidth > 360 && <img
-                                    src={exit}
-                                    alt={'exit'}
-                                    style={{}}/>}
-                                <span className={'sidebar_exitButtonTitle'} > {collapsed ? '' : 'Выход'}</span>
+                            ]}
+                        />
+                    </Row>
+                    <Row>
+                        <Col className={'body_regular_14 sidebar_exitWrapper'}>
+                            <Divider style={{
+                                margin: '0'
+                            }}/>
+                            <div className={'sidebar_exitButton'} onClick={logoutHandler}>
+                                <div style={{display: 'flex'}}>
+                                    {windowWidth > 360 && <img
+                                        src={exit}
+                                        alt={'exit'}
+                                    />}
+                                    <span
+                                        className={'sidebar_exitButtonTitle'}> {collapsed ? '' : 'Выход'}</span>
+                                </div>
                             </div>
+                        </Col>
+                        <div data-test-id={dataTestId}
+                             className={`sidebar_button ${windowWidth <= 360 && 'sidebar_button360Uncollapsed'}`}
+                             onClick={() => setCollapsed(!collapsed)}><img src={collapsedImg}
+                                                                           alt={'button'}/>
                         </div>
-                    </Col>
-                </Row></div>
-            <div data-test-id={dataTestId}
-                 className={`sidebar_button ${windowWidth <= 360 && 'sidebar_button360Uncollapsed'}`}
-                 onClick={() => setCollapsed(!collapsed)}><img src={collapsedImg} alt={'button'}/>
+                    </Row>
+
+                </div>
+
             </div>
+
         </Sider>
     );
 };

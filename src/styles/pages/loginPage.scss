@@ -162,7 +162,8 @@
 .loginPage_buttonPrimary {
     width: auto;
     background-color: $color-primary-light-6;
-    color: $color-character-light-primary-inverse
+    color: $color-character-light-primary-inverse;
+    border: none;
 }
 
 .loginPage_button100 {

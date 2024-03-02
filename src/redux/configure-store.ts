@@ -6,6 +6,7 @@ import {createBrowserHistory} from 'history';
 import {createReduxHistoryContext} from 'redux-first-history';
 import {checkEmailReducer} from '@redux/reducers/auth/checkEmail-reducer.ts';
 import {changePasswordReducer} from '@redux/reducers/auth/changePassword-reducer.ts';
+import {feedbackReducer} from '@redux/reducers/feedback/feedback-reducer.ts';
 
 
 const {
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     checkEmail: checkEmailReducer,
     router: routerReducer,
     changePassword: changePasswordReducer,
+    feedback: feedbackReducer
 })
 export const store = configureStore({
     reducer: rootReducer,

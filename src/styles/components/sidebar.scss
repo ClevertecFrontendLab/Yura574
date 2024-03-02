@@ -1,5 +1,6 @@
 .sidebar_sider{
     background: white;
+    z-index: 2;
 }
 .sidebar_sider_none{
     display: none;
@@ -12,6 +13,7 @@
 }
 
 .sidebar_wrapper{
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -31,11 +33,12 @@
 }
 
 .sidebar_button {
+
     cursor: pointer;
     position: absolute;
     right: 0;
     bottom: 50%;
-    transform: translate(100%, 50%);
+    transform: translateX(100%);
     z-index: 1;
     background: white;
     clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);

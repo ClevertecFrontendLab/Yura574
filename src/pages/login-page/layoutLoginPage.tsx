@@ -4,7 +4,7 @@ import {NavLink, Outlet} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
-import {pathName} from '../../routers/routers.tsx';
+import {path, pathName} from '../../routers/routers.tsx';
 
 export const LayoutLoginPage = () => {
     const dispatch = useAppDispatch()
@@ -15,12 +15,12 @@ export const LayoutLoginPage = () => {
 
     useEffect(() => {
         if (isAuth) {
-            dispatch(push(pathName.main))
+            dispatch(push(path.main))
         }
     }, [dispatch, isAuth]);
     useEffect(() => {
         if (router?.pathname === pathName.auth) {
-            dispatch(push(`${pathName.auth}/${pathName.singIn}`));
+            dispatch(push(`${path.login}`));
         }
     }, [router, dispatch]);
 

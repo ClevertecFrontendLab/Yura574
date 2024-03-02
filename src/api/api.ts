@@ -7,9 +7,13 @@ import {
     TrainingType, UploadImageType
 } from './apiTypes.ts';
 
+const token = localStorage.getItem('token')
 const instance = axios.create({
     baseURL: 'https://marathon-api.clevertec.ru',
     withCredentials: true,
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
 })
 
 export const authApi = {

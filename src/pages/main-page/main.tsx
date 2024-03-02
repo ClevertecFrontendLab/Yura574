@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import './main-page.css';
 import {Col, Layout, Row} from 'antd';
 import {Sidebar} from '@pages/main-page/components/sidebar.tsx';
-import {MainContent} from '@pages/main-page/components/mainContent.tsx';
 import {AppHeader} from '@pages/main-page/components/header.tsx';
-import {Footer} from '@pages/main-page/components/footer.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
-import {Navigate} from 'react-router-dom';
-import { useAppSelector} from '@redux/configure-store.ts';
-import {pathName} from '../../routers/routers.tsx';
+import {Navigate, Outlet, useLocation} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
+import {path, pathName} from '../../routers/routers.tsx';
+import {push} from 'redux-first-history';
 
 
- const MainPage: React.FC = () => {
+ const Main: React.FC = () => {
+     const dispatch = useAppDispatch()
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
@@ -19,7 +18,13 @@ import {pathName} from '../../routers/routers.tsx';
 
     const auth = useAppSelector(state => state.auth.isAuth)
 
-    useEffect(() => {
+
+     const  location = useLocation()
+     if(location.pathname === `${pathName.app}`){
+
+         dispatch(push(`${path.main}`))
+     }
+     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -71,13 +76,13 @@ import {pathName} from '../../routers/routers.tsx';
                 <Col className={'mainPages_mainPageWrapper'}>
                     <Row style={{display: 'block'}}>
                         <Col>
-                            <AppHeader windowWidth={windowWidth}/>
+                            <AppHeader />
                         </Col>
                     </Row>
 
                     <Row className={'main_page_image-light mainPages_mainContentWrapper'}>
-                        <Col><MainContent windowWidth={windowWidth}/></Col>
-                        <Col className={'mainPages_footerWrapper'}><Footer/></Col>
+
+                    <Outlet/>
                     </Row>
 
 
@@ -88,4 +93,4 @@ import {pathName} from '../../routers/routers.tsx';
 
     );
 };
-export default MainPage
+export default Main

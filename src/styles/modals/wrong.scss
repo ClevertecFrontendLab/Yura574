@@ -1,0 +1,34 @@
+
+.wrong_wrapper {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 475px;
+
+    & img {
+        width: 255px;
+    }
+
+}
+
+.ant-modal {
+    display: flex;
+    justify-content: center;
+    width: auto;
+
+}
+
+.ant-modal-body {
+    padding: 64px 32px 56px 32px;
+}
+
+@media screen and (max-width: 360px) {
+    .wrong_wrapper{
+        width: 264px;
+    }
+    //.ant-modal-body {
+    //    margin: 36px 16px;
+    //}
+}

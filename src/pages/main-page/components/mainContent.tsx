@@ -1,14 +1,14 @@
-import {Col,  Row} from 'antd';
+import {Col, Row} from 'antd';
 import like from '../../../assets/svg/like.svg'
 import calendar from '../../../assets/svg/calendar1.svg'
 import profile from '../../../assets/svg/profile1.svg'
 import {Card} from '@pages/main-page/components/Card.tsx';
+import {getWindowWidth,} from '../../../selectors/selectors.ts';
+import {useSelector} from 'react-redux';
 
-type MainContentType = {
-    windowWidth: number
-}
-export const MainContent = (props: MainContentType) => {
-    const {windowWidth} = props
+
+export const MainContent = () => {
+    const windowWidth = useSelector(getWindowWidth)
     return (
         <div className={'mainContent'}>
             <Row>
@@ -17,10 +17,12 @@ export const MainContent = (props: MainContentType) => {
                     — планировать свои тренировки на календаре, выбирая тип
                     и уровень нагрузки;<br/>
                     — отслеживать свои достижения в разделе статистики,
-                    сравнивая свои результаты {windowWidth <= 835? '': <br/>}с нормами и рекордами; <br/>
+                    сравнивая свои результаты {windowWidth && windowWidth <= 835 ? '' : <br/>}с
+                    нормами и рекордами; <br/>
                     — создавать свой профиль, где ты можешь
                     загружать
-                    свои фото, видео и отзывы {windowWidth <= 835? '': <br/>} о тренировках;
+                    свои фото, видео и отзывы {windowWidth && windowWidth <= 835 ? '' : <br/>} о
+                    тренировках;
                     <br/>— выполнять расписанные тренировки
                     для
                     разных частей тела, следуя подробным инструкциям и советам профессиональных

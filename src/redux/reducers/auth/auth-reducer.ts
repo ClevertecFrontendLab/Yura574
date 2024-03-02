@@ -3,7 +3,7 @@ import {authApi} from '../../../api/api.ts';
 import {LoginType, RegisterType} from '../../../api/apiTypes.ts';
 import {push} from 'redux-first-history';
 import {setIsPending, setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
-import {pathName} from '../../../routers/routers.tsx';
+import {path, pathName} from '../../../routers/routers.tsx';
 
 
 export const singUp = createAsyncThunk(
@@ -33,12 +33,14 @@ export const singIn = createAsyncThunk(
     'auth/login', async (dataLogin: LoginType, {dispatch, rejectWithValue}) => {
         dispatch(setIsPending(true))
         try {
+
             const response = await authApi.loginUser(dataLogin)
             if (dataLogin.rememberMe && 'accessToken' in response.data) {
+
                 localStorage.setItem('token', response.data.accessToken
                 )
             }
-            dispatch(push(`${pathName.main}`))
+            dispatch(push(`${path.main}`))
             dispatch(setIsPending(false))
             return response
         } catch (error: any) {
@@ -49,8 +51,6 @@ export const singIn = createAsyncThunk(
 
     }
 )
-
-
 
 
 const initialState = {
@@ -64,12 +64,12 @@ const authSlice = createSlice({
         logout: (state) => {
             localStorage.removeItem('token')
             state.isAuth = false
-        }
+        },
     },
+
     extraReducers: (builder) => {
-        builder.addCase(singIn.fulfilled, (state, action) => {
+        builder.addCase(singIn.fulfilled, (state) => {
             state.isAuth = true
-            console.log(action.payload)
         })
     }
 })

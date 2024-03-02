@@ -7,9 +7,6 @@ export const Loader = () => {
         loop: true,
         autoplay: true,
         animationData: animationData,
-        // rendererSettings: {
-        //     preserveAspectRatio: 'xMidYMid slice'
-        // }
     };
     return (
         <div className={'loader'} data-test-id='loader'>

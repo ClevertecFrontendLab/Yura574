@@ -1,0 +1,52 @@
+
+
+.feedback_wrapper{
+    display: flex;
+    align-items: center;
+}
+.first_commentWrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.first_comment{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 56px 130px ;
+}
+
+.feedback_title{
+    color: $color-primary-light-9;
+    width: 924px;
+    text-align: center;
+}
+.feedback_subtitle{
+    width: 520px;
+}
+
+
+@media screen and (max-width: 360px){
+  .feedback_title{
+      width: 264px;
+  }
+    .feedback_subtitle{
+      width: 264px;
+  }
+    .first_comment{
+        padding: 48px 32px;
+    }
+    .first_commentWrapper{
+        margin-top: 24px;
+        gap: 48px;
+        align-items: normal;
+    }
+    .feedback_wrapper{
+        align-items: normal;
+    }
+}
+
