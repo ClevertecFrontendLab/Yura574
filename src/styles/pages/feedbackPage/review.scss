@@ -17,17 +17,38 @@
         max-width: 42px;
     }
 }
-.review_messageWrapper{
+
+.review_messageWrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    & div{
+
+    & div {
         text-align: left;
     }
 }
 
-.review_date{
+.review_date {
     display: flex;
     gap: 16px;
     align-items: center;
+}
+
+
+@media screen and (max-width: 360px) {
+
+    .reviewWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+
+        & img {
+            width: 42px;
+        }
+    }
+    .review_userNameWrapper{
+        & img {
+            width: 42px;
+        }
+    }
+
 }

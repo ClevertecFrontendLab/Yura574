@@ -1,16 +1,25 @@
 @import "fonts/fonts";
+
 @import "components/header";
 @import "components/mainContent";
 @import "components/loader";
 @import "components/inputVarification";
 @import "components/footer";
 @import "components/sidebar";
+
 @import "colors/colors";
+
 @import "typography/typography";
+
 @import "common/common";
 @import "common/modals";
+
 @import "icons/calendar";
+
 @import "modals/wrong";
+@import "modals/success";
+@import "modals/error";
+
 @import "pages/mainPages";
 @import "pages/loginPage";
 @import "pages/resultPages/resultPage";

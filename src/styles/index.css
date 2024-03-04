@@ -494,6 +494,64 @@ h4 {
     width: 264px;
   }
 }
+.success-model .ant-modal-body {
+  padding: 64px 86px;
+}
+.success-model .ant-result {
+  padding: 0;
+}
+.success-model .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+
+.success_wrapper {
+  width: 368px;
+}
+
+.ant-modal-mask {
+  backdrop-filter: blur(5px);
+}
+
+@media screen and (max-width: 360px) {
+  .success_wrapper {
+    width: 296px;
+  }
+  .success-model .ant-modal-body {
+    padding: 32px 16px;
+  }
+}
+.error-model .ant-modal-body {
+  padding: 64px 86px;
+}
+.error-model .ant-result-title {
+  line-height: 130%;
+  font-weight: 500;
+}
+.error-model .ant-result {
+  padding: 0;
+}
+.error-model .ant-result-extra {
+  display: flex;
+}
+.error-model .ant-result-extra button {
+  flex: 1;
+}
+
+.error_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 368px;
+}
+
+@media screen and (max-width: 360px) {
+  .error_wrapper {
+    width: 296px;
+  }
+  .error-model .ant-modal-body {
+    padding: 32px 16px;
+  }
+}
 .mainPages_layoutPageWrapper {
   min-height: 100vh;
   background: white;
@@ -1160,6 +1218,10 @@ h4 {
   .feedback_wrapper {
     align-items: normal;
   }
+  .feedback_footer {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .reviewWrapper {
   display: flex;
@@ -1194,6 +1256,18 @@ h4 {
   align-items: center;
 }
 
+@media screen and (max-width: 360px) {
+  .reviewWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .reviewWrapper img {
+    width: 42px;
+  }
+  .review_userNameWrapper img {
+    width: 42px;
+  }
+}
 .main_page_image-light {
   background: url("../assets/webp/Main-page_light.webp") no-repeat center fixed;
   background-size: cover;

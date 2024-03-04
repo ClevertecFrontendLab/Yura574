@@ -78,5 +78,10 @@
     .feedback_wrapper {
         align-items: normal;
     }
+    .feedback_footer {
+       display: flex;
+        flex-direction: column;
+    }
+
 }
 

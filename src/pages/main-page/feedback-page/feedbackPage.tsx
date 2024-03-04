@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useAppDispatch} from '@redux/configure-store.ts';
 import {
     createFeedback,
-    getFeedback, setIsModalError} from '@redux/reducers/feedback/feedback-reducer.ts';
+    getFeedback} from '@redux/reducers/feedback/feedback-reducer.ts';
 import {useAppSelector} from '@hooks/typed-react-redux-hooks.ts';
 import {ModalWrong} from '../../../Modals/Wrong.tsx';
 import {CreateFirstComment} from '@pages/main-page/feedback-page/createFirstComment.tsx';
@@ -12,11 +12,11 @@ import user from '../../../assets/svg/user.svg'
 import {StarFilled, StarTwoTone} from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import {SuccessModal} from '../../../Modals/successModal.tsx';
+import {ErrorModal} from '../../../Modals/errorModal.tsx';
 
 export const FeedbackPage = () => {
     const dispatch = useAppDispatch()
 
-    const isError = useAppSelector(state => state.feedback.isError)
     const [collapsedReviews, setCollapsedReviews] = useState(true)
     const [openModal, setOpenModal] = useState(false)
     const [rating, setRating] = useState(0)
@@ -48,17 +48,7 @@ export const FeedbackPage = () => {
     const writeReview = () => {
         setOpenModal(true)
     }
-    const writeReviewAgain = () => {
-        dispatch(setIsModalError(false))
-        const rating = sessionStorage.getItem('rating')
-        const review = sessionStorage.getItem('review')
-        rating && setRating(+rating)
-        review && setReview(review)
-        setOpenModal(true)
-    }
-    const closeErrorModal = ()=> {
-        dispatch(setIsModalError(false))
-    }
+
     const publicReview = () => {
         setOpenModal(false)
         dispatch(createFeedback({rating, message: review}))
@@ -169,12 +159,7 @@ export const FeedbackPage = () => {
                 </div>
             </Modal>
 
-             <Modal open={isError} footer={[
-                <div key={'unique1'}>
-                    <Button  data-test-id='write-review-not-saved-modal' onClick={writeReviewAgain} >Написать отзыв</Button>
-                    <Button onClick={closeErrorModal}>Закрыть</Button>
-                </div>
-            ]}>Error</Modal>
+     <ErrorModal setOpenModal={setOpenModal} setRating={setRating} setReview={setReview}/>
 
             <SuccessModal/>
 
