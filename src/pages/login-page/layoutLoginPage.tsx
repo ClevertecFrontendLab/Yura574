@@ -1,10 +1,10 @@
-import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
+import { useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {Layout} from 'antd';
 import {NavLink, Outlet} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
-import {path, pathName} from '../../routers/routers.tsx';
+import { pathName} from '../../routers/routers.tsx';
 
 export const LayoutLoginPage = () => {
     const dispatch = useAppDispatch()
@@ -12,15 +12,19 @@ export const LayoutLoginPage = () => {
     const router = useAppSelector(state => state.router.location)
     const isAuth = useAppSelector(state => state.auth.isAuth)
 
+    const accessToken = localStorage.getItem('accessToken')
+
+
 
     useEffect(() => {
-        if (isAuth) {
-            dispatch(push(path.main))
+        if (isAuth || accessToken) {
+            dispatch(push(pathName.main))
         }
     }, [dispatch, isAuth]);
+
     useEffect(() => {
         if (router?.pathname === pathName.auth) {
-            dispatch(push(`${path.login}`));
+            dispatch(push(`${pathName.auth}/${pathName.singIn}`));
         }
     }, [router, dispatch]);
 

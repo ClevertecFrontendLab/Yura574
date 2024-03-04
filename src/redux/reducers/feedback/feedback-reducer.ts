@@ -17,11 +17,15 @@ type ReviewType = {
 
 type InitialState = {
     isWrong: boolean
+    isSuccess: boolean
+    isError: boolean
     reviews: ReviewType[]
 }
 
 const initialState: InitialState = {
     isWrong: false,
+    isError: false,
+    isSuccess: false,
     reviews: []
 }
 
@@ -35,22 +39,48 @@ export const getFeedback = createAsyncThunk(
             const allFeedback = await feedbackApi.getAllFeedbacks()
             dispatch(setIsPending(false))
             console.log(allFeedback)
-            const sortedFeedback = allFeedback.data.sort((a: ReviewType,b: ReviewType)=> a.createdAt < b.createdAt ? 1: -1)
+            const sortedFeedback = allFeedback.data.sort((a: ReviewType, b: ReviewType) => a.createdAt < b.createdAt ? 1 : -1)
 
             dispatch(setReviews(sortedFeedback))
         } catch (error: any) {
             console.log(error)
             dispatch(setIsPending(false))
+
             if (+error.response.status == responseStatus.Forbidden) {
                 dispatch(logout())
                 dispatch(push(path.login))
+
             } else {
-                dispatch(push(path.main))
+                dispatch(setIsModalWrong(true))
             }
 
         }
 
     })
+export const createFeedback = createAsyncThunk('feedback/createFeedback', async (data: any, {dispatch}) => {
+    dispatch(setIsPending(true))
+    try {
+        const {rating, message} = data
+
+        const response = await feedbackApi.createFeedback({rating, message})
+        console.log(response)
+
+
+
+            sessionStorage.removeItem('review')
+            sessionStorage.removeItem('rating')
+            dispatch(setIsPending(false))
+            dispatch(setIsModalSuccess(true))
+
+
+
+    } catch (error: any) {
+        console.log(error)
+        dispatch(setIsPending(false))
+        dispatch(setIsModalError(true))
+    }
+
+})
 
 
 const feedBackSlice = createSlice({
@@ -62,11 +92,23 @@ const feedBackSlice = createSlice({
         },
         setReviews: (state, action) => {
             state.reviews = action.payload
-        }
+        },
+        setIsModalSuccess: (state, action) => {
+            state.isSuccess = action.payload
+        },
+        setIsModalError: (state, action) => {
+            state.isError = action.payload
+        },
+
     }
 })
 
 
-export const {setIsModalWrong, setReviews} = feedBackSlice.actions
+export const {
+    setIsModalWrong,
+    setIsModalSuccess,
+    setIsModalError,
+    setReviews
+} = feedBackSlice.actions
 
 export const feedbackReducer = feedBackSlice.reducer

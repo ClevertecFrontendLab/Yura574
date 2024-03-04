@@ -7,14 +7,28 @@ import {
     TrainingType, UploadImageType
 } from './apiTypes.ts';
 
-const token = localStorage.getItem('token')
+
 const instance = axios.create({
     baseURL: 'https://marathon-api.clevertec.ru',
     withCredentials: true,
     headers: {
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'application/json',
     }
 })
+
+instance.interceptors.request.use(
+    (config) => {
+        const token =localStorage?.getItem('accessToken')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    },
+);
 
 export const authApi = {
     registrationUser(data: RegisterType) {
@@ -31,12 +45,22 @@ export const authApi = {
     },
     changePassword(data: ChangePasswordType) {
         return instance.post('/auth/change-password', data)
+    },
+    loginGoogle() {
+
+        window.location.href = `https://marathon-api.clevertec.ru/auth/google`;
+
+
     }
 }
 
 export const feedbackApi = {
     getAllFeedbacks() {
-        return instance.get('/feedback')
+        return instance.get('/feedback', {
+            headers: {
+                Authorization: `Bearer SUPERUSER`,
+            },
+        })
     },
     createFeedback(data: createFeedbackType) {
         return instance.post('/feedback', data)
@@ -56,13 +80,13 @@ export const trainingApi = {
 }
 
 export const uploadImage = {
-    uploadImage(data: UploadImageType){
+    uploadImage(data: UploadImageType) {
         return instance.post('/upload-image', data)
     }
 }
 
 export const catalogsTraining = {
-    getCatalogTraining(){
+    getCatalogTraining() {
         return instance.get('/catalogs/training-list')
     }
 

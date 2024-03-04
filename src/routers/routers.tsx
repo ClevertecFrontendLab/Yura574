@@ -1,9 +1,9 @@
 
 
 export const pathName = {
-    app: '/app',
-    main: 'main',
-    feedback: 'feedback',
+
+    main: '/main',
+    feedback: '/feedbacks',
 
     auth: '/auth',
     singIn: 'singIn',
@@ -23,7 +23,8 @@ export const pathName = {
 
 }
 export const path = {
-    main: `${pathName.app}/${pathName.main}`,
-    login: `${pathName.auth}/${pathName.singIn}`
+    main: `${pathName.main}`,
+    feedback: `${pathName.feedback}`,
+    login: `${pathName.singIn}`,
 }
 

@@ -5,7 +5,7 @@ import {LoginType} from '../../api/apiTypes.ts';
 import {Rule} from 'antd/lib/form';
 import {useEffect, useState} from 'react';
 import {checkEmail} from '@redux/reducers/auth/checkEmail-reducer.ts';
-import {singIn} from '@redux/reducers/auth/auth-reducer.ts';
+import {singIn, singInGoogle} from '@redux/reducers/auth/auth-reducer.ts';
 
 export const LoginTab = () => {
     const dispatch = useAppDispatch()
@@ -56,6 +56,10 @@ export const LoginTab = () => {
         }
 
     }, [email, dispatch]);
+
+    const googleHandler = ()=> {
+        window.location.href = `https://marathon-api.clevertec.ru/auth/google`;
+    }
     return (
         <div>
             <Form form={form} onFinish={values => finish(values)}
@@ -121,11 +125,13 @@ export const LoginTab = () => {
                             className={'loginPage_buttonPrimary'}
                             htmlType={'submit'}
                             onClick={handleButtonClick}>Войти</Button>
-                    <Button type={'default'} size={'large'}>
-                        <img className={'loginPage_svgGoogle'} src={google}
+
+                    <Button onClick={googleHandler} type={'default'} size={'large'}>
+                        <img  className={'loginPage_svgGoogle'} src={google}
                              alt={'google'}/>
                         Войти через Google
                     </Button>
+
                 </div>
             </Form></div>
     )

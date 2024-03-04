@@ -4,6 +4,7 @@ import {LoginType, RegisterType} from '../../../api/apiTypes.ts';
 import {push} from 'redux-first-history';
 import {setIsPending, setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
 import {path, pathName} from '../../../routers/routers.tsx';
+import {act} from 'react-dom/test-utils';
 
 
 export const singUp = createAsyncThunk(
@@ -28,7 +29,6 @@ export const singUp = createAsyncThunk(
         }
     }
 )
-
 export const singIn = createAsyncThunk(
     'auth/login', async (dataLogin: LoginType, {dispatch, rejectWithValue}) => {
         dispatch(setIsPending(true))
@@ -37,7 +37,7 @@ export const singIn = createAsyncThunk(
             const response = await authApi.loginUser(dataLogin)
             if (dataLogin.rememberMe && 'accessToken' in response.data) {
 
-                localStorage.setItem('token', response.data.accessToken
+                localStorage.setItem('accessToken', response.data.accessToken
                 )
             }
             dispatch(push(`${path.main}`))
@@ -52,9 +52,15 @@ export const singIn = createAsyncThunk(
     }
 )
 
+export const singInGoogle = createAsyncThunk('auth/login', async () => {
+const res =authApi.loginGoogle()
+    console.log(res)
+})
+
+
 
 const initialState = {
-    isAuth: !!localStorage.getItem('token')
+    isAuth: !!localStorage.getItem('accessToken')
 }
 
 const authSlice = createSlice({
@@ -62,9 +68,12 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('token')
+            localStorage.removeItem('accessToken')
             state.isAuth = false
         },
+        setIsAuth: (state, action)=> {
+            state.isAuth = action.payload
+        }
     },
 
     extraReducers: (builder) => {
@@ -74,6 +83,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {logout} = authSlice.actions
+export const {logout, setIsAuth} = authSlice.actions
 
 export const authReducer = authSlice.reducer

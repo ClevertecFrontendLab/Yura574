@@ -12,7 +12,7 @@ export const CreateFirstComment = () => {
                     им сделать правильный выбор.
                 </div>
             </div>
-            <Button size={'large'} className={'loginPage_buttonPrimary'}>Написать отзыв</Button>
+            <Button  data-test-id='write-review' size={'large'} className={'loginPage_buttonPrimary'}>Написать отзыв</Button>
         </div>
     )
 }

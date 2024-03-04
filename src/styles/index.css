@@ -366,6 +366,10 @@
   width: 100%;
 }
 
+.sidebar_exitWrapper_collapsed {
+  max-width: 64px;
+}
+
 .sidebar_exitButton {
   margin-left: 16px;
   padding: 12px 0;
@@ -396,6 +400,12 @@
 
 .body_regular_14 {
   font-size: 14px;
+  line-height: 130%;
+  font-weight: 400;
+}
+
+.body_regular_12 {
+  font-size: 12px;
   line-height: 130%;
   font-weight: 400;
 }
@@ -437,6 +447,10 @@ h4 {
   line-height: 130%;
   color: #8c8c8c;
   text-align: center;
+}
+
+.modal_public {
+  width: 539px;
 }
 
 .custom-calendar {
@@ -1075,7 +1089,31 @@ h4 {
 }
 .feedback_wrapper {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  margin: 24px;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.feedback_contentWrapper {
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feedback_content {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feedback_footer {
+  min-height: 10vh;
+  margin-top: 112px;
 }
 
 .first_commentWrapper {
@@ -1124,7 +1162,36 @@ h4 {
   }
 }
 .reviewWrapper {
+  display: flex;
   background: white;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.review_userNameWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.review_userNameWrapper img {
+  max-width: 42px;
+}
+
+.review_messageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.review_messageWrapper div {
+  text-align: left;
+}
+
+.review_date {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .main_page_image-light {

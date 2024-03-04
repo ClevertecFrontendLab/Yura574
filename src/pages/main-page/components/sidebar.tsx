@@ -22,7 +22,7 @@ export const Sidebar = (props: SidebarType) => {
     const dispatch = useAppDispatch()
     const {collapsed, setCollapsed, isNone, windowWidth, dataTestId} = props
 
-    const logoutHandler = ()=> {
+    const logoutHandler = () => {
         dispatch(logout())
     }
     return (
@@ -105,11 +105,15 @@ export const Sidebar = (props: SidebarType) => {
                         />
                     </Row>
                     <Row>
-                        <Col className={'body_regular_14 sidebar_exitWrapper'}>
+                        <Col className={`body_regular_14 sidebar_exitWrapper
+                         ${collapsed && 'sidebar_exitWrapper_collapsed'}
+                         `}>
                             <Divider style={{
                                 margin: '0'
                             }}/>
-                            <div className={'sidebar_exitButton'} onClick={logoutHandler}>
+                            <div className={`sidebar_exitButton
+                             ${collapsed && 'sidebar_exitWrapper_collapsed'}`}
+                                 onClick={logoutHandler}>
                                 <div style={{display: 'flex'}}>
                                     {windowWidth > 360 && <img
                                         src={exit}

@@ -4,7 +4,8 @@
 
 
 export const responseStatus = {
-    OK: 200,
+    OK_200: 200,
+    CREATED_201: 201,
     Forbidden: 403,
     Error400: 400,
 }

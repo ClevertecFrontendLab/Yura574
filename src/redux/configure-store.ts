@@ -15,7 +15,7 @@ const {
     createReduxHistory
 } = createReduxHistoryContext({
     history: createBrowserHistory(),
-    savePreviousLocations: 1
+    savePreviousLocations: 2
 })
 
 const rootReducer = combineReducers({

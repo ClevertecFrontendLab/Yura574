@@ -2,12 +2,12 @@ import {Col, Divider, Row} from 'antd';
 import apple from '../../../assets/svg/apple.svg'
 import android from '../../../assets/svg/android.svg'
 import {NavLink} from 'react-router-dom';
-import {pathName} from '../../../routers/routers.tsx';
+import {path} from '../../../routers/routers.tsx';
 
 export const Footer = () => (
     <Row className={'footerWrapper'}>
-        <Col className={'reviews body_regular_16'}><NavLink
-            to={`${pathName.app}/${pathName.feedback}`}>Смотреть отзывы</NavLink></Col>
+        <Col className={'reviews body_regular_16'} data-test-id='see-reviews'><NavLink
+            to={`${path.feedback}`}>Смотреть отзывы</NavLink></Col>
         <Col className={'forAppWrapper'}>
             <Row className={'footer_downloadDescriptionWrapper'}>
                 <Col className={'body_regular_16 footer_downloadForPhone'}>Скачать на телефон</Col>
