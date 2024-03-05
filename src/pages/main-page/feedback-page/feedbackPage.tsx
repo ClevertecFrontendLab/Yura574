@@ -36,11 +36,10 @@ export const FeedbackPage = () => {
     }
 
     if (isWrong) return <ModalWrong/>
-
     return (
         <div className={'feedback_wrapper'}>
 
-            {!reviews
+            {reviews.length === 0
                 ? <div className={' feedback_firstComment-wrapper'}><CreateFirstComment/></div>
 
                 : <div className={'feedback_contentWrapper'}>
