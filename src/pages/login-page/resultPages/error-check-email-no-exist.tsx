@@ -1,28 +1,15 @@
 import {Button, Result} from 'antd';
-import {useAppDispatch} from '@redux/configure-store.ts';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {push} from 'redux-first-history';
-import {pathName} from '../../../routers/routers.tsx';
-import {useEffect, useState} from 'react';
+import {path} from '../../../routers/routers.tsx';
 
 
 export const ErrorCheckEmailNoExist = () => {
     const dispatch = useAppDispatch()
+    const windowWidth = useAppSelector(state => state.common.windowWidth)
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [])
     const handleButton = ()=> {
-        dispatch(push(`${pathName.auth}/${pathName.singIn}`))
+        dispatch(push(`${path.login}`))
     }
     return (
         <Result

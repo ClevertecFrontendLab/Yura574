@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
 import {Button, Result} from 'antd';
-import {pathName} from '../../../routers/routers.tsx';
+import {path} from '../../../routers/routers.tsx';
 
 
 export const ErrorUserExist = () => {
@@ -18,7 +18,7 @@ export const ErrorUserExist = () => {
 
 
     const handleButton = () => {
-        dispatch(push(`${pathName.auth}/${pathName.singUp}`))
+        dispatch(push(`${path.registration}`))
         dispatch(deleteError())
     }
     return (

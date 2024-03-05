@@ -8,10 +8,11 @@ import {
 } from './apiTypes.ts';
 import {accessToken} from '../selectors/selectors.ts';
 import {store} from '@redux/configure-store.ts';
+import {path} from '../routers/routers.tsx';
 
 
 const baseURL  = 'https://marathon-api.clevertec.ru'
-export const googleURL = `${baseURL}/auth/google`
+export const googleURL = `${baseURL}${path.google}`
 
 const instance = axios.create({
     baseURL,
@@ -37,19 +38,19 @@ instance.interceptors.request.use(
 
 export const authApi = {
     registrationUser(data: RegisterType) {
-        return instance.post('/auth/registration', data)
+        return instance.post(`${path.registration}`, data)
     },
     loginUser(data: LoginType) {
         return instance.post('/auth/login', {email: data.email, password: data.password})
     },
     checkEmail(email: string) {
-        return instance.post('/auth/check-email', {email})
+        return instance.post(`${path.checkEmail}`, {email})
     },
     confirmEmail(data: ConfirmType) {
-        return instance.post('/auth/confirm-email', data)
+        return instance.post(`${path.confirmEmail}`, data)
     },
     changePassword(data: ChangePasswordType) {
-        return instance.post('/auth/change-password', data)
+        return instance.post(`${path.changePassword}`, data)
     },
 }
 

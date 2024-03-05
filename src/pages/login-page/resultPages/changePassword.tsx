@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {useForm} from 'antd/lib/form/Form';
 import {changePassword} from '@redux/reducers/auth/changePassword-reducer.ts';
 import {ChangePasswordType} from '../../../api/apiTypes.ts';
+import {path} from '../../../routers/routers.tsx';
 
 export const ChangePassword = () => {
     const dispatch = useAppDispatch()
@@ -13,32 +14,19 @@ export const ChangePassword = () => {
     const previousLocation = useAppSelector(state => state.router.previousLocations)
     const location = previousLocation && previousLocation[1] && previousLocation[1].location?.pathname
     const email = sessionStorage.getItem('email')
+    const windowWidth = useAppSelector(state => state.common.windowWidth)
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [])
 
     useEffect(() => {
-        if (location === '/result/error-change-password') {
+        if (location === path.errorChangePassword) {
             const password = sessionStorage.getItem('password')
             const confirmPassword = sessionStorage.getItem('confirmPassword')
-            console.log(password, confirmPassword, email)
             if (password && confirmPassword && email) {
                 dispatch(changePassword({password, confirmPassword}))
             }
 
         }
-    }, [previousLocation,location, email, dispatch]);
+    }, [previousLocation, location, email, dispatch]);
     const handleButtonClick = () => {
         form.validateFields()
             .then()
@@ -46,7 +34,7 @@ export const ChangePassword = () => {
     };
 
     const validatePassword: Rule = () => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
 
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -63,7 +51,7 @@ export const ChangePassword = () => {
     });
 
     const validateMatchPassword: Rule = ({getFieldValue}) => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && getFieldValue('password') === value) {
@@ -82,15 +70,16 @@ export const ChangePassword = () => {
     const finish = (value: ChangePasswordType) => {
         const {password, confirmPassword} = value
         sessionStorage.setItem('password', password)
-            sessionStorage.setItem('confirmPassword', confirmPassword)
-        console.log(value)
+        sessionStorage.setItem('confirmPassword', confirmPassword)
 
-        email && dispatch(changePassword({password, confirmPassword, email}))
+        email && dispatch(changePassword({password, confirmPassword}))
     }
 
     return (
         <div className={'result_changePassword__wrapper'}>
-            <div className={'result_changePassword__title'}>Восстановление{windowWidth <= 360&& <br/>} аккауанта</div>
+            <div className={'result_changePassword__title'}>Восстановление{windowWidth <= 360 &&
+                <br/>} аккауанта
+            </div>
             <Form form={form} onFinish={values => finish(values)}
                   className={'result_registerFormWrapper'}>
 

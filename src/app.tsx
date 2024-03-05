@@ -64,7 +64,7 @@ export const App = () => {
                     <Route path={pathName.changePassword} element={<ChangePassword/>}> </Route>
                 </Route>
 
-                <Route element={<ResultPage/>}>
+                <Route path={pathName.result} element={<ResultPage/>}>
                     <Route path={pathName.errorLogin} element={<ErrorLogin/>}></Route>
                     <Route path={pathName.errorUserExist} element={<ErrorUserExist/>}> </Route>
                     <Route path={pathName.error} element={<ErrorResult/>}> </Route>

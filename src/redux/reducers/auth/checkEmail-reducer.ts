@@ -4,6 +4,7 @@ import {authApi} from '../../../api/api.ts';
 import {push} from 'redux-first-history';
 import {pathName} from '../../../routers/routers.tsx';
 import {ConfirmType} from '../../../api/apiTypes.ts';
+import {AxiosError} from 'axios';
 
 type InitialStateType = {
     repeatedCheckEmail: string | null
@@ -25,9 +26,10 @@ export const checkEmail = createAsyncThunk('auth/check-email', async (email: str
         dispatch(setEmail(email))
         console.log(response)
         return response
-    } catch (error: any) {
+    } catch (err) {
+        const error = err as AxiosError
 
-        if (error.response.status === 404) {
+        if (Number(error.response?.status) === 404) {
             dispatch(push(`${pathName.result}/${pathName.errorCheckEmailNoExist}`, {fromServer: true}))
         } else {
 
@@ -44,12 +46,10 @@ export const confirmEmail = createAsyncThunk('auth/confirmEmail', async (data: C
         const response =await authApi.confirmEmail(data)
         dispatch(setIsPending(false))
         dispatch(push(`${pathName.auth}/${pathName.changePassword}`,{fromServer: true}))
-        console.log(response)
         return response
     } catch (error) {
         dispatch(setIsPending(false))
         dispatch(setError(true))
-        console.log(error)
 
     }
 })

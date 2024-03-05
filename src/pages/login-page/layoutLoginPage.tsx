@@ -4,7 +4,7 @@ import {NavLink, Outlet} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
 import {useEffect} from 'react';
 import {push} from 'redux-first-history';
-import { pathName} from '../../routers/routers.tsx';
+import {path, pathName} from '../../routers/routers.tsx';
 
 export const LayoutLoginPage = () => {
     const dispatch = useAppDispatch()
@@ -18,13 +18,13 @@ export const LayoutLoginPage = () => {
 
     useEffect(() => {
         if (isAuth || accessToken) {
-            dispatch(push(pathName.main))
+            dispatch(push(path.main))
         }
-    }, [dispatch, isAuth]);
+    }, [dispatch, isAuth, accessToken]);
 
     useEffect(() => {
         if (router?.pathname === pathName.auth) {
-            dispatch(push(`${pathName.auth}/${pathName.singIn}`));
+            dispatch(push(`${path.login}`));
         }
     }, [router, dispatch]);
 
@@ -34,7 +34,7 @@ export const LayoutLoginPage = () => {
         <div className={`login_page_image-light ${isPending && 'login_page_image-light_blur'}`}>
 
             <Layout className={'loginPage_layoutPageWrapper'}>
-                {router?.pathname === `${pathName.auth}/${pathName.singIn}` || router?.pathname === `${pathName.auth}/${pathName.singUp}`
+                {router?.pathname === `${path.login}` || router?.pathname === `${path.registration}`
                     ? <div className={'loginPage_loginFieldWrapper'}>
                         <img src={logo} className={'loginPage_logo'} alt={'logo'}/>
 

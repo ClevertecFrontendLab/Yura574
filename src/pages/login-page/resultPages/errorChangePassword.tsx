@@ -8,8 +8,9 @@ export const ErrorChangePassword = () => {
     const dispatch = useAppDispatch()
     const previousLocation = useAppSelector(state => state.router.previousLocations)
    const location = previousLocation &&previousLocation[1] &&previousLocation[1].location?.pathname
-
+    console.log(location)
     const handleButton = () => {
+        console.log(location)
         if(location){
             dispatch(push(location))
         }
@@ -24,6 +25,7 @@ export const ErrorChangePassword = () => {
             className={'result_errorChangePassword__wrapper'}
             extra={[
                 <Button
+                    key={1}
                     type="primary"
                     size={'large'}
                     className={'loginPage_buttonPrimary loginPage_button100'}

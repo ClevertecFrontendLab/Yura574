@@ -7,6 +7,7 @@ import {RegisterType} from '../../api/apiTypes.ts';
 import {singUp} from '@redux/reducers/auth/auth-reducer.ts';
 import {useForm} from 'antd/lib/form/Form';
 import {setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
+import {path} from '../../routers/routers.tsx';
 
 
 export const RegisterTab = () => {
@@ -22,17 +23,17 @@ export const RegisterTab = () => {
             .catch(err => console.log(err));
     };
     useEffect(() => {
-        if (prevLocation === '/result/error') {
+        if (prevLocation === path.error) {
             const email = sessionStorage.getItem('registerEmail')
             const password = sessionStorage.getItem('registerPassword')
             if (email && password) dispatch(singUp({email, password}))
         }
         dispatch(setRepeatedRequestData(null))
 
-    }, [prevLoc, dispatch]);
+    }, [prevLoc, dispatch, prevLocation]);
 
     const validatePassword: Rule = () => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
 
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -49,7 +50,7 @@ export const RegisterTab = () => {
     });
 
     const validateEmail: Rule = () => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (value && emailRegex.test(value)) {
@@ -65,7 +66,7 @@ export const RegisterTab = () => {
         },
     });
     const validateMatchPassword: Rule = ({getFieldValue}) => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && getFieldValue('password') === value) {

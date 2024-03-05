@@ -1,6 +1,6 @@
 import {Button, Result} from 'antd';
 import {push} from 'redux-first-history';
-import {pathName} from '../../../routers/routers.tsx';
+import {path} from '../../../routers/routers.tsx';
 import {useAppDispatch} from '@redux/configure-store.ts';
 
 
@@ -9,7 +9,7 @@ export const ErrorCheckEmail = () => {
     const dispatch = useAppDispatch()
     const handleButton = ()=> {
 
-        dispatch(push(`${pathName.auth}/${pathName.singIn}`))
+        dispatch(push(`${path.login}`))
 
     }
     return (
