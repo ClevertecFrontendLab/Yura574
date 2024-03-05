@@ -5,8 +5,9 @@ import {push} from 'redux-first-history';
 import {path} from '../../../routers/routers.tsx';
 import {responseStatus} from '../../../api/statuses.ts';
 import {logout} from '@redux/reducers/auth/auth-reducer.ts';
+import {AxiosError} from 'axios';
 
-type ReviewType = {
+export type ReviewType = {
     id: number
     fullName: string | null
     imgSrc: string | null
@@ -14,11 +15,16 @@ type ReviewType = {
     rating: number
     createdAt: string
 }
+type CreateFeedbackType = {
+    rating: number,
+    message?: string
+}
 
 type InitialState = {
     isWrong: boolean
     isSuccess: boolean
     isError: boolean
+    isOpenWriteReviewModal: boolean
     reviews: ReviewType[]
 }
 
@@ -26,27 +32,28 @@ const initialState: InitialState = {
     isWrong: false,
     isError: false,
     isSuccess: false,
+    isOpenWriteReviewModal: false,
+
     reviews: []
 }
 
 
 export const getFeedback = createAsyncThunk(
     'feedback/getFeedback',
-    async (data: boolean, {dispatch}) => {
+    async (_, {dispatch}) => {
 
         dispatch(setIsPending(true))
         try {
             const allFeedback = await feedbackApi.getAllFeedbacks()
             dispatch(setIsPending(false))
-            console.log(allFeedback)
             const sortedFeedback = allFeedback.data.sort((a: ReviewType, b: ReviewType) => a.createdAt < b.createdAt ? 1 : -1)
 
             dispatch(setReviews(sortedFeedback))
-        } catch (error: any) {
-            console.log(error)
+        } catch (error) {
+            const errors = error as AxiosError;
             dispatch(setIsPending(false))
 
-            if (+error.response.status == responseStatus.Forbidden) {
+            if (Number(errors.response?.status) == responseStatus.Forbidden) {
                 dispatch(logout())
                 dispatch(push(path.login))
 
@@ -57,13 +64,12 @@ export const getFeedback = createAsyncThunk(
         }
 
     })
-export const createFeedback = createAsyncThunk('feedback/createFeedback', async (data: any, {dispatch}) => {
+export const createFeedback = createAsyncThunk('feedback/createFeedback', async (data: CreateFeedbackType, {dispatch}) => {
     dispatch(setIsPending(true))
     try {
         const {rating, message} = data
 
-        const response = await feedbackApi.createFeedback({rating, message})
-        console.log(response)
+        await feedbackApi.createFeedback({rating, message})
 
 
 
@@ -74,8 +80,7 @@ export const createFeedback = createAsyncThunk('feedback/createFeedback', async 
 
 
 
-    } catch (error: any) {
-        console.log(error)
+    } catch (error) {
         dispatch(setIsPending(false))
         dispatch(setIsModalError(true))
     }
@@ -100,6 +105,11 @@ const feedBackSlice = createSlice({
             state.isError = action.payload
         },
 
+        setIsOpenWriteReviewModal: (state, action) => {
+            state.isOpenWriteReviewModal = action.payload
+        },
+
+
     }
 })
 
@@ -108,7 +118,8 @@ export const {
     setIsModalWrong,
     setIsModalSuccess,
     setIsModalError,
-    setReviews
+    setReviews,
+    setIsOpenWriteReviewModal,
 } = feedBackSlice.actions
 
 export const feedbackReducer = feedBackSlice.reducer

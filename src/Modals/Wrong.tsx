@@ -9,8 +9,7 @@ import {setIsModalWrong} from '@redux/reducers/feedback/feedback-reducer.ts';
 export const ModalWrong = () => {
     const dispatch = useAppDispatch()
     const onClickHandler = () => {
-
-            dispatch(push(path.main))
+        dispatch(push(path.main))
         dispatch(setIsModalWrong(false))
 
     }
@@ -26,7 +25,8 @@ export const ModalWrong = () => {
                 <img src={somethingWasWrong} alt={'something was wrong'}/>
                 <div>
                     <div className={'modal_title'}>Что-то пошло не так</div>
-                    <div className={'modal_subtitle'}>Произошла ошибка, <br/> попробуйте еще раз</div>
+                    <div className={'modal_subtitle'}>Произошла ошибка, <br/> попробуйте еще раз
+                    </div>
                 </div>
                 <Button size={'large'} className={'loginPage_buttonPrimary'}
                         onClick={onClickHandler}>Назад</Button>

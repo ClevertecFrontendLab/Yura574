@@ -5,7 +5,8 @@ import {LoginType} from '../../api/apiTypes.ts';
 import {Rule} from 'antd/lib/form';
 import {useEffect, useState} from 'react';
 import {checkEmail} from '@redux/reducers/auth/checkEmail-reducer.ts';
-import {singIn, singInGoogle} from '@redux/reducers/auth/auth-reducer.ts';
+import {singIn} from '@redux/reducers/auth/auth-reducer.ts';
+import {googleURL} from '../../api/api.ts';
 
 export const LoginTab = () => {
     const dispatch = useAppDispatch()
@@ -25,7 +26,7 @@ export const LoginTab = () => {
         dispatch(singIn({email, password, rememberMe}))
     }
     const validatePassword: Rule = () => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
 
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -55,10 +56,10 @@ export const LoginTab = () => {
             email && dispatch(checkEmail(email))
         }
 
-    }, [email, dispatch]);
+    }, [prevLocation,email, dispatch]);
 
     const googleHandler = ()=> {
-        window.location.href = `https://marathon-api.clevertec.ru/auth/google`;
+        window.location.href = googleURL;
     }
     return (
         <div>

@@ -13,17 +13,17 @@ export const AppHeader = () => {
     const windowWidth = useSelector(getWindowWidth)
     const location = useLocation()
     const navigation: Record<string, string> = {
-        feedback: 'Отзывы пользователей'
+        feedbacks: 'Отзывы пользователей'
     }
 
     const pathArr = location.pathname.split('/')
 
-const currentPath = pathArr.map((path, index)=> {
+    const currentPath = pathArr.map((path, index) => {
 
-    if(path in navigation){
-        return {pathName: navigation[path], link: path , index}
-    }
-}).filter(Boolean)
+        if (path in navigation) {
+            return {pathName: navigation[path], link: path, index}
+        }
+    }).filter(Boolean)
 
 
     return (
@@ -32,11 +32,13 @@ const currentPath = pathArr.map((path, index)=> {
             <Row>
                 <Col className={'body_regular_14 header_main'}>
                     <Breadcrumb>
-                        <Breadcrumb.Item > <NavLink to={path.main}>Главная</NavLink></Breadcrumb.Item>
+                        <Breadcrumb.Item> <NavLink
+                            to={path.main}>Главная</NavLink></Breadcrumb.Item>
                         {currentPath.map(path => {
-                            if(path){
+                            if (path) {
                                 return (
-                                    <Breadcrumb.Item key={path.index}> <NavLink to={path.link}>{path.pathName}</NavLink></Breadcrumb.Item>
+                                    <Breadcrumb.Item
+                                        key={path.index}> {path.pathName}</Breadcrumb.Item>
                                 )
                             }
 
@@ -44,7 +46,7 @@ const currentPath = pathArr.map((path, index)=> {
                     </Breadcrumb>
                 </Col>
             </Row>
-            {location.pathname === `${pathName.app}/${pathName.main}` &&
+            {location.pathname === `${pathName.main}` &&
                 <Row className={'header_position'}>
                     <Col>
                         <h1>Приветствуем тебя в CleverFit — приложении,{windowWidth <= 835 ?

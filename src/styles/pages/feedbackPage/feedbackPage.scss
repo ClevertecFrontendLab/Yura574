@@ -16,6 +16,7 @@
     height: 90vh;
     flex-direction: column;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 
 
@@ -31,13 +32,27 @@
 .feedback_footer {
     min-height: 10vh;
     margin-top: 112px;
+    display: flex;
+    gap: 8px;
+    & button{
+        border: none;
+    }
 }
 
+.feedback_firstComment-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow-x: hidden;
+
+}
 .first_commentWrapper {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    transform: translateY(-25%);
 }
 
 .first_comment {
@@ -51,7 +66,7 @@
 
 .feedback_title {
     color: $color-primary-light-9;
-    width: 924px;
+    max-width: 924px;
     text-align: center;
 }
 

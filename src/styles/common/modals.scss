@@ -1,5 +1,11 @@
 
-
+.modal_wrapper{
+    display: flex;
+    align-items: center;
+     & .ant-modal{
+         transform: translateY(-50%);
+     }
+}
 .modal_title{
     font-weight: 500;
     font-size: 24px;
@@ -12,9 +18,9 @@
     font-size: 14px;
     line-height: 130%;
     color: $color-character-light-secondary-45;
-    text-align: center;
+    word-break: break-word;
 }
 
 .modal_public{
-    width: 539px;
+    //width: 539px;
 }

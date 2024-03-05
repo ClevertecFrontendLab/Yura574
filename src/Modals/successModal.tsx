@@ -8,14 +8,13 @@ export const SuccessModal = () => {
     const isSuccess = useAppSelector(state => state.feedback.isSuccess)
 
     const closeSuccessModal = () => {
-        dispatch(getFeedback(true))
+        dispatch(getFeedback())
         dispatch(setIsModalSuccess(false))
     }
 
 
     return (
-
-        <Modal open={isSuccess} className={'success-model'} footer={false} closable={false}>
+        <Modal open={isSuccess} wrapClassName={'modal_wrapper'} className={'success-model'} footer={false} closable={false}>
             <Result
                 status={'success'}
                 title='Отзыв опубуликован успешно'

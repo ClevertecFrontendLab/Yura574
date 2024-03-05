@@ -8,7 +8,6 @@ export const getDate = (d: string) => {
         : new Date(d).getMonth() +1
     const year = new Date(d).getFullYear()
 
-    console.log(month)
 
     return `${day}.${month}.${year}`
 

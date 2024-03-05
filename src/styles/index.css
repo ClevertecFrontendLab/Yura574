@@ -328,7 +328,7 @@
   position: absolute;
   right: 0;
   bottom: 50%;
-  transform: translateX(100%);
+  transform: translate(100%, -50%);
   z-index: 1;
   background: white;
   clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
@@ -434,6 +434,14 @@ h4 {
   color: #262626;
 }
 
+.modal_wrapper {
+  display: flex;
+  align-items: center;
+}
+.modal_wrapper .ant-modal {
+  transform: translateY(-50%);
+}
+
 .modal_title {
   font-weight: 500;
   font-size: 24px;
@@ -446,11 +454,7 @@ h4 {
   font-size: 14px;
   line-height: 130%;
   color: #8c8c8c;
-  text-align: center;
-}
-
-.modal_public {
-  width: 539px;
+  word-break: break-word;
 }
 
 .custom-calendar {
@@ -552,6 +556,29 @@ h4 {
     padding: 32px 16px;
   }
 }
+.review-model .ant-modal-content {
+  max-width: 539px;
+  width: 100%;
+}
+.review-model .ant-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+.review_modal-input {
+  max-width: 491px;
+  width: 100%;
+}
+.review_modal-input .ant-input {
+  line-height: 130%;
+}
+
+.review-rate {
+  font-size: 24px;
+}
+
 .mainPages_layoutPageWrapper {
   min-height: 100vh;
   background: white;
@@ -736,6 +763,13 @@ h4 {
   width: auto;
   background-color: #2f54eb;
   color: #fff;
+  border: none;
+}
+
+.loginPage_buttonGhost {
+  width: auto;
+  background-color: inherit;
+  color: #2f54eb;
   border: none;
 }
 
@@ -1160,6 +1194,7 @@ h4 {
   height: 90vh;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 .feedback_content {
@@ -1172,6 +1207,19 @@ h4 {
 .feedback_footer {
   min-height: 10vh;
   margin-top: 112px;
+  display: flex;
+  gap: 8px;
+}
+.feedback_footer button {
+  border: none;
+}
+
+.feedback_firstComment-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 .first_commentWrapper {
@@ -1179,6 +1227,7 @@ h4 {
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  transform: translateY(-25%);
 }
 
 .first_comment {
@@ -1192,7 +1241,7 @@ h4 {
 
 .feedback_title {
   color: #061178;
-  width: 924px;
+  max-width: 924px;
   text-align: center;
 }
 
@@ -1236,9 +1285,16 @@ h4 {
   display: flex;
   align-items: center;
   flex-direction: column;
+  max-width: 174px;
+  width: 100%;
 }
 .review_userNameWrapper img {
   max-width: 42px;
+}
+
+.review_userName {
+  text-align: center;
+  max-width: 100px;
 }
 
 .review_messageWrapper {

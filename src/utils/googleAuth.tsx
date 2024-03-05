@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {history, useAppDispatch} from '@redux/configure-store.ts';
 import {pathName} from '../routers/routers.tsx';
 import {push} from 'redux-first-history';
@@ -18,7 +17,7 @@ const dispatch = useAppDispatch()
             dispatch(setIsAuth(true))
         }
         dispatch(push(pathName.main))
-    }, [])
+    }, [dispatch])
     return null;
 };
 

@@ -1,7 +1,13 @@
 import {Button} from 'antd';
+import {useAppDispatch} from '@redux/configure-store.ts';
+import {setIsOpenWriteReviewModal} from '@redux/reducers/feedback/feedback-reducer.ts';
 
 
 export const CreateFirstComment = () => {
+    const dispatch = useAppDispatch()
+    const onclickHandler = ()=> {
+        dispatch(setIsOpenWriteReviewModal(true))
+    }
     return (
         <div className={'first_commentWrapper'}>
             <div className={'first_comment '}>
@@ -12,7 +18,12 @@ export const CreateFirstComment = () => {
                     им сделать правильный выбор.
                 </div>
             </div>
-            <Button  data-test-id='write-review' size={'large'} className={'loginPage_buttonPrimary'}>Написать отзыв</Button>
+            <Button
+                data-test-id='write-review'
+                size={'large'}
+                className={'loginPage_buttonPrimary'}
+                onClick={onclickHandler}
+            >Написать отзыв</Button>
         </div>
     )
 }

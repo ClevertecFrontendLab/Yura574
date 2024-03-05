@@ -38,7 +38,7 @@
     position: absolute;
     right: 0;
     bottom: 50%;
-    transform: translateX(100%);
+    transform: translate(100%, -50%);
     z-index: 1;
     background: white;
     clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);

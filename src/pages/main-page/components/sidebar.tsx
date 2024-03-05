@@ -29,7 +29,7 @@ export const Sidebar = (props: SidebarType) => {
         <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
                className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
 
-            <div style={{position: 'fixed'}}>
+            <div >
                 <div className={'sidebar_wrapper'}>
                     <Row className={'sidebar_itemsWrapper'}>
                         <Col className={collapsed ? 'sidebar_logoCollapsed' : 'sidebar_logo'}>

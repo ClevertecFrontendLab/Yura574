@@ -28,7 +28,6 @@ const Main = lazy(() => import('@pages/main-page/main.tsx'))
 export const App = () => {
     const dispatch = useAppDispatch()
     const isPending = useAppSelector(state => state.common.isPending)
-    const isAuth = useAppSelector(state => state.auth.isAuth)
 
     useEffect(() => {
         const handleResize = () => {
@@ -40,7 +39,7 @@ export const App = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [])
+    }, [dispatch])
 
     return (
 
@@ -79,46 +78,6 @@ export const App = () => {
                            element={<ErrorChangePassword/>}> </Route>
                 </Route>
             </Routes>
-            {/*<Routes>*/}
-            {/*    <Route path='/' element={<GoogleRedirect/>}>*/}
-
-
-            {/*        /!*<Route path={'/'} element={<Navigate to={isAuth ? `${pathName.main}` : pathName.auth}/>}> </Route>*!/*/}
-            {/*        /!*<Route path={'/main'} element={<Navigate to={`${pathName.app}/${pathName.main}`}/>}> </Route>*!/*/}
-            {/*        /!*<Route path={'/feedbacks'} element={<Navigate to={`${pathName.app}/${pathName.feedback}`}/>}> </Route>*!/*/}
-
-            {/*        <Route element={*/}
-            {/*            <div data-test-id='loader'>*/}
-            {/*                <Suspense fallback={<Loader/>}><Main/></Suspense>*/}
-            {/*            </div>*/}
-            {/*        }>*/}
-            {/*            <Route path={pathName.main} element={<MainPage/>}/>*/}
-            {/*            <Route path={pathName.feedback} element={<FeedbackPage/>}/>*/}
-            {/*        </Route>*/}
-            {/*    </Route>*/}
-            {/*    <Route path={pathName.auth} element={<LayoutLoginPage/>}>*/}
-            {/*        <Route path={pathName.singIn} element={<LoginTab/>}></Route>*/}
-            {/*        <Route path={pathName.singUp} element={<RegisterTab/>}> </Route>*/}
-            {/*        <Route path={pathName.confirmEmail} element={<ConfirmEmail/>}> </Route>*/}
-            {/*        <Route path={pathName.changePassword} element={<ChangePassword/>}> </Route>*/}
-            {/*    </Route>*/}
-
-            {/*    <Route path={pathName.result} element={<ResultPage/>}>*/}
-            {/*        <Route path={pathName.errorLogin} element={<ErrorLogin/>}></Route>*/}
-            {/*        <Route path={pathName.errorUserExist} element={<ErrorUserExist/>}> </Route>*/}
-            {/*        <Route path={pathName.error} element={<ErrorResult/>}> </Route>*/}
-            {/*        <Route path={pathName.success} element={<SuccessResult/>}> </Route>*/}
-            {/*        <Route path={pathName.errorCheckEmail} element={<ErrorCheckEmail/>}> </Route>*/}
-            {/*        <Route path={pathName.errorCheckEmailNoExist}*/}
-            {/*               element={<ErrorCheckEmailNoExist/>}> </Route>*/}
-            {/*        <Route path={pathName.successChangePassword}*/}
-            {/*               element={<SuccessChangePassword/>}> </Route>*/}
-            {/*        <Route path={pathName.errorChangePassword}*/}
-            {/*               element={<ErrorChangePassword/>}> </Route>*/}
-            {/*    </Route>*/}
-
-
-            {/*</Routes>*/}
         </HistoryRouter>
 
 

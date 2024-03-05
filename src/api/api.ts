@@ -6,10 +6,15 @@ import {
     LoginType, RegisterType,
     TrainingType, UploadImageType
 } from './apiTypes.ts';
+import {accessToken} from '../selectors/selectors.ts';
+import {store} from '@redux/configure-store.ts';
 
+
+const baseURL  = 'https://marathon-api.clevertec.ru'
+export const googleURL = `${baseURL}/auth/google`
 
 const instance = axios.create({
-    baseURL: 'https://marathon-api.clevertec.ru',
+    baseURL,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
@@ -18,7 +23,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
     (config) => {
-        const token =localStorage?.getItem('accessToken')
+        const token =localStorage?.getItem('accessToken') || accessToken(store.getState())
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -46,21 +51,11 @@ export const authApi = {
     changePassword(data: ChangePasswordType) {
         return instance.post('/auth/change-password', data)
     },
-    loginGoogle() {
-
-        window.location.href = `https://marathon-api.clevertec.ru/auth/google`;
-
-
-    }
 }
 
 export const feedbackApi = {
     getAllFeedbacks() {
-        return instance.get('/feedback', {
-            headers: {
-                Authorization: `Bearer SUPERUSER`,
-            },
-        })
+        return instance.get('/feedback', )
     },
     createFeedback(data: createFeedbackType) {
         return instance.post('/feedback', data)
