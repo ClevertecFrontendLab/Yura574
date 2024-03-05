@@ -14,7 +14,6 @@ export const ErrorChangePassword = () => {
         if(location){
             dispatch(push(location))
         }
-        //
         dispatch(deleteError())
     }
     return (

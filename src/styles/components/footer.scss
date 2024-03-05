@@ -2,9 +2,7 @@
 
 .footerWrapper{
     width: 100%;
-    //margin: 0 0 42px 24px;
     display: flex;
-    //flex-direction: column-reverse;
     justify-content: space-between;
     align-items: flex-end;
 
@@ -18,7 +16,6 @@
 }
 
 .forAppWrapper{
-    //margin-right: 24px;
     background: white;
     min-width: 240px;
     margin: 24px;
@@ -50,7 +47,6 @@
 
 @media screen and (max-width: 360px){
     .forAppWrapper{
-        //margin-right: 24px;
         background: white;
         min-width: 100%;
       margin: 0 0 0 0;
@@ -60,7 +56,6 @@
     }
     .footerWrapper{
         width: 100%;
-        //margin: 0 0 42px 24px;
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;

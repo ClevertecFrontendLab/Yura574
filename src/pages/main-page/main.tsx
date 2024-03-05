@@ -3,14 +3,12 @@ import {Col, Layout, Row} from 'antd';
 import {Sidebar} from '@pages/main-page/components/sidebar.tsx';
 import {AppHeader} from '@pages/main-page/components/header.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
-import {Navigate, Outlet, useLocation} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
-import {path, pathName} from '../../routers/routers.tsx';
-import {push} from 'redux-first-history';
+import {Navigate, Outlet} from 'react-router-dom';
+import { useAppSelector} from '@redux/configure-store.ts';
+import { pathName} from '../../routers/routers.tsx';
 
 
  const Main: React.FC = () => {
-     const dispatch = useAppDispatch()
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
@@ -19,11 +17,8 @@ import {push} from 'redux-first-history';
     const auth = useAppSelector(state => state.auth.isAuth)
 
 
-     const  location = useLocation()
-     if(location.pathname === `${pathName.app}`){
 
-         dispatch(push(`${path.main}`))
-     }
+
      useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);

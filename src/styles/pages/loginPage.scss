@@ -9,10 +9,6 @@
     justify-content: center;
     background: rgba(0, 0, 0, 0);
     z-index: 100;
-
-    //& .ant-result {
-    //    padding: 64px 32px 56px 32px;
-    //}
 }
 
 .loginPage_loginFieldWrapper {
@@ -54,7 +50,6 @@
     margin: 48px 85px 174px 85px;
     display: flex;
     flex-direction: column;
-    //gap: 24px;
 
 }
 
@@ -83,9 +78,7 @@
     border-bottom: 2px solid $color-primary-light-6;
 }
 
-.loginPage_inputGroup {
-    //margin-bottom: 24px;
-}
+
 
 .loginPage_extra {
     font-size: 12px;
@@ -130,7 +123,7 @@
 
 .loginPage_rememberMe {
     .ant-checkbox-inner {
-        border-color: $color-primary-light-6; // Замените #yourBorderColor на желаемый цвет границы
+        border-color: $color-primary-light-6;
     }
 
     .ant-checkbox-input:checked + .ant-checkbox-inner {
@@ -212,7 +205,6 @@
         margin: 48px 85px 174px 85px;
         display: flex;
         flex-direction: column;
-        //gap: 24px;
 
     }
 
