@@ -1,0 +1,23 @@
+
+.modal_wrapper{
+    display: flex;
+    align-items: center;
+     & .ant-modal{
+         transform: translateY(-50%);
+     }
+}
+.modal_title{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 130%;
+    color: $color-character-light-title-85;
+}
+
+.modal_subtitle{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: $color-character-light-secondary-45;
+    word-break: break-word;
+    text-align: center;
+}

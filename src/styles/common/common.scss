@@ -11,6 +11,11 @@
     line-height: $line-height;
     font-weight: $font-weight-regular;
 }
+.body_regular_12{
+    font-size: 12px;
+    line-height: $line-height;
+    font-weight: $font-weight-regular;
+}
 .body_regular_20{
     font-size: 20px;
     line-height: $line-height;
@@ -18,18 +23,17 @@
 }
 
 .ant-layout-sider-children {
-    /* Ваши стили здесь */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+
 h1{
     margin: 0;
-    //letter-spacing: 1px;
 }
 h4{
     margin: 0;
-//font-family: Inter;
     font-weight: 500;
     font-size: 20px;
     line-height: 130%;

@@ -4,23 +4,23 @@ import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
 import {useAppDispatch} from '@redux/configure-store.ts';
 import {useEffect} from 'react';
-import {pathName} from '../../../routers/routers.tsx';
+import {path} from '../../../routers/routers.tsx';
 
 export const ErrorResult = () => {
     const dispatch = useAppDispatch()
     const location = useLocation()
 
-
     useEffect(() => {
         if (!location.state) {
-            dispatch(push(`${pathName.auth}/${pathName.singUp}`))
+            dispatch(push(`${path.registration}`))
         }
     }, [location, dispatch]);
 
     const handleButton = () => {
-        dispatch(push(`${pathName.auth}/${pathName.singUp}`))
+        dispatch(push(`${path.registration}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'error'}
@@ -36,6 +36,6 @@ export const ErrorResult = () => {
                     Назад к регестрации
                 </Button>,
             ]}
-            />
+        />
     )
 };

@@ -1,17 +1,28 @@
 @import "fonts/fonts";
+
 @import "components/header";
 @import "components/mainContent";
 @import "components/loader";
 @import "components/inputVarification";
 @import "components/footer";
 @import "components/sidebar";
+
 @import "colors/colors";
+
 @import "typography/typography";
+
 @import "common/common";
+@import "common/modals";
+
 @import "icons/calendar";
+
+@import "modals/wrong";
+@import "modals/success";
+@import "modals/error";
+@import "modals/writeReview";
+
 @import "pages/mainPages";
 @import "pages/loginPage";
-@import "pages/resultPages/resultPage";
 @import "pages/resultPages/changePassword";
 @import "pages/resultPages/confirmEmail";
 @import "pages/resultPages/errorChangePassword";
@@ -23,11 +34,13 @@
 @import "pages/resultPages/successChangePassword";
 @import "pages/resultPages/errorUserExist";
 @import "pages/resultPages/errorResult";
+@import "pages/feedbackPage/feedbackPage";
+@import "pages/feedbackPage/review";
 
 
 
 .main_page_image-light {
-    background: url("../assets/webp/Main-page_light.webp") no-repeat center ;
+    background: url("../assets/webp/Main-page_light.webp") no-repeat center fixed ;
     background-size:cover;
     width: 100%;
     height: 100%;
@@ -53,20 +66,4 @@
 }
 .main_page_image-light_blur::before{
     z-index: 2;
-}
-
-//.main_page_image-light::before {
-//    content: "";
-//    position: absolute;
-//    top: 0;
-//    left: 0;
-//    width: 100%;
-//    height: 100%;
-//    backdrop-filter: blur(5px);
-//}
-@media screen and (max-width: 360px){
-   .main_page_image-light{
-       //height: 100vh;
-   }
-
 }

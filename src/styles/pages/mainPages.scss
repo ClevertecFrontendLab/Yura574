@@ -4,7 +4,6 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     max-width: 1440px;
     margin: 0 auto;
-    //overflow: hidden;
 
 }
 .mainPages_layoutPageWrapper_blur::before{
@@ -31,6 +30,7 @@
 .mainPages_mainContentWrapper {
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 .mainPages_footerWrapper{
@@ -44,8 +44,5 @@
 @media screen and (max-width: 360px){
     .mainContent_cardsActionsWrapper{
         flex-direction: column;
-    }
-    .mainPages_mainContentWrapper{
-        //flex-direction: row;
     }
 }

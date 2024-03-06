@@ -1,0 +1,26 @@
+
+.review-model {
+    .ant-modal-content {
+        max-width: 539px;
+        width: 100%;
+    }
+
+        & .ant-modal-body {
+display: flex;
+            flex-direction: column;
+            gap: 16px;
+        padding: 24px;
+    }
+
+}
+.review_modal-input{
+    max-width: 491px;
+    width: 100%;
+     & .ant-input{
+         line-height: 130%;
+     }
+
+}
+.review-rate{
+    font-size: 24px;
+}

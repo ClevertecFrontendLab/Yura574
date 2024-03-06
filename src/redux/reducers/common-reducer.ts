@@ -4,7 +4,6 @@ export type DataErrorType = {
     statusCode: 400 | 404 | 409 | 429 | 500,
     error: string,
     errorMessage: string
-
 }
 
 type InitialStateType = {
@@ -12,10 +11,8 @@ type InitialStateType = {
     email: string
     dataError: DataErrorType | null
     isResult: boolean,
-    repeatedRequest: {
-            email: string,
-            password: string
-    } | null
+    repeatedRequest: { email: string, password: string } | null
+    windowWidth: number
 }
 
 const initialState: InitialStateType = {
@@ -23,7 +20,8 @@ const initialState: InitialStateType = {
     dataError: null,
     isResult: false,
     repeatedRequest: null,
-    email: ''
+    email: '',
+    windowWidth: window.innerWidth
 
 }
 
@@ -41,17 +39,27 @@ const commonSlice = createSlice({
         setIsResult: (state, action) => {
             state.isResult = action.payload
         },
-        setRepeatedRequestData: ((state, action)=> {
+        setRepeatedRequestData: ((state, action) => {
             state.repeatedRequest = action.payload
         }),
 
         setEmail: (state, action) => {
             state.email = action.payload
         },
+        setWindowWidth: (state, action)=> {
+            state.windowWidth = action.payload
+        }
     },
 
 })
 
-export const {setIsPending,setEmail, setRepeatedRequestData, setIsResult, deleteError} = commonSlice.actions
+export const {
+    setIsPending,
+    setWindowWidth,
+    setEmail,
+    setRepeatedRequestData,
+    setIsResult,
+    deleteError
+} = commonSlice.actions
 
 export const commonReducer = commonSlice.reducer

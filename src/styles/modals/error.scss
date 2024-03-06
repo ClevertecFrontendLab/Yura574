@@ -1,0 +1,42 @@
+
+.error-model {
+    & .ant-modal-body {
+        padding: 64px 86px;
+    }
+    .ant-result-title{
+        line-height: 130%;
+        font-weight: 500;
+    }
+
+    & .ant-result {
+        padding: 0;
+    }
+
+    & .ant-result-extra {
+        display: flex;
+
+        & button {
+            flex: 1;
+        }
+    }
+}
+
+.error_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 368px;
+
+}
+
+@media screen and (max-width: 360px) {
+    .error_wrapper {
+        width: 296px;
+    }
+    .error-model {
+
+        & .ant-modal-body {
+            padding: 32px 16px;
+        }
+
+    }
+}

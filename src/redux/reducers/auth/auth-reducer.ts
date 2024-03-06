@@ -3,7 +3,8 @@ import {authApi} from '../../../api/api.ts';
 import {LoginType, RegisterType} from '../../../api/apiTypes.ts';
 import {push} from 'redux-first-history';
 import {setIsPending, setRepeatedRequestData} from '@redux/reducers/common-reducer.ts';
-import {pathName} from '../../../routers/routers.tsx';
+import {path, pathName} from '../../../routers/routers.tsx';
+import {AxiosError} from 'axios';
 
 
 export const singUp = createAsyncThunk(
@@ -14,47 +15,47 @@ export const singUp = createAsyncThunk(
             dispatch(push(`${pathName.result}/${pathName.success}`, {fromServer: true}))
             dispatch(setIsPending(false))
             return response
-        } catch (error: any) {
+        } catch (error) {
+            const errors = error as AxiosError
             dispatch(setIsPending(false))
-            if (+error.response.status === 409) {
+            if (Number(errors.response?.status) === 409) {
                 dispatch(push(`${pathName.result}/${pathName.errorUserExist}`, {fromServer: true}))
             } else {
                 dispatch(push(`${pathName.result}/${pathName.error}`, {fromServer: true}))
                 dispatch(setRepeatedRequestData(data))
             }
-
-
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(errors.response?.data);
         }
     }
 )
-
 export const singIn = createAsyncThunk(
     'auth/login', async (dataLogin: LoginType, {dispatch, rejectWithValue}) => {
         dispatch(setIsPending(true))
         try {
             const response = await authApi.loginUser(dataLogin)
             if (dataLogin.rememberMe && 'accessToken' in response.data) {
-                localStorage.setItem('token', response.data.accessToken
-                )
+                localStorage.setItem('accessToken', response.data.accessToken)
             }
-            dispatch(push(`${pathName.main}`))
+            if (!dataLogin.rememberMe && 'accessToken' in response.data) {
+                dispatch(setAccessToken(response.data.accessToken))
+            }
+            dispatch(push(`${path.main}`))
             dispatch(setIsPending(false))
             return response
-        } catch (error: any) {
+        } catch (error) {
+            const errors = error as AxiosError
             dispatch(setIsPending(false))
             dispatch(push(`${pathName.result}/${pathName.errorLogin}`, {fromServer: true}))
-            return rejectWithValue(error.response.data)
+            return rejectWithValue(errors.response?.data)
         }
 
     }
 )
 
 
-
-
 const initialState = {
-    isAuth: !!localStorage.getItem('token')
+    isAuth: !!localStorage.getItem('accessToken'),
+    accessToken: null
 }
 
 const authSlice = createSlice({
@@ -62,18 +63,28 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('token')
+            localStorage.removeItem('accessToken')
             state.isAuth = false
-        }
+        },
+        setIsAuth: (state, action) => {
+            state.isAuth = action.payload
+        },
+        setAccessToken: (state, action) => {
+            state.accessToken = action.payload
+        },
     },
+
     extraReducers: (builder) => {
-        builder.addCase(singIn.fulfilled, (state, action) => {
+        builder.addCase(singIn.fulfilled, (state) => {
             state.isAuth = true
-            console.log(action.payload)
         })
     }
 })
 
-export const {logout} = authSlice.actions
+export const {
+    logout,
+    setAccessToken,
+    setIsAuth
+} = authSlice.actions
 
 export const authReducer = authSlice.reducer

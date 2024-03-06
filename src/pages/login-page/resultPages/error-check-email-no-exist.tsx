@@ -1,34 +1,23 @@
 import {Button, Result} from 'antd';
-import {useAppDispatch} from '@redux/configure-store.ts';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {push} from 'redux-first-history';
-import {pathName} from '../../../routers/routers.tsx';
-import {useEffect, useState} from 'react';
+import {path} from '../../../routers/routers.tsx';
 
 
 export const ErrorCheckEmailNoExist = () => {
     const dispatch = useAppDispatch()
+    const windowWidth = useAppSelector(state => state.common.windowWidth)
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [])
-    const handleButton = ()=> {
-        dispatch(push(`${pathName.auth}/${pathName.singIn}`))
+    const handleButton = () => {
+        dispatch(push(`${path.login}`))
     }
+
     return (
         <Result
             status={'error'}
             title="Такой e-mail не зарегистрирован"
-            subTitle={<div>Мы не нашли в базе вашего e-mail. Попробуйте {windowWidth > 360? <br/> : ''} войти с другим e-mail.</div>}
+            subTitle={<div>Мы не нашли в базе вашего e-mail. Попробуйте {windowWidth > 360 ?
+                <br/> : ''} войти с другим e-mail.</div>}
             className={'result_errorCheckEmailNoExist_wrapper'}
             extra={[
                 <Button

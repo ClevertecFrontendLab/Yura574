@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import {push} from 'redux-first-history';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
 import {Button, Result} from 'antd';
-import {pathName} from '../../../routers/routers.tsx';
+import {path} from '../../../routers/routers.tsx';
 
 
 export const ErrorLogin = () => {
@@ -12,15 +12,15 @@ export const ErrorLogin = () => {
     const location = useLocation()
     useEffect(() => {
         if (!location.state) {
-            dispatch(push(`${pathName.auth}/${pathName.singIn}`))
+            dispatch(push(`${path.login}`))
         }
     }, [location, dispatch]);
 
-
     const handleButton = () => {
-        dispatch(push('/auth/singIn'))
+        dispatch(push(`${path.login}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'warning'}

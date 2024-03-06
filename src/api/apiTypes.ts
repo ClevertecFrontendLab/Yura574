@@ -1,6 +1,3 @@
-
-
-
 export type LoginType = {
     email: string,
     password: string,
@@ -11,11 +8,11 @@ export type RegisterType = {
     password: string,
 }
 
-export type ConfirmType ={
+export type ConfirmType = {
     email: string,
     code: string
 }
-export type ChangePasswordType ={
+export type ChangePasswordType = {
     password: string,
     confirmPassword: string
 }

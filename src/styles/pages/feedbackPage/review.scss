@@ -1,0 +1,62 @@
+
+.reviewWrapper {
+    display: flex;
+    background: white;
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+.review_userNameWrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 174px;
+    width: 100%;
+
+
+    & img {
+        max-width: 42px;
+    }
+}
+.review_userName{
+  text-align: center;
+max-width: 100px;
+}
+
+.review_messageWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+
+    & div {
+        text-align: left;
+    }
+}
+
+.review_date {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 360px) {
+
+    .reviewWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+
+        & img {
+            width: 42px;
+        }
+    }
+    .review_userNameWrapper{
+        & img {
+            width: 42px;
+        }
+    }
+
+}

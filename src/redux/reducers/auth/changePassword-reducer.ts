@@ -12,7 +12,7 @@ const initialState: InitialStateType = {
     error: false
 }
 
-export const changePassword = createAsyncThunk('auth/changePassword', async (data: ChangePasswordType, {dispatch})=> {
+export const changePassword = createAsyncThunk('auth/changePassword', async (data: ChangePasswordType, {dispatch}) => {
     dispatch(setIsPending(true))
     try {
         const response = await authApi.changePassword(data)
@@ -21,7 +21,7 @@ export const changePassword = createAsyncThunk('auth/changePassword', async (dat
         return response
     } catch (error) {
         dispatch(setIsPending(false))
-        dispatch(push(`${pathName.result}/${pathName.errorChangePassword}`,{fromState: true}))
+        dispatch(push(`${pathName.result}/${pathName.errorChangePassword}`, {fromState: true}))
     }
 })
 
@@ -29,9 +29,6 @@ export const changePassword = createAsyncThunk('auth/changePassword', async (dat
 const changePasswordSlice = createSlice({
     name: 'auth/changePassword',
     initialState,
-    reducers: {
-
-    }
+    reducers: {}
 })
-// export const {} = changePasswordSlice.actions
 export const changePasswordReducer = changePasswordSlice.reducer

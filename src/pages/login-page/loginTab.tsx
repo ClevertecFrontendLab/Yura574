@@ -6,6 +6,7 @@ import {Rule} from 'antd/lib/form';
 import {useEffect, useState} from 'react';
 import {checkEmail} from '@redux/reducers/auth/checkEmail-reducer.ts';
 import {singIn} from '@redux/reducers/auth/auth-reducer.ts';
+import {googleURL} from '../../api/api.ts';
 
 export const LoginTab = () => {
     const dispatch = useAppDispatch()
@@ -25,9 +26,8 @@ export const LoginTab = () => {
         dispatch(singIn({email, password, rememberMe}))
     }
     const validatePassword: Rule = () => ({
-        validator(_: any, value: string) {
+        validator(_, value: string) {
             return new Promise((resolve, reject) => {
-
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && passwordRegex.test(value)) {
                     setError(errors.filter((p) => p !== 'password'))
@@ -48,14 +48,19 @@ export const LoginTab = () => {
                 sessionStorage.setItem('email', form.getFieldValue('email'))
                 dispatch(checkEmail(form.getFieldValue('email')))
             })
-            .catch(err => console.log(err));
     }
+
     useEffect(() => {
         if (prevLocation === '/result/error-check-email') {
             email && dispatch(checkEmail(email))
         }
 
-    }, [email, dispatch]);
+    }, [prevLocation, email, dispatch]);
+
+    const googleHandler = () => {
+        window.location.href = googleURL;
+    }
+
     return (
         <div>
             <Form form={form} onFinish={values => finish(values)}
@@ -105,7 +110,7 @@ export const LoginTab = () => {
                         <Checkbox
                             data-test-id='login-remember'
                             defaultChecked={false}
-                           className={'loginPage_rememberMe'}
+                            className={'loginPage_rememberMe'}
                         >
                             Запомнить меня
                         </Checkbox>
@@ -121,11 +126,13 @@ export const LoginTab = () => {
                             className={'loginPage_buttonPrimary'}
                             htmlType={'submit'}
                             onClick={handleButtonClick}>Войти</Button>
-                    <Button type={'default'} size={'large'}>
+
+                    <Button onClick={googleHandler} type={'default'} size={'large'}>
                         <img className={'loginPage_svgGoogle'} src={google}
                              alt={'google'}/>
                         Войти через Google
                     </Button>
+
                 </div>
             </Form></div>
     )

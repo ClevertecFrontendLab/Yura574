@@ -1,4 +1,4 @@
-import { Layout} from 'antd';
+import {Layout} from 'antd';
 import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts'
 import {Outlet, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
@@ -14,7 +14,6 @@ export const ResultPage = () => {
 
     useEffect(() => {
         if (!location.state) {
-            console.log(location)
             dispatch(push(pathName.auth))
         }
     }, [location, dispatch]);
@@ -23,8 +22,6 @@ export const ResultPage = () => {
             <Layout className={'loginPage_layoutPageWrapper'}>
                 <Outlet/>
             </Layout>
-
-
         </div>
     )
 }

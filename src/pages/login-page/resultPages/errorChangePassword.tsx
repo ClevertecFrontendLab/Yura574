@@ -7,15 +7,14 @@ import {Button, Result} from 'antd';
 export const ErrorChangePassword = () => {
     const dispatch = useAppDispatch()
     const previousLocation = useAppSelector(state => state.router.previousLocations)
-   const location = previousLocation &&previousLocation[1] &&previousLocation[1].location?.pathname
-
+    const location = previousLocation && previousLocation[1] && previousLocation[1].location?.pathname
     const handleButton = () => {
-        if(location){
+        if (location) {
             dispatch(push(location))
         }
-        //
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'error'}
@@ -24,12 +23,13 @@ export const ErrorChangePassword = () => {
             className={'result_errorChangePassword__wrapper'}
             extra={[
                 <Button
+                    key={1}
                     type="primary"
                     size={'large'}
                     className={'loginPage_buttonPrimary loginPage_button100'}
                     onClick={handleButton}
                     data-test-id='change-retry-button'>
-                   Повторить
+                    Повторить
                 </Button>,
             ]}
         />
