@@ -13,7 +13,7 @@ export const Loader = () => {
             <Lottie
                 data-test-id='loader'
                 options={defaultOptions}
-                    height={200} width={200}/>
+                height={200} width={200}/>
         </div>
     )
 }

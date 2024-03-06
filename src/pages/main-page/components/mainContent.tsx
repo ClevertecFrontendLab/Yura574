@@ -6,7 +6,6 @@ import {Card} from '@pages/main-page/components/Card.tsx';
 import {getWindowWidth,} from '../../../selectors/selectors.ts';
 import {useSelector} from 'react-redux';
 
-
 export const MainContent = () => {
     const windowWidth = useSelector(getWindowWidth)
     return (

@@ -24,8 +24,6 @@ export const singUp = createAsyncThunk(
                 dispatch(push(`${pathName.result}/${pathName.error}`, {fromServer: true}))
                 dispatch(setRepeatedRequestData(data))
             }
-
-
             return rejectWithValue(errors.response?.data);
         }
     }
@@ -34,7 +32,6 @@ export const singIn = createAsyncThunk(
     'auth/login', async (dataLogin: LoginType, {dispatch, rejectWithValue}) => {
         dispatch(setIsPending(true))
         try {
-
             const response = await authApi.loginUser(dataLogin)
             if (dataLogin.rememberMe && 'accessToken' in response.data) {
                 localStorage.setItem('accessToken', response.data.accessToken)

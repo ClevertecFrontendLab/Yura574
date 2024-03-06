@@ -5,11 +5,9 @@ import {
 import {Button, Modal, Result} from 'antd';
 import {useAppSelector} from '@redux/configure-store.ts';
 
-
 export const ErrorModal = () => {
     const dispatch = useAppDispatch()
     const isError = useAppSelector(state => state.feedback.isError)
-
 
     const writeReviewAgain = () => {
         dispatch(setIsModalError(false))
@@ -17,10 +15,9 @@ export const ErrorModal = () => {
     }
     const closeErrorModal = () => dispatch(setIsModalError(false))
 
-
     return (
-
-        <Modal open={isError} wrapClassName={'modal_wrapper'} className={'error-model'} footer={false} closable={false}>
+        <Modal open={isError} wrapClassName={'modal_wrapper'} className={'error-model'}
+               footer={false} closable={false}>
             <Result
                 status={'error'}
                 title='Данные не сохранились'

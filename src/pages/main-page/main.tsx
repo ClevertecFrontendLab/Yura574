@@ -4,11 +4,11 @@ import {Sidebar} from '@pages/main-page/components/sidebar.tsx';
 import {AppHeader} from '@pages/main-page/components/header.tsx';
 import collapsedImg from '../../assets/svg/collapsedSidebar.svg';
 import {Navigate, Outlet} from 'react-router-dom';
-import { useAppSelector} from '@redux/configure-store.ts';
-import { pathName} from '../../routers/routers.tsx';
+import {useAppSelector} from '@redux/configure-store.ts';
+import {pathName} from '../../routers/routers.tsx';
 
 
- const Main: React.FC = () => {
+const Main: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [dataTestId, setDataTestId] = useState('sider-switch')
@@ -16,10 +16,7 @@ import { pathName} from '../../routers/routers.tsx';
 
     const auth = useAppSelector(state => state.auth.isAuth)
 
-
-
-
-     useEffect(() => {
+    useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -34,7 +31,6 @@ import { pathName} from '../../routers/routers.tsx';
         if (windowWidth <= 360 && collapsed) {
             setCollapsed(!collapsed)
         }
-
     }
 
     useEffect(() => {
@@ -46,47 +42,40 @@ import { pathName} from '../../routers/routers.tsx';
         }
     }, [windowWidth, dataTestId]);
 
-
-     if(!auth){
-      return  <Navigate to={pathName.auth}/>
+    if (!auth) {
+        return <Navigate to={pathName.auth}/>
     }
+
     return (
-        <Layout className={`mainPages_layoutPageWrapper ${isPending && 'mainPages_layoutPageWrapper_blur'}`}>
+        <Layout
+            className={`mainPages_layoutPageWrapper ${isPending && 'mainPages_layoutPageWrapper_blur'}`}>
             <Sidebar isNone={windowWidth <= 360 && collapsed}
                      collapsed={collapsed}
                      setCollapsed={setCollapsed}
                      windowWidth={windowWidth}
                      dataTestId={dataTestId}
             />
-            {windowWidth <= 360 ?
-                <div data-test-id='sider-switch-mobile'
-                     className={`sidebar_button sidebar_button360 ${windowWidth <= 360 && !collapsed && 'hide'}`}
-                     onClick={toggle}><img
+            {windowWidth <= 360
+                ? <div data-test-id='sider-switch-mobile'
+                       className={`sidebar_button sidebar_button360 ${windowWidth <= 360 && !collapsed && 'hide'}`}
+                       onClick={toggle}><img
                     src={collapsedImg} alt={'button'}/>
                 </div>
-
-
                 : ''}
             <Layout>
                 <Col className={'mainPages_mainPageWrapper'}>
                     <Row style={{display: 'block'}}>
                         <Col>
-                            <AppHeader />
+                            <AppHeader/>
                         </Col>
                     </Row>
 
                     <Row className={'main_page_image-light mainPages_mainContentWrapper'}>
-
-                    <Outlet/>
+                        <Outlet/>
                     </Row>
-
-
-
                 </Col>
             </Layout>
         </Layout>
-
-
     );
 };
 export default Main

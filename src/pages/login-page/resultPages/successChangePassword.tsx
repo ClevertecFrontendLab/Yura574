@@ -4,21 +4,21 @@ import {path} from '../../../routers/routers.tsx';
 import {deleteError} from '@redux/reducers/common-reducer.ts';
 import {Button, Result} from 'antd';
 
-
 export const SuccessChangePassword = () => {
     const dispatch = useAppDispatch()
     const windowWidth = useAppSelector(state => state.common.windowWidth)
-
 
     const handleButton = () => {
         dispatch(push(`${path.login}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'success'}
-            title={<div>Пароль успешно {windowWidth <=360 && <br/>} изменен</div>}
-            subTitle={<div>Теперь можно войти в аккаунт, используя <br/> свой логин и новый пароль</div>}
+            title={<div>Пароль успешно {windowWidth <= 360 && <br/>} изменен</div>}
+            subTitle={<div>Теперь можно войти в аккаунт, используя <br/> свой логин и новый пароль
+            </div>}
             className={'result_successChangePassword_wrapper'}
             extra={[
                 <Button

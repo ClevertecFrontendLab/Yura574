@@ -11,7 +11,6 @@ export const ModalWrong = () => {
     const onClickHandler = () => {
         dispatch(push(path.main))
         dispatch(setIsModalWrong(false))
-
     }
     return (
         <Modal
@@ -19,7 +18,6 @@ export const ModalWrong = () => {
             wrapClassName={'modal_subtitle'}
             footer={false}
             closable={false}
-
         >
             < div className={'wrong_wrapper'}>
                 <img src={somethingWasWrong} alt={'something was wrong'}/>

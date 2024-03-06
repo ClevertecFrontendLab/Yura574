@@ -33,7 +33,6 @@ const initialState: InitialState = {
     isError: false,
     isSuccess: false,
     isOpenWriteReviewModal: false,
-
     reviews: []
 }
 
@@ -41,45 +40,32 @@ const initialState: InitialState = {
 export const getFeedback = createAsyncThunk(
     'feedback/getFeedback',
     async (_, {dispatch}) => {
-
         dispatch(setIsPending(true))
         try {
             const allFeedback = await feedbackApi.getAllFeedbacks()
             dispatch(setIsPending(false))
             const sortedFeedback = allFeedback.data.sort((a: ReviewType, b: ReviewType) => a.createdAt < b.createdAt ? 1 : -1)
-
             dispatch(setReviews(sortedFeedback))
         } catch (error) {
             const errors = error as AxiosError;
             dispatch(setIsPending(false))
-
             if (Number(errors.response?.status) == responseStatus.Forbidden) {
                 dispatch(logout())
                 dispatch(push(path.login))
-
             } else {
                 dispatch(setIsModalWrong(true))
             }
-
         }
-
     })
 export const createFeedback = createAsyncThunk('feedback/createFeedback', async (data: CreateFeedbackType, {dispatch}) => {
     dispatch(setIsPending(true))
     try {
         const {rating, message} = data
-
         await feedbackApi.createFeedback({rating, message})
-
-
-
-            sessionStorage.removeItem('review')
-            sessionStorage.removeItem('rating')
-            dispatch(setIsPending(false))
-            dispatch(setIsModalSuccess(true))
-
-
-
+        sessionStorage.removeItem('review')
+        sessionStorage.removeItem('rating')
+        dispatch(setIsPending(false))
+        dispatch(setIsModalSuccess(true))
     } catch (error) {
         dispatch(setIsPending(false))
         dispatch(setIsModalError(true))

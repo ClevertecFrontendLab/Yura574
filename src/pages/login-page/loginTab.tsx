@@ -28,7 +28,6 @@ export const LoginTab = () => {
     const validatePassword: Rule = () => ({
         validator(_, value: string) {
             return new Promise((resolve, reject) => {
-
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && passwordRegex.test(value)) {
                     setError(errors.filter((p) => p !== 'password'))
@@ -49,18 +48,19 @@ export const LoginTab = () => {
                 sessionStorage.setItem('email', form.getFieldValue('email'))
                 dispatch(checkEmail(form.getFieldValue('email')))
             })
-            .catch(err => console.log(err));
     }
+
     useEffect(() => {
         if (prevLocation === '/result/error-check-email') {
             email && dispatch(checkEmail(email))
         }
 
-    }, [prevLocation,email, dispatch]);
+    }, [prevLocation, email, dispatch]);
 
-    const googleHandler = ()=> {
+    const googleHandler = () => {
         window.location.href = googleURL;
     }
+
     return (
         <div>
             <Form form={form} onFinish={values => finish(values)}
@@ -110,7 +110,7 @@ export const LoginTab = () => {
                         <Checkbox
                             data-test-id='login-remember'
                             defaultChecked={false}
-                           className={'loginPage_rememberMe'}
+                            className={'loginPage_rememberMe'}
                         >
                             Запомнить меня
                         </Checkbox>
@@ -128,7 +128,7 @@ export const LoginTab = () => {
                             onClick={handleButtonClick}>Войти</Button>
 
                     <Button onClick={googleHandler} type={'default'} size={'large'}>
-                        <img  className={'loginPage_svgGoogle'} src={google}
+                        <img className={'loginPage_svgGoogle'} src={google}
                              alt={'google'}/>
                         Войти через Google
                     </Button>

@@ -24,9 +24,9 @@ export const ChangePassword = () => {
             if (password && confirmPassword && email) {
                 dispatch(changePassword({password, confirmPassword}))
             }
-
         }
     }, [previousLocation, location, email, dispatch]);
+
     const handleButtonClick = () => {
         form.validateFields()
             .then()
@@ -36,7 +36,6 @@ export const ChangePassword = () => {
     const validatePassword: Rule = () => ({
         validator(_, value: string) {
             return new Promise((resolve, reject) => {
-
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && passwordRegex.test(value)) {
                     setError(errors.filter((p) => p !== 'password'))
@@ -71,7 +70,6 @@ export const ChangePassword = () => {
         const {password, confirmPassword} = value
         sessionStorage.setItem('password', password)
         sessionStorage.setItem('confirmPassword', confirmPassword)
-
         email && dispatch(changePassword({password, confirmPassword}))
     }
 

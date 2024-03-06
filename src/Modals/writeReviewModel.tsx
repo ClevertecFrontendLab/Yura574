@@ -10,8 +10,8 @@ import {useAppDispatch} from '@redux/configure-store.ts';
 import {useAppSelector} from '@hooks/typed-react-redux-hooks.ts';
 
 
-export const WriteReviewModal = ()=> {
-     const dispatch = useAppDispatch()
+export const WriteReviewModal = () => {
+    const dispatch = useAppDispatch()
 
     const isOpenWriteReviewModal = useAppSelector(state => state.feedback.isOpenWriteReviewModal)
 
@@ -25,7 +25,6 @@ export const WriteReviewModal = ()=> {
     }, []);
 
     const handleRating = (rating: number) => {
-
         setRating(rating)
         sessionStorage.setItem('rating', rating.toString())
     }
@@ -43,7 +42,7 @@ export const WriteReviewModal = ()=> {
     }
 
 
-    return(
+    return (
         <Modal open={isOpenWriteReviewModal}
                title={'Ваш отзыв'}
                onCancel={() => dispatch(setIsOpenWriteReviewModal(false))}
@@ -73,7 +72,7 @@ export const WriteReviewModal = ()=> {
                     } else {
                         return <StarTwoTone key={index}
                                             twoToneColor={'#faad14'}
-                                            />
+                        />
                     }
 
 

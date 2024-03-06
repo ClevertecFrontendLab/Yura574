@@ -7,8 +7,6 @@ import {path} from '../../../routers/routers.tsx';
 export const SuccessResult = () => {
     const dispatch = useAppDispatch()
     const windowWidth = useAppSelector(state => state.common.windowWidth)
-
-
     const handleButton = () => {
         dispatch(push(`${path.login}`))
         dispatch(deleteError())
@@ -17,7 +15,8 @@ export const SuccessResult = () => {
         <Result
             status={'success'}
             title='Регестрация успешна'
-            subTitle={<div>Регистрация прошла успешно. Зайдите {windowWidth> 360 && <br/>} в приложение, используя свои e-mail и пароль.</div>}
+            subTitle={<div>Регистрация прошла успешно. Зайдите {windowWidth > 360 && <br/>} в
+                приложение, используя свои e-mail и пароль.</div>}
             className={'result_successResult__wrapper'}
             extra={[
                 <Button

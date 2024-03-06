@@ -16,11 +16,11 @@ export const ErrorLogin = () => {
         }
     }, [location, dispatch]);
 
-
     const handleButton = () => {
         dispatch(push(`${path.login}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'warning'}

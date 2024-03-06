@@ -10,7 +10,6 @@ export const ErrorResult = () => {
     const dispatch = useAppDispatch()
     const location = useLocation()
 
-
     useEffect(() => {
         if (!location.state) {
             dispatch(push(`${path.registration}`))
@@ -21,6 +20,7 @@ export const ErrorResult = () => {
         dispatch(push(`${path.registration}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'error'}
@@ -36,6 +36,6 @@ export const ErrorResult = () => {
                     Назад к регестрации
                 </Button>,
             ]}
-            />
+        />
     )
 };

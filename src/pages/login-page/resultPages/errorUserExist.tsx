@@ -6,21 +6,20 @@ import {deleteError} from '@redux/reducers/common-reducer.ts';
 import {Button, Result} from 'antd';
 import {path} from '../../../routers/routers.tsx';
 
-
 export const ErrorUserExist = () => {
     const dispatch = useAppDispatch()
     const location = useLocation()
     useEffect(() => {
         if (!location.state) {
-            dispatch(push('/auth/singUp'))
+            dispatch(push(path.registration))
         }
     }, [location, dispatch]);
-
 
     const handleButton = () => {
         dispatch(push(`${path.registration}`))
         dispatch(deleteError())
     }
+
     return (
         <Result
             status={'error'}

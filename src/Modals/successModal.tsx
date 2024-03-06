@@ -12,7 +12,6 @@ export const SuccessModal = () => {
         dispatch(setIsModalSuccess(false))
     }
 
-
     return (
         <Modal open={isSuccess} wrapClassName={'modal_wrapper'} className={'success-model'} footer={false} closable={false}>
             <Result

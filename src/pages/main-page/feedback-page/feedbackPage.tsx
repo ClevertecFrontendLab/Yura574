@@ -15,7 +15,6 @@ export const FeedbackPage = () => {
 
     const [collapsedReviews, setCollapsedReviews] = useState(true)
 
-
     let reviews = useAppSelector(state => state.feedback.reviews)
 
     const isWrong = useAppSelector(state => state.feedback.isWrong)
@@ -24,12 +23,10 @@ export const FeedbackPage = () => {
         reviews = reviews.slice(0, 4)
     }
 
-
     useEffect(() => {
         dispatch(getFeedback())
 
     }, [dispatch]);
-
 
     const writeReview = () => {
         dispatch(setIsOpenWriteReviewModal(true))

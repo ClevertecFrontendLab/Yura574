@@ -1,8 +1,3 @@
-
-
-
-
-
 export const responseStatus = {
     OK_200: 200,
     CREATED_201: 201,

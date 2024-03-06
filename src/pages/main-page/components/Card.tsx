@@ -10,7 +10,6 @@ type CardType = {
 export const Card = (props: CardType) => {
     const {img, altImg, titleButton, title} = props
     return (
-
         <div className={'mainContent_cardAction'}>
             <div
                 className={'mainContent_card'}>

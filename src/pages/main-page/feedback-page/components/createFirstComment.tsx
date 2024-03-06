@@ -5,7 +5,7 @@ import {setIsOpenWriteReviewModal} from '@redux/reducers/feedback/feedback-reduc
 
 export const CreateFirstComment = () => {
     const dispatch = useAppDispatch()
-    const onclickHandler = ()=> {
+    const onclickHandler = () => {
         dispatch(setIsOpenWriteReviewModal(true))
     }
     return (

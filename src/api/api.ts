@@ -11,7 +11,7 @@ import {store} from '@redux/configure-store.ts';
 import {path} from '../routers/routers.tsx';
 
 
-const baseURL  = 'https://marathon-api.clevertec.ru'
+const baseURL = 'https://marathon-api.clevertec.ru'
 export const googleURL = `${baseURL}${path.google}`
 
 const instance = axios.create({
@@ -24,7 +24,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
     (config) => {
-        const token =localStorage?.getItem('accessToken') || accessToken(store.getState())
+        const token = localStorage?.getItem('accessToken') || accessToken(store.getState())
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -56,7 +56,7 @@ export const authApi = {
 
 export const feedbackApi = {
     getAllFeedbacks() {
-        return instance.get('/feedback', )
+        return instance.get('/feedback',)
     },
     createFeedback(data: createFeedbackType) {
         return instance.post('/feedback', data)

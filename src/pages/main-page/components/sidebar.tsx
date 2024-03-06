@@ -25,11 +25,11 @@ export const Sidebar = (props: SidebarType) => {
     const logoutHandler = () => {
         dispatch(logout())
     }
+
     return (
         <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
                className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
-
-            <div >
+            <div>
                 <div className={'sidebar_wrapper'}>
                     <Row className={'sidebar_itemsWrapper'}>
                         <Col className={collapsed ? 'sidebar_logoCollapsed' : 'sidebar_logo'}>
@@ -39,7 +39,6 @@ export const Sidebar = (props: SidebarType) => {
                             />
                         </Col>
                         <Menu
-
                             mode='inline'
                             defaultSelectedKeys={['1']}
                             items={[
@@ -130,11 +129,8 @@ export const Sidebar = (props: SidebarType) => {
                                                                            alt={'button'}/>
                         </div>
                     </Row>
-
                 </div>
-
             </div>
-
         </Sider>
     );
 };

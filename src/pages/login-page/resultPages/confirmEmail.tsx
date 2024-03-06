@@ -15,18 +15,14 @@ export const ConfirmEmail = () => {
 
     const completeHandler = (value: string) => {
         email && dispatch(confirmEmail({email, code: value}))
-
-
         setCode('')
     }
-
 
     const previousLocation = useAppSelector(state => state.router.previousLocations)
     const location = previousLocation && previousLocation[1] && previousLocation[1].location?.pathname
     useEffect(() => {
         if (location === `${path.login}`) {
             dispatch(setError(null))
-
         }
     }, [previousLocation, location, dispatch]);
 

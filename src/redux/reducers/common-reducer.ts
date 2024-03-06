@@ -4,7 +4,6 @@ export type DataErrorType = {
     statusCode: 400 | 404 | 409 | 429 | 500,
     error: string,
     errorMessage: string
-
 }
 
 type InitialStateType = {

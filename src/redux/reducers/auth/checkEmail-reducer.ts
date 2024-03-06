@@ -22,9 +22,8 @@ export const checkEmail = createAsyncThunk('auth/check-email', async (email: str
     try {
         const response = await authApi.checkEmail(email)
         dispatch(setIsPending(false))
-        dispatch(push(`${pathName.auth}/${pathName.confirmEmail}`,{fromServer: true}))
+        dispatch(push(`${pathName.auth}/${pathName.confirmEmail}`, {fromServer: true}))
         dispatch(setEmail(email))
-        console.log(response)
         return response
     } catch (err) {
         const error = err as AxiosError
@@ -32,7 +31,6 @@ export const checkEmail = createAsyncThunk('auth/check-email', async (email: str
         if (Number(error.response?.status) === 404) {
             dispatch(push(`${pathName.result}/${pathName.errorCheckEmailNoExist}`, {fromServer: true}))
         } else {
-
             dispatch(push(`${pathName.result}/${pathName.errorCheckEmail}`, {fromServer: true}))
             dispatch(setRepeatedCheckEmail(email))
         }
@@ -43,9 +41,9 @@ export const checkEmail = createAsyncThunk('auth/check-email', async (email: str
 export const confirmEmail = createAsyncThunk('auth/confirmEmail', async (data: ConfirmType, {dispatch}) => {
     dispatch(setIsPending(true))
     try {
-        const response =await authApi.confirmEmail(data)
+        const response = await authApi.confirmEmail(data)
         dispatch(setIsPending(false))
-        dispatch(push(`${pathName.auth}/${pathName.changePassword}`,{fromServer: true}))
+        dispatch(push(`${pathName.auth}/${pathName.changePassword}`, {fromServer: true}))
         return response
     } catch (error) {
         dispatch(setIsPending(false))
@@ -61,10 +59,7 @@ const checkEmailSlice = createSlice({
         setRepeatedCheckEmail: (state, action: PayloadAction<string | null>) => {
             state.repeatedCheckEmail = action.payload
         },
-        // setEmail: (state, action) => {
-        //     state.email = action.payload
-        // },
-        setError: (state, action)=> {
+        setError: (state, action) => {
             state.error = action.payload
         }
     }

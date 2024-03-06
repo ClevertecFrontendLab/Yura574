@@ -7,11 +7,10 @@ import {useAppDispatch} from '@redux/configure-store.ts';
 export const ErrorCheckEmail = () => {
 
     const dispatch = useAppDispatch()
-    const handleButton = ()=> {
-
+    const handleButton = () => {
         dispatch(push(`${path.login}`))
-
     }
+
     return (
         <Result
             status={'500'}

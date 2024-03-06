@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
+import {useAppDispatch, useAppSelector} from '@redux/configure-store.ts';
 import {Layout} from 'antd';
 import {NavLink, Outlet} from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
@@ -14,8 +14,6 @@ export const LayoutLoginPage = () => {
 
     const accessToken = localStorage.getItem('accessToken')
 
-
-
     useEffect(() => {
         if (isAuth || accessToken) {
             dispatch(push(path.main))
@@ -27,8 +25,6 @@ export const LayoutLoginPage = () => {
             dispatch(push(`${path.login}`));
         }
     }, [router, dispatch]);
-
-
 
     return (
         <div className={`login_page_image-light ${isPending && 'login_page_image-light_blur'}`}>

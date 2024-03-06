@@ -20,7 +20,6 @@ export const RegisterTab = () => {
     const handleButtonClick = () => {
         form.validateFields()
             .then()
-            .catch(err => console.log(err));
     };
     useEffect(() => {
         if (prevLocation === path.error) {
@@ -35,7 +34,6 @@ export const RegisterTab = () => {
     const validatePassword: Rule = () => ({
         validator(_, value: string) {
             return new Promise((resolve, reject) => {
-
                 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
                 if (value && passwordRegex.test(value)) {
                     setError(errors.filter((p) => p !== 'password'))
@@ -86,7 +84,6 @@ export const RegisterTab = () => {
         const {email, password} = value
         sessionStorage.setItem('registerEmail', email)
         sessionStorage.setItem('registerPassword', password)
-        // setFormData(value)
         dispatch(singUp({email, password}))
     }
 
@@ -94,7 +91,6 @@ export const RegisterTab = () => {
         <Form form={form} onFinish={values => finish(values)}
               className={'loginPage_registerFormWrapper'}>
             <Form.Item
-
                 name={'email'}
                 validateTrigger={['onBlur', 'onChange']}
                 rules={[validateEmail]}
@@ -104,7 +100,6 @@ export const RegisterTab = () => {
                     data-test-id='registration-email'
                     addonBefore={'e-mail:'}
                     className={'loginPage_inputItem'}
-
                 />
             </Form.Item>
             <Form.Item
@@ -124,7 +119,6 @@ export const RegisterTab = () => {
                     size={'large'}
                     data-test-id='registration-password'
                     placeholder={'Пароль'}
-
                 />
             </Form.Item>
 

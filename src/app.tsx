@@ -2,7 +2,7 @@ import {history, useAppDispatch, useAppSelector} from '@redux/configure-store.ts
 import {pathName} from './routers/routers.tsx';
 import {HistoryRouter} from 'redux-first-history/rr6';
 import {Loader} from '@utils/loader.tsx';
-import { Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {LayoutLoginPage} from '@pages/login-page/layoutLoginPage.tsx';
 import {LoginTab} from '@pages/login-page/loginTab.tsx';
 import {RegisterTab} from '@pages/login-page/registerTab.tsx';
@@ -16,7 +16,7 @@ import {SuccessResult} from '@pages/login-page/resultPages/successResult.tsx';
 import {ErrorCheckEmail} from '@pages/login-page/resultPages/errorCheckEmail.tsx';
 import {SuccessChangePassword} from '@pages/login-page/resultPages/successChangePassword.tsx';
 import {ErrorChangePassword} from '@pages/login-page/resultPages/errorChangePassword.tsx';
-import  {lazy, Suspense, useEffect} from 'react';
+import {lazy, Suspense, useEffect} from 'react';
 import {ErrorCheckEmailNoExist} from '@pages/login-page/resultPages/error-check-email-no-exist.tsx';
 import {FeedbackPage} from '@pages/main-page/feedback-page/feedbackPage.tsx';
 import {setWindowWidth} from '@redux/reducers/common-reducer.ts';

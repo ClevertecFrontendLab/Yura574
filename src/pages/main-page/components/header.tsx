@@ -19,16 +19,13 @@ export const AppHeader = () => {
     const pathArr = location.pathname.split('/')
 
     const currentPath = pathArr.map((path, index) => {
-
         if (path in navigation) {
             return {pathName: navigation[path], link: path, index}
         }
     }).filter(Boolean)
 
-
     return (
         <Header className={'header_wrapper'}>
-
             <Row>
                 <Col className={'body_regular_14 header_main'}>
                     <Breadcrumb>
@@ -41,7 +38,6 @@ export const AppHeader = () => {
                                         key={path.index}> {path.pathName}</Breadcrumb.Item>
                                 )
                             }
-
                         })}
                     </Breadcrumb>
                 </Col>
