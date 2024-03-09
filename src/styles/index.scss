@@ -23,6 +23,7 @@
 
 @import "pages/mainPages";
 @import "pages/loginPage";
+
 @import "pages/resultPages/changePassword";
 @import "pages/resultPages/confirmEmail";
 @import "pages/resultPages/errorChangePassword";
@@ -34,8 +35,12 @@
 @import "pages/resultPages/successChangePassword";
 @import "pages/resultPages/errorUserExist";
 @import "pages/resultPages/errorResult";
+
 @import "pages/feedbackPage/feedbackPage";
 @import "pages/feedbackPage/review";
+
+@import "pages/calendarPage/calendarPage";
+@import "pages/calendarPage/headerCalendar";
 
 
 

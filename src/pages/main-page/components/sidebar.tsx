@@ -6,6 +6,7 @@ import collapsedImg from '../../../assets/svg/collapsedSidebar.svg'
 import logoCollapsed from '../../../assets/svg/logoCollapsed.svg'
 import {useAppDispatch} from '@redux/configure-store.ts';
 import {logout} from '@redux/reducers/auth/auth-reducer.ts';
+import { NavLink} from "react-router-dom";
 
 
 const {Sider} = Layout;
@@ -26,6 +27,68 @@ export const Sidebar = (props: SidebarType) => {
         dispatch(logout())
     }
 
+    const items = [
+        {
+            style: {
+                marginBottom: '16px',
+                paddingLeft: '16px'
+            },
+            key: '1',
+            icon: (
+                windowWidth > 360 &&
+                <CalendarTwoTone twoToneColor={['#061178', '#061178']}/>
+            ),
+            label: <NavLink to={'calendar'}> {`${collapsed ? '' : 'Календарь'}`} </NavLink>,
+
+        },
+        {
+            style: {
+                marginBottom: '16px',
+                paddingLeft: '16px'
+            },
+            key: '2',
+            icon: (
+                windowWidth > 360 && <HeartFilled
+                    style={{
+                        fontSize: '14px',
+                        color: '#061178',
+                    }}
+                    twoToneColor='#061178'
+                />
+            ),
+            label: <NavLink to={'training'}> {`${collapsed ? '' : 'Тренировки'}`} </NavLink>,
+        },
+        {
+            style: {
+                marginBottom: '16px',
+                paddingLeft: '16px'
+            },
+            key: '3',
+            icon: (
+                windowWidth > 360 && <TrophyFilled
+                    style={{
+                        fontSize: '14px',
+                        color: '#061178',
+                    }}
+                    twoToneColor='#061178'
+                />
+            ),
+            label: <NavLink to={'achievements'}> {`${collapsed ? '' : 'Достижения'}`} </NavLink>,
+        },
+        {
+            style: {
+                marginBottom: '16px',
+                paddingLeft: '16px'
+            },
+            key: '4',
+            icon: (
+                windowWidth > 360 &&
+                <IdcardTwoTone twoToneColor={['#061178', '#fff',]}/>
+            ),
+            label: <NavLink to={'profile'}> {`${collapsed ? '' : 'Профиль'}`} </NavLink>,
+        },
+    ]
+
     return (
         <Sider width={collapsed ? '64px' : windowWidth <= 360 ? '106px' : '208px'}
                className={`sidebar_sider ${isNone ? 'sidebar_sider_none' : ''} `}>
@@ -41,66 +104,7 @@ export const Sidebar = (props: SidebarType) => {
                         <Menu
                             mode='inline'
                             defaultSelectedKeys={['1']}
-                            items={[
-                                {
-                                    style: {
-                                        marginBottom: '16px',
-                                        paddingLeft: '16px'
-                                    },
-                                    key: '1',
-                                    icon: (
-                                        windowWidth > 360 &&
-                                        <CalendarTwoTone twoToneColor={['#061178', '#061178']}/>
-                                    ),
-                                    label: `${collapsed ? '' : 'Календарь'}`,
-                                },
-                                {
-                                    style: {
-                                        marginBottom: '16px',
-                                        paddingLeft: '16px'
-                                    },
-                                    key: '2',
-                                    icon: (
-                                        windowWidth > 360 && <HeartFilled
-                                            style={{
-                                                fontSize: '14px',
-                                                color: '#061178',
-                                            }}
-                                            twoToneColor='#061178'
-                                        />
-                                    ),
-                                    label: `${collapsed ? '' : 'Тренировки'}`,
-                                },
-                                {
-                                    style: {
-                                        marginBottom: '16px',
-                                        paddingLeft: '16px'
-                                    },
-                                    key: '3',
-                                    icon: (
-                                        windowWidth > 360 && <TrophyFilled
-                                            style={{
-                                                fontSize: '14px',
-                                                color: '#061178',
-                                            }}
-                                            twoToneColor='#061178'
-                                        />
-                                    ),
-                                    label: `${collapsed ? '' : 'Достижения'}`,
-                                },
-                                {
-                                    style: {
-                                        marginBottom: '16px',
-                                        paddingLeft: '16px'
-                                    },
-                                    key: '4',
-                                    icon: (
-                                        windowWidth > 360 &&
-                                        <IdcardTwoTone twoToneColor={['#061178', '#fff',]}/>
-                                    ),
-                                    label: `${collapsed ? '' : 'Профиль'}`,
-                                },
-                            ]}
+                            items={items}
                         />
                     </Row>
                     <Row>

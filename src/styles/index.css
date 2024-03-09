@@ -1325,6 +1325,44 @@ h4 {
     width: 42px;
   }
 }
+.calendar-wrapper {
+  background: #f0f5ff;
+  padding: 0 24px;
+  margin-bottom: 48px;
+}
+
+.calendar {
+  background: rgba(0, 0, 0, 0);
+  margin-left: -10px;
+}
+
+.ant-picker-calendar-header {
+  padding: 12px 10px 12px 0;
+}
+
+.ant-picker-calendar table {
+  border-collapse: separate;
+  border-spacing: 10px 0;
+}
+.ant-picker-calendar th {
+  background: white;
+}
+.ant-picker-calendar td {
+  background: white;
+}
+
+.ant-picker-calendar-full .ant-picker-panel {
+  background: rgba(0, 0, 0, 0);
+}
+
+.ant-picker-calendar-date {
+  padding: 0 10px;
+}
+
+.headerCalendar {
+  background: rgba(0, 0, 0, 0);
+}
+
 .main_page_image-light {
   background: url("../assets/webp/Main-page_light.webp") no-repeat center fixed;
   background-size: cover;

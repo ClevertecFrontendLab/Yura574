@@ -13,7 +13,8 @@ export const AppHeader = () => {
     const windowWidth = useSelector(getWindowWidth)
     const location = useLocation()
     const navigation: Record<string, string> = {
-        feedbacks: 'Отзывы пользователей'
+        feedbacks: 'Отзывы пользователей',
+        calendar: 'Календарь'
     }
 
     const pathArr = location.pathname.split('/')

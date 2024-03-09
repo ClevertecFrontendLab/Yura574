@@ -2,6 +2,8 @@ export const pathName = {
 
     main: '/main',
     feedback: '/feedbacks',
+    calendar: '/calendar',
+    notFound: '/notFound',
 
     auth: '/auth',
     singIn: 'login',

@@ -2,7 +2,7 @@ import {history, useAppDispatch, useAppSelector} from '@redux/configure-store.ts
 import {pathName} from './routers/routers.tsx';
 import {HistoryRouter} from 'redux-first-history/rr6';
 import {Loader} from '@utils/loader.tsx';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {LayoutLoginPage} from '@pages/login-page/layoutLoginPage.tsx';
 import {LoginTab} from '@pages/login-page/loginTab.tsx';
 import {RegisterTab} from '@pages/login-page/registerTab.tsx';
@@ -22,6 +22,7 @@ import {FeedbackPage} from '@pages/main-page/feedback-page/feedbackPage.tsx';
 import {setWindowWidth} from '@redux/reducers/common-reducer.ts';
 import {MainPage} from '@pages/main-page/main-page/mainPage.tsx';
 import GoogleAuth from '@utils/googleAuth.tsx';
+import {CalendarPage} from "@pages/main-page/calendar-page/calendarPage.tsx";
 
 const Main = lazy(() => import('@pages/main-page/main.tsx'))
 
@@ -55,6 +56,8 @@ export const App = () => {
                 }>
                     <Route path={pathName.main} element={<MainPage/>}/>
                     <Route path={pathName.feedback} element={<FeedbackPage/>}/>
+                    <Route path={pathName.calendar} element={<CalendarPage/>}/>
+                    <Route path={pathName.notFound} element={<div>page not found</div>}/>
                 </Route>
 
                 <Route path={pathName.auth} element={<LayoutLoginPage/>}>
@@ -77,6 +80,7 @@ export const App = () => {
                     <Route path={pathName.errorChangePassword}
                            element={<ErrorChangePassword/>}> </Route>
                 </Route>
+                <Route path={'*'} element={<Navigate to={'/notfound'}/>}></Route>
             </Routes>
         </HistoryRouter>
 
